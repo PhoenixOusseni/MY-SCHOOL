@@ -16,7 +16,7 @@
                         </h1>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_retards.create') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_retards.create') }}" class="btn btn-dark btn-sm">
                             <i data-feather="plus"></i>&nbsp; Ajouter un retard
                         </a>
                     </div>

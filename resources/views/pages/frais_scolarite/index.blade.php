@@ -144,14 +144,6 @@
                                                 class="btn btn-sm btn-1" title="Voir">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('gestion_frais_scolarite.edit', $frai->id) }}"
-                                                class="btn btn-sm btn-outline-secondary" title="Modifier">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button type="button" class="btn btn-sm btn-outline-danger" title="Supprimer"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ $frai->id }}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
                                         </div>
                                     </td>
                                 </tr>

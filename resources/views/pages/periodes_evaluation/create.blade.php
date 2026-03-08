@@ -15,7 +15,7 @@
                         <p class="text-muted">Créez une nouvelle période de notation et d'évaluation</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -23,12 +23,15 @@
             </div>
         </div>
     </header>
-    
+
     <div class="container-xl px-4 mt-n10">
         <!-- Form Card -->
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="card-title">Ajouter une période d'évaluation</h5>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_periodes_evaluation.store') }}" method="POST" id="periodeForm">
                             @csrf
@@ -117,9 +120,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&nbsp; Enregistrer
                                 </button>
-                                <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -144,6 +144,7 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Information</h5>
+                        <hr>
                         <p class="card-text small">
                             Cette page permet de créer une nouvelle période d'évaluation pour une année scolaire.
                         </p>

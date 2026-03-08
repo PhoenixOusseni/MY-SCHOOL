@@ -12,7 +12,10 @@
                         </h1>
                         <p class="text-muted">Consultez et gérez les bulletins des élèves</p>
                     </div>
-                    <div class="col-auto mt-4">
+                    <div class="col-auto mt-4 d-flex gap-2">
+                        <a href="{{ route('gestion_bulletins.generate_form') }}" class="btn btn-1 btn-sm">
+                            <i data-feather="zap"></i>&nbsp; Générer automatiquement
+                        </a>
                         <a href="{{ route('gestion_bulletins.create') }}" class="btn btn-dark btn-sm">
                             <i data-feather="plus"></i>&nbsp; Nouveau bulletin
                         </a>

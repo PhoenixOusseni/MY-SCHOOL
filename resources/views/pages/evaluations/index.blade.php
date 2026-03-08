@@ -28,7 +28,7 @@
         <!-- Statistics Cards -->
         <div class="row mb-4">
             <div class="col-md-3 mb-3">
-                <div class="card bg-primary text-white">
+                <div class="card bg-primary">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Évaluations total</p>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-success text-white">
+                <div class="card bg-success">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Publiées</p>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-warning text-white">
+                <div class="card bg-warning">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Examens</p>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-info text-white">
+                <div class="card bg-info">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Page actuelle</p>

@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter un Retard
                         </h1>
+                        <p class="text-muted">Enregistrez un nouveau retard pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-light btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -139,9 +140,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

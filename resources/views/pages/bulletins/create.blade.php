@@ -7,10 +7,10 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
-                            <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
+                            <div class="page-header-icon"><i data-feather="plus-circle" class="text-white"></i></div>
                             Nouveau bulletin
                         </h1>
-                        <p class="text-muted">Créer un bulletin pour un élève</p>
+                        <p class="text-white">Créer un bulletin pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_bulletins.index') }}" class="btn btn-dark btn-sm">
@@ -156,9 +156,6 @@
                         <button type="submit" class="btn btn-1">
                             <i data-feather="save"></i>&nbsp; Enregistrer
                         </button>
-                        <a href="{{ route('gestion_bulletins.index') }}" class="btn btn-dark">
-                            <i data-feather="x"></i>&nbsp; Annuler
-                        </a>
                     </div>
                 </form>
             </div>

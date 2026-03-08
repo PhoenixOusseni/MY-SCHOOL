@@ -6,6 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class MoyenneMatiere extends Model
 {
+    protected $fillable = [
+        'moyenne',
+        'coefficient',
+        'moyenne_ponderee',
+        'rang',
+        'total_eleve',
+        'appreciation',
+        'calculated_at',
+        'eleve_id',
+        'matiere_id',
+        'classe_id',
+        'period_evaluation_id',
+    ];
+
+    protected $casts = [
+        'calculated_at' => 'datetime',
+    ];
+
     // Relations
     public function eleve()
     {

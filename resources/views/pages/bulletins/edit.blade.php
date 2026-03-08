@@ -157,9 +157,6 @@
                         <button type="submit" class="btn btn-1">
                             <i data-feather="save"></i>&nbsp; Mettre à jour
                         </button>
-                        <a href="{{ route('gestion_bulletins.index') }}" class="btn btn-dark">
-                            <i data-feather="x"></i>&nbsp; Annuler
-                        </a>
                     </div>
                 </form>
             </div>

@@ -15,7 +15,7 @@
                         <p class="text-muted">{{ $periode->libelle }}</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -29,6 +29,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="card-title">Modifier une période d'évaluation</h5>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_periodes_evaluation.update', $periode->id) }}" method="POST"
                             id="periodeForm">
@@ -120,9 +123,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&nbsp; Enregistrer les modifications
                                 </button>
-                                <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

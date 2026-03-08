@@ -15,7 +15,7 @@
                         <p class="text-muted">{{ $periode->libelle }}</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_periodes_evaluation.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>

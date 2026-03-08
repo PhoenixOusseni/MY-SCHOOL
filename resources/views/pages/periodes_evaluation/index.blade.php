@@ -15,7 +15,7 @@
                         <p class="text-muted">Gérez les périodes de notation et d'évaluation</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_periodes_evaluation.create') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_periodes_evaluation.create') }}" class="btn btn-dark btn-sm">
                             <i data-feather="plus"></i>&nbsp; Ajouter une période
                         </a>
                     </div>
@@ -27,7 +27,7 @@
         <!-- Statistics Cards -->
         <div class="row mb-4">
             <div class="col-md-3 mb-3">
-                <div class="card bg-primary text-white">
+                <div class="card bg-primary">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Périodes total</p>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-success text-white">
+                <div class="card bg-success">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Années actives</p>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-info text-white">
+                <div class="card bg-info">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Trimestres</p>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-warning text-white">
+                <div class="card bg-warning">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Page actuelle</p>

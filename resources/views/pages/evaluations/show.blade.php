@@ -15,13 +15,13 @@
                         <p class="text-muted">{{ $evaluation->titre }}</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="#" class="btn btn-1" data-bs-toggle="modal" data-bs-target="#addNoteModal">
+                        <a href="#" class="btn btn-1 btn-sm" data-bs-toggle="modal" data-bs-target="#addNoteModal">
                             <i data-feather="plus"></i>&nbsp; Soumettre une note
                         </a>
-                        <a href="{{ route('gestion_evaluations.edit', $evaluation->id) }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_evaluations.edit', $evaluation->id) }}" class="btn btn-dark btn-sm">
                             <i data-feather="edit"></i>&nbsp; Modifier
                         </a>
-                        <a href="{{ route('gestion_evaluations.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_evaluations.index') }}" class="btn btn-light btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>

@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i class="fas fa-plus-circle"></i></div>
                             Ajouter un Frais de Scolarité
                         </h1>
+                        <p class="text-muted">Créer un nouveau frais de scolarité pour une classe</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_frais_scolarite.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_frais_scolarite.index') }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-arrow-left me-1"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -34,7 +35,7 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
+            <div class="col-lg-9">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">
@@ -149,11 +150,38 @@
                                 <button type="submit" class="btn btn-1">
                                     <i class="fas fa-save me-1"></i> Enregistrer
                                 </button>
-                                <a href="{{ route('gestion_frais_scolarite.index') }}" class="btn btn-dark">
-                                    <i class="fas fa-times me-1"></i> Annuler
-                                </a>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="m-2">
+                        <h6 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>Conseils
+                        </h6>
+                    </div>
+                    <hr>
+                    <div class="card-body p-4">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Assurez-vous que le libellé est clair et précis.
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Le montant doit être un nombre positif.
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Choisissez la fréquence de paiement appropriée.
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Sélectionnez l'établissement concerné par ce frais.
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

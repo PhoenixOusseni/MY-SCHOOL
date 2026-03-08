@@ -107,6 +107,8 @@ Route::resource('gestion_evaluations', EvaluationController::class);
 Route::resource('gestion_notes', NoteController::class);
 
 // Gestion des bulletins
+Route::get('gestion_bulletins/generate', [BulletinController::class, 'generateForm'])->name('gestion_bulletins.generate_form');
+Route::post('gestion_bulletins/generate', [BulletinController::class, 'generate'])->name('gestion_bulletins.generate');
 Route::resource('gestion_bulletins', BulletinController::class);
 // Route pour imprimer un bulletin
 Route::get('gestion_bulletins/{id}/print', [BulletinController::class, 'print'])->name('gestion_bulletins.print');

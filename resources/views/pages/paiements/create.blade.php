@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i class="fas fa-plus-circle"></i></div>
                             Enregistrer un Paiement
                         </h1>
+                        <p class="text-muted">Enregistrer un nouveau paiement pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_paiements.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_paiements.index') }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-arrow-left me-1"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -192,9 +193,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i class="fas fa-save me-1"></i>&nbsp; Enregistrer
                                 </button>
-                                <a href="{{ route('gestion_paiements.index') }}" class="btn btn-dark">
-                                    <i class="fas fa-times me-1"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
