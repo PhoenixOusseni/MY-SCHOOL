@@ -11,7 +11,9 @@
                         <div class="page-header-icon"><i class="fas fa-calendar-check"></i></div>
                         Rapport d'assiduité
                     </h1>
-                    <div class="page-header-subtitle text-white-50">Absences et retards par classe et par élève</div>
+                    <div class="page-header-subtitle text-white-75">
+                        <small>Absences et retards par classe et par élève</small>
+                    </div>
                 </div>
                 <div class="col-auto mt-4">
                     <form method="GET" class="d-flex gap-2 align-items-center flex-wrap">
@@ -24,7 +26,7 @@
                             <select name="classe_id" class="form-select form-select-sm" onchange="this.form.submit()">
                                 <option value="">— Toutes les classes —</option>
                                 @foreach($classes as $c)
-                                    <option value="{{ $c->id }}" {{ $classeId == $c->id ? 'selected' : '' }}>{{ $c->libelle }}</option>
+                                    <option value="{{ $c->id }}" {{ $classeId == $c->id ? 'selected' : '' }}>{{ $c->nom }}</option>
                                 @endforeach
                             </select>
                         @endif
