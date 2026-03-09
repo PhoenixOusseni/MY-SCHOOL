@@ -33,6 +33,7 @@ use App\Http\Controllers\SystemLogController;
 use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\EmploiTempController;
+use App\Http\Controllers\DossierEleveController;
 
 
 Route::get('/', [PageController::class, 'home'])->name('login');
@@ -62,6 +63,10 @@ Route::resource('gestion_classes', ClasseController::class);
 
 // Gestion des eleves
 Route::resource('gestion_eleves', EleveController::class);
+
+// Dossiers des élèves
+Route::get('dossiers_eleves', [DossierEleveController::class, 'index'])->name('dossiers_eleves.index');
+Route::get('dossiers_eleves/{id}', [DossierEleveController::class, 'show'])->name('dossiers_eleves.show');
 
 // Gestion des inscriptions
 Route::resource('gestion_inscriptions', InscriptionController::class);

@@ -66,7 +66,7 @@
                         <nav class="sidenav-menu-nested nav">
                             <a class="nav-link" href="{{ route('gestion_eleves.index') }}">Liste des élèves</a>
                             <a class="nav-link" href="{{ route('gestion_inscriptions.index') }}">Inscriptions</a>
-                            <a class="nav-link" href="#">Dossiers élèves</a>
+                            <a class="nav-link" href="{{ route('dossiers_eleves.index') }}">Dossiers élèves</a>
                         </nav>
                     </div>
 
