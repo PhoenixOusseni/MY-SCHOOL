@@ -14,9 +14,12 @@
                             <div class="page-header-icon"><i data-feather="users"></i></div>
                             Gestion des parents / Tuteurs
                         </h1>
+                        <p class="mt-2 mb-0 text-white-75">
+                            Consultez les détails du tuteur, les élèves rattachés et gérez les informations du tuteur.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-light btn-sm me-2">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -271,13 +274,13 @@
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
                             <a href="{{ route('gestion_tuteurs.edit', $tuteur->id) }}"
-                                class="list-group-item list-group-item-action text-warning">
+                                class="btn btn-1">
                                 <i data-feather="edit" class="me-2"></i>Modifier les informations
                             </a>
                             <form action="{{ route('gestion_tuteurs.destroy', $tuteur->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="list-group-item list-group-item-action text-danger">
+                                <button type="submit" class="btn btn-danger btn-sm mt-2 w-100" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce tuteur ? Cette action est irréversible.')">
                                     <i data-feather="trash-2" class="me-2"></i>Supprimer le tuteur
                                 </button>
                             </form>

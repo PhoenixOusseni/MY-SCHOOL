@@ -12,7 +12,7 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Gestion des Devoirs
                         </h1>
-                        <p class="text-muted">Créez et gérez les devoirs des classes</p>
+                        <p class="text-white-75">Créez et gérez les devoirs des classes</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_devoirs.create') }}" class="btn btn-dark btn-sm">
@@ -28,7 +28,7 @@
         <!-- Statistics Cards -->
         <div class="row mb-4">
             <div class="col-md-3 mb-3">
-                <div class="card bg-primary text-white">
+                <div class="card bg-primary text-dark">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Devoirs total</p>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-success text-white">
+                <div class="card bg-success text-dark">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">À noter</p>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-info text-white">
+                <div class="card bg-info text-dark">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Avec pièce jointe</p>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-warning text-white">
+                <div class="card bg-warning text-dark">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Page actuelle</p>

@@ -63,15 +63,15 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-8">
                 <!-- Formulaire d'inscription -->
                 <div class="card border-0 shadow mb-4">
                     <div class="m-3">
                         <h6 class="mb-0">
                             <i data-feather="file-plus" class="me-2"></i> Formulaire d'Inscription
                         </h6>
+                        <hr>
                     </div>
-                    <hr>
                     <div class="card-body">
                         <form id="inscriptionForm" action="{{ route('gestion_inscriptions.store') }}" method="POST">
                             @csrf
@@ -240,22 +240,18 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i data-feather="save" class="me-2"></i> Enregistrer l'Inscription
                                 </button>
-                                <a href="{{ route('gestion_inscriptions.index') }}" class="btn btn-secondary">
-                                    <i data-feather="x" class="me-2"></i> Annuler
-                                </a>
                             </div>
                         </form>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <!-- Card d'informations supplémentaires -->
-        <div class="row mt-4">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-4">
                 <div class="card border-0 shadow-sm bg-light">
                     <div class="card-body">
                         <h6 class="card-title mb-3">
                             <i data-feather="help-circle" class="me-2"></i> Aide
                         </h6>
+                        <hr>
                         <div class="row">
                             <div class="col-md-6">
                                 <strong class="d-block mb-2">Statuts possibles:</strong>
@@ -276,65 +272,64 @@
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('script')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-
-            // Gestion de la soumission du formulaire
-            document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
-                // Valider les champs requis
-                const eleveId = document.getElementById('eleve_id').value;
-                const classeId = document.getElementById('classe_id').value;
-                const anneeId = document.getElementById('annee_scolaire_id').value;
-                const dateInscription = document.getElementById('date_inscription').value;
-                const statut = document.getElementById('statut').value;
-
-                if (!eleveId || !classeId || !anneeId || !dateInscription || !statut) {
-                    e.preventDefault();
-                    alert('Veuillez remplir tous les champs requis');
-                    return false;
+    @section('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
                 }
+
+                // Gestion de la soumission du formulaire
+                document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+                    // Valider les champs requis
+                    const eleveId = document.getElementById('eleve_id').value;
+                    const classeId = document.getElementById('classe_id').value;
+                    const anneeId = document.getElementById('annee_scolaire_id').value;
+                    const dateInscription = document.getElementById('date_inscription').value;
+                    const statut = document.getElementById('statut').value;
+
+                    if (!eleveId || !classeId || !anneeId || !dateInscription || !statut) {
+                        e.preventDefault();
+                        alert('Veuillez remplir tous les champs requis');
+                        return false;
+                    }
+                });
             });
-        });
 
-        // Mettre à jour les informations de l'élève
-        function updateEleveInfo() {
-            const select = document.getElementById('eleve_id');
-            const option = select.options[select.selectedIndex];
-            const infoDiv = document.getElementById('eleveInfo');
+            // Mettre à jour les informations de l'élève
+            function updateEleveInfo() {
+                const select = document.getElementById('eleve_id');
+                const option = select.options[select.selectedIndex];
+                const infoDiv = document.getElementById('eleveInfo');
 
-            if (option.value) {
-                document.getElementById('infoRegistration').textContent = option.dataset.registration;
-                document.getElementById('infoGenre').textContent =
-                    option.dataset.genre === 'M' ? 'Masculin' :
-                    (option.dataset.genre === 'F' ? 'Féminin' : 'Autres');
-                document.getElementById('infoAge').textContent = option.dataset.age;
-                document.getElementById('infoEmail').textContent = option.dataset.email || 'N/A';
-                infoDiv.style.display = 'block';
-            } else {
-                infoDiv.style.display = 'none';
+                if (option.value) {
+                    document.getElementById('infoRegistration').textContent = option.dataset.registration;
+                    document.getElementById('infoGenre').textContent =
+                        option.dataset.genre === 'M' ? 'Masculin' :
+                        (option.dataset.genre === 'F' ? 'Féminin' : 'Autres');
+                    document.getElementById('infoAge').textContent = option.dataset.age;
+                    document.getElementById('infoEmail').textContent = option.dataset.email || 'N/A';
+                    infoDiv.style.display = 'block';
+                } else {
+                    infoDiv.style.display = 'none';
+                }
             }
-        }
 
-        // Mettre à jour les informations de la classe
-        function updateClasseInfo() {
-            const select = document.getElementById('classe_id');
-            const option = select.options[select.selectedIndex];
-            const infoDiv = document.getElementById('classeInfo');
+            // Mettre à jour les informations de la classe
+            function updateClasseInfo() {
+                const select = document.getElementById('classe_id');
+                const option = select.options[select.selectedIndex];
+                const infoDiv = document.getElementById('classeInfo');
 
-            if (option.value) {
-                document.getElementById('infoNiveau').textContent = option.dataset.niveau;
-                document.getElementById('infoCapacite').textContent = option.dataset.capacite;
-                infoDiv.style.display = 'block';
-            } else {
-                infoDiv.style.display = 'none';
+                if (option.value) {
+                    document.getElementById('infoNiveau').textContent = option.dataset.niveau;
+                    document.getElementById('infoCapacite').textContent = option.dataset.capacite;
+                    infoDiv.style.display = 'block';
+                } else {
+                    infoDiv.style.display = 'none';
+                }
             }
-        }
-    </script>
-@endsection
+        </script>
+    @endsection

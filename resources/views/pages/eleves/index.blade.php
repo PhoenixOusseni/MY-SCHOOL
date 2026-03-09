@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="users"></i></div>
                             Gestion des Élèves
                         </h1>
+                        <p class="text-muted">Gérer les élèves inscrits dans les établissements scolaires</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_eleves.create') }}" class="btn btn-light btn-sm"><i
@@ -42,7 +43,7 @@
                         <!-- Statistiques -->
                         <div class="row mb-4">
                             <div class="col-lg-3 mb-4">
-                                <div class="card bg-primary text-white">
+                                <div class="card bg-primary text-dark">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
@@ -59,7 +60,7 @@
                             </div>
 
                             <div class="col-lg-3 mb-4">
-                                <div class="card bg-info text-white">
+                                <div class="card bg-info text-dark">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
@@ -77,7 +78,7 @@
                             </div>
 
                             <div class="col-lg-3 mb-4">
-                                <div class="card bg-success text-white">
+                                <div class="card bg-success text-dark">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
@@ -96,7 +97,7 @@
                             </div>
 
                             <div class="col-lg-3 mb-4">
-                                <div class="card bg-warning text-white">
+                                <div class="card bg-warning text-dark">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>

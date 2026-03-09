@@ -15,11 +15,11 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Gestion des élèves - Ajouter un nouvel élève
                         </h1>
+                        <p class="text-muted">Ajouter un nouvel élève à la base de données</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_eleves.index') }}" class="btn btn-dark btn-sm">
-                            <i data-feather="arrow-left"></i>
-                            Retour
+                            <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
                 </div>

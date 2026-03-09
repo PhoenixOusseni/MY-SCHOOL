@@ -15,9 +15,12 @@
                             <div class="page-header-icon"><i data-feather="users"></i></div>
                             Gestion des Tuteurs
                         </h1>
+                        <p class="mt-2 mb-0 text-white-75">
+                            Gérez les tuteurs de vos élèves, ajoutez de nouveaux tuteurs et consultez les détails de chaque tuteur.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_tuteurs.create') }}" class="btn btn-dark me-2">
+                        <a href="{{ route('gestion_tuteurs.create') }}" class="btn btn-dark btn-sm me-2">
                             <i data-feather="plus"></i>&nbsp; Ajouter un tuteur
                         </a>
                     </div>

@@ -12,7 +12,7 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Détails du devoir
                         </h1>
-                        <p class="text-muted">{{ $devoir->title }}</p>
+                        <p class="text-white-75">{{ $devoir->title }}</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_devoirs.index') }}" class="btn btn-dark btn-sm">
@@ -444,5 +444,24 @@
 
     <script>
         feather.replace();
+
+        // Select2 dans le modal — doit être initialisé avec dropdownParent
+        // pour éviter les conflits de z-index avec Bootstrap 5
+        $('#addNoteModal').on('shown.bs.modal', function () {
+            $('#eleve_id').select2({
+                placeholder: '-- Sélectionner un élève --',
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#addNoteModal'),
+                language: {
+                    noResults: function () { return 'Aucun résultat trouvé'; },
+                    searching:  function () { return 'Recherche en cours…'; }
+                }
+            });
+        });
+
+        $('#addNoteModal').on('hidden.bs.modal', function () {
+            $('#eleve_id').select2('destroy');
+        });
     </script>
 @endsection

@@ -12,7 +12,7 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter un devoir
                         </h1>
-                        <p class="text-muted">Créer un nouveau devoir pour une classe</p>
+                        <p class="text-white-75">Créer un nouveau devoir pour une classe</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_devoirs.index') }}" class="btn btn-dark btn-sm">
@@ -153,12 +153,9 @@
 
                             <!-- Buttons -->
                             <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-1">
+                                <button type="submit" class="btn btn-1 btn-sm">
                                     <i data-feather="save"></i>&nbsp; Enregistrer
                                 </button>
-                                <a href="{{ route('gestion_devoirs.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -183,10 +180,10 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title">Information</h5>
+                        <hr>
                         <p class="card-text small">
                             Cette page permet de créer un nouveau devoir pour une classe spécifique et une matière.
                         </p>
-                        <hr>
                         <p class="card-text small mb-0">
                             <strong>Champs obligatoires:</strong>
                         <ul class="mb-0 ps-3">

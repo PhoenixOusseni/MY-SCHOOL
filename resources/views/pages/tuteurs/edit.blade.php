@@ -14,9 +14,12 @@
                             <i data-feather="user-check" class="me-2"></i>Modifier:
                             {{ $tuteur->prenom . ' ' . strtoupper($tuteur->nom) }}
                         </h1>
+                        <p class="mt-2 mb-0 text-white-75">
+                            Mettez à jour les informations du tuteur et gérez les détails de contact.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_tuteurs.show', $tuteur->id) }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_tuteurs.show', $tuteur->id) }}" class="btn btn-dark btn-sm me-2">
                             <i data-feather="arrow-left" class="me-2"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -115,12 +118,9 @@
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <div class="d-flex gap-2 justify-content-start">
-                                        <button type="submit" class="btn btn-1">
+                                        <button type="submit" class="btn btn-1 btn-sm">
                                             <i data-feather="save" class="me-2"></i>Enregistrer les Modifications
                                         </button>
-                                        <a href="{{ route('gestion_tuteurs.show', $tuteur->id) }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

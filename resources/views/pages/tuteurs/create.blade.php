@@ -17,7 +17,7 @@
                         </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-dark">
+                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-dark btn-sm me-2">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -112,9 +112,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -129,6 +126,7 @@
                         <i data-feather="alert-circle" class="me-3 mt-1"></i>
                         <div>
                             <h6 class="alert-heading">Informations importantes</h6>
+                            <hr>
                             <ul class="mb-0 ps-3">
                                 <li>Le nom et prénom sont obligatoires</li>
                                 <li>Le lien de parenté permet de distinguer le type de tuteur</li>
