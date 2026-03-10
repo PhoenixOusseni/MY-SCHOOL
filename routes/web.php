@@ -36,132 +36,137 @@ use App\Http\Controllers\EmploiTempController;
 use App\Http\Controllers\DossierEleveController;
 
 
+// Routes publiques (non authentifiées)
 Route::get('/', [PageController::class, 'home'])->name('login');
 Route::get('/register_users', [PageController::class, 'add_users'])->name('add_users');
-
-Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-Route::get('profile/{id}', [PageController::class, 'profile'])->name('profile');
-
 Route::post('connexion', [AuthController::class, 'login'])->name('connexion');
 Route::post('register', [AuthController::class, 'register'])->name('register');
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-// Gestion des établissements
-Route::resource('gestion_etablissements', EtablissementController::class);
+// Routes protégées (authentification requise)
+Route::middleware('auth')->group(function () {
 
-// Gestion des années scolaires
-Route::resource('gestion_annees_scolaires', AnneeScolaireController::class);
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-// Gestion des niveaux
-Route::resource('gestion_niveaux', NiveauController::class);
+    Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+    Route::get('profile/{id}', [PageController::class, 'profile'])->name('profile');
 
-// Gestion des matieres
-Route::resource('gestion_matieres', MatiereController::class);
+    // Gestion des établissements
+    Route::resource('gestion_etablissements', EtablissementController::class);
 
-// Gestion des classes
-Route::resource('gestion_classes', ClasseController::class);
+    // Gestion des années scolaires
+    Route::resource('gestion_annees_scolaires', AnneeScolaireController::class);
 
-// Gestion des eleves
-Route::resource('gestion_eleves', EleveController::class);
+    // Gestion des niveaux
+    Route::resource('gestion_niveaux', NiveauController::class);
 
-// Dossiers des élèves
-Route::get('dossiers_eleves', [DossierEleveController::class, 'index'])->name('dossiers_eleves.index');
-Route::get('dossiers_eleves/{id}', [DossierEleveController::class, 'show'])->name('dossiers_eleves.show');
+    // Gestion des matieres
+    Route::resource('gestion_matieres', MatiereController::class);
 
-// Gestion des inscriptions
-Route::resource('gestion_inscriptions', InscriptionController::class);
-Route::get('gestion_inscriptions/{id}/print', [InscriptionController::class, 'print'])->name('gestion_inscriptions.print');
+    // Gestion des classes
+    Route::resource('gestion_classes', ClasseController::class);
 
-// Gestion des tuteurs
-Route::resource('gestion_tuteurs', TuteurController::class);
+    // Gestion des eleves
+    Route::resource('gestion_eleves', EleveController::class);
 
-// Gestion des associations élèves-tuteurs
-Route::resource('gestion_associations', EleveParentController::class);
+    // Dossiers des élèves
+    Route::get('dossiers_eleves', [DossierEleveController::class, 'index'])->name('dossiers_eleves.index');
+    Route::get('dossiers_eleves/{id}', [DossierEleveController::class, 'show'])->name('dossiers_eleves.show');
 
-// Gestion des enseignants
-Route::resource('gestion_enseignants', EnseignantController::class);
-Route::get('form_professeur_principal', [EnseignantController::class, 'form_professeurPrincipal'])->name('form.professeur_principal');
-Route::post('gestion_enseignants_principal', [EnseignantController::class, 'professeurPrincipal'])->name('gestion_enseignants.professeur_principal');
-Route::delete('professeur_principal/{id}', [EnseignantController::class, 'professeurPrincipalDelete'])->name('gestion_enseignants.professeur_principal_delete');
+    // Gestion des inscriptions
+    Route::resource('gestion_inscriptions', InscriptionController::class);
+    Route::get('gestion_inscriptions/{id}/print', [InscriptionController::class, 'print'])->name('gestion_inscriptions.print');
 
-// Gestion des frais de scolarité
-Route::resource('gestion_frais_scolarite', FraiScolariteController::class);
+    // Gestion des tuteurs
+    Route::resource('gestion_tuteurs', TuteurController::class);
 
-// Gestion des paiements
-Route::resource('gestion_paiements', PaiementController::class);
-Route::get('gestion_paiements/{id}/print', [PaiementController::class, 'printReceipt'])->name('gestion_paiements.print');
-Route::post('gestion_paiements/{id}/solder', [PaiementController::class, 'solder'])->name('gestion_paiements.solder');
-Route::get('situation_financiere', [PaiementController::class, 'situationFinanciere'])->name('paiements.situation_financiere');
+    // Gestion des associations élèves-tuteurs
+    Route::resource('gestion_associations', EleveParentController::class);
 
-// Gestion des matières enseignées par classe
-Route::resource('gestion_enseignement_matieres', EnseignementMatiereClasseController::class);
+    // Gestion des enseignants
+    Route::resource('gestion_enseignants', EnseignantController::class);
+    Route::get('form_professeur_principal', [EnseignantController::class, 'form_professeurPrincipal'])->name('form.professeur_principal');
+    Route::post('gestion_enseignants_principal', [EnseignantController::class, 'professeurPrincipal'])->name('gestion_enseignants.professeur_principal');
+    Route::delete('professeur_principal/{id}', [EnseignantController::class, 'professeurPrincipalDelete'])->name('gestion_enseignants.professeur_principal_delete');
 
-// Gestion de périodes d'évaluation
-Route::resource('gestion_periodes_evaluation', PeriodeEvaluationController::class);
+    // Gestion des frais de scolarité
+    Route::resource('gestion_frais_scolarite', FraiScolariteController::class);
 
-// Gestion des devoirs
-Route::resource('gestion_devoirs', DevoirController::class);
+    // Gestion des paiements
+    Route::resource('gestion_paiements', PaiementController::class);
+    Route::get('gestion_paiements/{id}/print', [PaiementController::class, 'printReceipt'])->name('gestion_paiements.print');
+    Route::post('gestion_paiements/{id}/solder', [PaiementController::class, 'solder'])->name('gestion_paiements.solder');
+    Route::get('situation_financiere', [PaiementController::class, 'situationFinanciere'])->name('paiements.situation_financiere');
 
-// Gestion des soumissions de devoirs
-Route::resource('gestion_soumissions', SoumissionDevoirController::class);
+    // Gestion des matières enseignées par classe
+    Route::resource('gestion_enseignement_matieres', EnseignementMatiereClasseController::class);
 
-// Gestion des évaluations
-Route::resource('gestion_evaluations', EvaluationController::class);
+    // Gestion de périodes d'évaluation
+    Route::resource('gestion_periodes_evaluation', PeriodeEvaluationController::class);
 
-// Gestion des notes
-Route::resource('gestion_notes', NoteController::class);
+    // Gestion des devoirs
+    Route::resource('gestion_devoirs', DevoirController::class);
 
-// Gestion des bulletins
-Route::get('gestion_bulletins/generate', [BulletinController::class, 'generateForm'])->name('gestion_bulletins.generate_form');
-Route::post('gestion_bulletins/generate', [BulletinController::class, 'generate'])->name('gestion_bulletins.generate');
-Route::resource('gestion_bulletins', BulletinController::class);
-// Route pour imprimer un bulletin
-Route::get('gestion_bulletins/{id}/print', [BulletinController::class, 'print'])->name('gestion_bulletins.print');
+    // Gestion des soumissions de devoirs
+    Route::resource('gestion_soumissions', SoumissionDevoirController::class);
 
-// Gestion des détails de bulletins
-Route::resource('gestion_detail_bulletins', DetailBulletinController::class);
+    // Gestion des évaluations
+    Route::resource('gestion_evaluations', EvaluationController::class);
 
-// Gestion des absences
-Route::resource('gestion_absences', AbsenceController::class);
+    // Gestion des notes
+    Route::resource('gestion_notes', NoteController::class);
 
-// Gestion des retards
-Route::resource('gestion_retards', RetardController::class);
+    // Gestion des bulletins
+    Route::get('gestion_bulletins/generate', [BulletinController::class, 'generateForm'])->name('gestion_bulletins.generate_form');
+    Route::post('gestion_bulletins/generate', [BulletinController::class, 'generate'])->name('gestion_bulletins.generate');
+    Route::resource('gestion_bulletins', BulletinController::class);
+    Route::get('gestion_bulletins/{id}/print', [BulletinController::class, 'print'])->name('gestion_bulletins.print');
 
-// Gestion des incidents disciplinaires
-Route::resource('gestion_incidents', IncidentDisciplinaireController::class);
+    // Gestion des détails de bulletins
+    Route::resource('gestion_detail_bulletins', DetailBulletinController::class);
 
-// Gestion des sanctions
-Route::resource('gestion_sanctions', SanctionController::class);
+    // Gestion des absences
+    Route::resource('gestion_absences', AbsenceController::class);
 
-// Gestion des utilisateurs
-Route::resource('gestion_utilisateurs', UserController::class);
-Route::post('gestion_utilisateurs/{id}/toggle', [UserController::class, 'toggleActif'])->name('gestion_utilisateurs.toggle');
+    // Gestion des retards
+    Route::resource('gestion_retards', RetardController::class);
 
-// Gestion des rôles
-Route::resource('gestion_roles', RoleController::class);
+    // Gestion des incidents disciplinaires
+    Route::resource('gestion_incidents', IncidentDisciplinaireController::class);
 
-// Logs système
-Route::get('gestion_logs', [SystemLogController::class, 'index'])->name('gestion_logs.index');
-Route::delete('gestion_logs', [SystemLogController::class, 'clear'])->name('gestion_logs.clear');
+    // Gestion des sanctions
+    Route::resource('gestion_sanctions', SanctionController::class);
 
-// Paramètres
-Route::get('parametres/configuration', [ParametreController::class, 'configuration'])->name('parametres.configuration');
-Route::post('parametres/configuration', [ParametreController::class, 'saveConfiguration'])->name('parametres.save_configuration');
-Route::get('parametres/notifications', [ParametreController::class, 'notifications'])->name('parametres.notifications');
-Route::post('parametres/notifications', [ParametreController::class, 'saveNotifications'])->name('parametres.save_notifications');
-Route::get('parametres/sauvegardes', [ParametreController::class, 'sauvegardes'])->name('parametres.sauvegardes');
-Route::post('parametres/sauvegardes', [ParametreController::class, 'creerSauvegarde'])->name('parametres.creer_sauvegarde');
-Route::get('parametres/sauvegardes/{filename}', [ParametreController::class, 'telecharger'])->name('parametres.telecharger')->where('filename', '.+');
-Route::delete('parametres/sauvegardes/{filename}', [ParametreController::class, 'supprimerSauvegarde'])->name('parametres.supprimer')->where('filename', '.+');
-Route::post('parametres/restaurer', [ParametreController::class, 'restaurer'])->name('parametres.restaurer');
+    // Gestion des utilisateurs
+    Route::resource('gestion_utilisateurs', UserController::class);
+    Route::post('gestion_utilisateurs/{id}/toggle', [UserController::class, 'toggleActif'])->name('gestion_utilisateurs.toggle');
 
-// Emploi du temps
-Route::resource('gestion_emploi_temps', EmploiTempController::class);
+    // Gestion des rôles
+    Route::resource('gestion_roles', RoleController::class);
 
-// Statistiques & Rapports
-Route::get('statistiques/effectifs',     [StatistiqueController::class, 'effectifs'])->name('statistiques.effectifs');
-Route::get('statistiques/resultats',     [StatistiqueController::class, 'resultats'])->name('statistiques.resultats');
-Route::get('statistiques/taux-reussite', [StatistiqueController::class, 'tauxReussite'])->name('statistiques.taux_reussite');
-Route::get('statistiques/finances',      [StatistiqueController::class, 'finances'])->name('statistiques.finances');
-Route::get('statistiques/assiduite',     [StatistiqueController::class, 'assiduite'])->name('statistiques.assiduite');
-Route::get('statistiques/discipline',    [StatistiqueController::class, 'discipline'])->name('statistiques.discipline');
+    // Logs système
+    Route::get('gestion_logs', [SystemLogController::class, 'index'])->name('gestion_logs.index');
+    Route::delete('gestion_logs', [SystemLogController::class, 'clear'])->name('gestion_logs.clear');
+
+    // Paramètres
+    Route::get('parametres/configuration', [ParametreController::class, 'configuration'])->name('parametres.configuration');
+    Route::post('parametres/configuration', [ParametreController::class, 'saveConfiguration'])->name('parametres.save_configuration');
+    Route::get('parametres/notifications', [ParametreController::class, 'notifications'])->name('parametres.notifications');
+    Route::post('parametres/notifications', [ParametreController::class, 'saveNotifications'])->name('parametres.save_notifications');
+    Route::get('parametres/sauvegardes', [ParametreController::class, 'sauvegardes'])->name('parametres.sauvegardes');
+    Route::post('parametres/sauvegardes', [ParametreController::class, 'creerSauvegarde'])->name('parametres.creer_sauvegarde');
+    Route::get('parametres/sauvegardes/{filename}', [ParametreController::class, 'telecharger'])->name('parametres.telecharger')->where('filename', '.+');
+    Route::delete('parametres/sauvegardes/{filename}', [ParametreController::class, 'supprimerSauvegarde'])->name('parametres.supprimer')->where('filename', '.+');
+    Route::post('parametres/restaurer', [ParametreController::class, 'restaurer'])->name('parametres.restaurer');
+
+    // Emploi du temps
+    Route::resource('gestion_emploi_temps', EmploiTempController::class);
+
+    // Statistiques & Rapports
+    Route::get('statistiques/effectifs',     [StatistiqueController::class, 'effectifs'])->name('statistiques.effectifs');
+    Route::get('statistiques/resultats',     [StatistiqueController::class, 'resultats'])->name('statistiques.resultats');
+    Route::get('statistiques/taux-reussite', [StatistiqueController::class, 'tauxReussite'])->name('statistiques.taux_reussite');
+    Route::get('statistiques/finances',      [StatistiqueController::class, 'finances'])->name('statistiques.finances');
+    Route::get('statistiques/assiduite',     [StatistiqueController::class, 'assiduite'])->name('statistiques.assiduite');
+    Route::get('statistiques/discipline',    [StatistiqueController::class, 'discipline'])->name('statistiques.discipline');
+
+});
