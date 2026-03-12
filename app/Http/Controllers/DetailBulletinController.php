@@ -65,6 +65,11 @@ class DetailBulletinController extends Controller
 
             DetailBulletin::create($validated);
 
+            $redirectUrl = $request->input('redirect_url');
+            if ($redirectUrl) {
+                return redirect($redirectUrl)->with('success', 'Détail du bulletin ajouté avec succès');
+            }
+
             return redirect()->route('gestion_detail_bulletins.index')
                 ->with('success', 'Détail du bulletin créé avec succès');
         } catch (\Illuminate\Validation\ValidationException $e) {

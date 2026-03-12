@@ -20,11 +20,8 @@
                         </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_paiements.show', $paiement->id) }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_paiements.show', $paiement->id) }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-arrow-left me-1"></i>&nbsp; Retour
-                        </a>
-                        <a href="{{ route('gestion_paiements.index') }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-list me-1"></i>&nbsp; Liste des paiements
                         </a>
                     </div>
                 </div>
@@ -198,9 +195,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i class="fas fa-save me-1"></i> Enregistrer les modifications
                                 </button>
-                                <a href="{{ route('gestion_paiements.show', $paiement->id) }}" class="btn btn-dark">
-                                    <i class="fas fa-times me-1"></i> Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

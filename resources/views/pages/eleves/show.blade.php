@@ -20,11 +20,14 @@
                         </p>
                     </div>
                     <div class="col-auto mt-4">
+                        <a href="{{ route('gestion_eleves.index') }}" class="btn btn-dark btn-sm">
+                            <i class="fas fa-arrow-left"></i>&nbsp; Retour
+                        </a>
                         <a href="{{ route('gestion_eleves.edit', $eleve->id) }}" class="btn btn-light btn-sm me-2">
                             <i class="fas fa-edit"></i>&nbsp; Modifier
                         </a>
-                        <a href="{{ route('gestion_eleves.index') }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-arrow-left"></i>&nbsp; Retour
+                        <a href="{{ route('gestion_eleves.carte', $eleve->id) }}" target="_blank" class="btn btn-success btn-sm">
+                            <i class="fas fa-id-card"></i>&nbsp; Carte scolaire
                         </a>
                     </div>
                 </div>
@@ -53,7 +56,7 @@
                         <p class="card-text text-muted small">{{ $eleve->registration_number }}</p>
                         <div class="d-grid gap-2">
                             <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Voir le compte
+                                <i class="fas fa-external-link-alt"></i>&nbsp; Voir le compte
                             </a>
                         </div>
                     </div>
@@ -120,6 +123,19 @@
                                         {{ ucfirst($eleve->statut) }}
                                     </span>
                                 </p>
+                            </div>
+                            <div class="col-12 mb-0">
+                                <label class="small mb-1 text-muted text-uppercase">Pièces jointes</label>
+                                <br>
+                                @if ($eleve->pieces_jointes)
+                                    <a href="{{ asset('storage/' . $eleve->pieces_jointes) }}" target="_blank"
+                                        class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-file-alt"></i>&nbsp;
+                                        {{ \Illuminate\Support\Str::afterLast($eleve->pieces_jointes, '/') }}
+                                    </a>
+                                @else
+                                    <span class="text-muted">Aucune pièce jointe</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -934,7 +950,8 @@
                                             <tr>
                                                 <td><strong>{{ ucfirst($frais->libelle ?? 'N/A') }}</strong></td>
                                                 <td>{{ number_format($frais->montant ?? 0, 2) }} FCFA</td>
-                                                <td class="text-success">{{ number_format($frais->montant_paye ?? 0, 2) }}
+                                                <td class="text-success">
+                                                    {{ number_format($frais->montant_paye ?? 0, 2) }}
                                                     FCFA
                                                 </td>
                                                 <td class="text-danger">

@@ -56,8 +56,8 @@ class StatistiqueController extends Controller
                         ->where('genre', 'féminin')
                         ->count();
                     return [
-                        'classe'   => $row->classe->libelle ?? '—',
-                        'niveau'   => $row->classe->niveau->libelle ?? '—',
+                        'classe'   => $row->classe->nom ?? '—',
+                        'niveau'   => $row->classe->niveau->nom ?? '—',
                         'total'    => $row->total,
                         'garcons'  => $row->total - $filles,
                         'filles'   => $filles,

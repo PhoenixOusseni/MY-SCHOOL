@@ -442,12 +442,16 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
     <script>
         feather.replace();
 
-        // Select2 dans le modal — doit être initialisé avec dropdownParent
-        // pour éviter les conflits de z-index avec Bootstrap 5
         $('#addNoteModal').on('shown.bs.modal', function () {
+            if ($('#eleve_id').hasClass('select2-hidden-accessible')) {
+                $('#eleve_id').select2('destroy');
+            }
             $('#eleve_id').select2({
                 placeholder: '-- Sélectionner un élève --',
                 allowClear: true,
@@ -461,7 +465,9 @@
         });
 
         $('#addNoteModal').on('hidden.bs.modal', function () {
-            $('#eleve_id').select2('destroy');
+            if ($('#eleve_id').hasClass('select2-hidden-accessible')) {
+                $('#eleve_id').select2('destroy');
+            }
         });
     </script>
 @endsection

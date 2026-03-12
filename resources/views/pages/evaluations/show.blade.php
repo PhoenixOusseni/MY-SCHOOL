@@ -461,3 +461,22 @@
     </script>
 
 @endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        // Réinitialiser Select2 pour l'élève avec dropdownParent (fix modal Bootstrap)
+        $('select[name="eleve_id"]').select2('destroy');
+        $('select[name="eleve_id"]').select2({
+            placeholder: '-- Sélectionner un élève --',
+            allowClear: true,
+            width: '100%',
+            dropdownParent: $('#addNoteModal'),
+            language: {
+                noResults: function () { return 'Aucun résultat trouvé'; },
+                searching:  function () { return 'Recherche en cours…'; }
+            }
+        });
+    });
+</script>
+@endsection

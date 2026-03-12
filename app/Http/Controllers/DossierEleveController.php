@@ -53,6 +53,47 @@ class DossierEleveController extends Controller
     }
 
     /**
+     * Vue d'impression du dossier complet d'un élève.
+     */
+    public function print(string $id)
+    {
+        $eleve = Eleve::with([
+            'etablissement',
+            'user',
+            'inscriptions.classe.niveau',
+            'inscriptions.anneeScolaire',
+            'eleveParents.tuteur',
+            'absences',
+            'retards',
+            'incidentsDisciplinaires',
+            'sanctions',
+            'paiements.fraiScolarite',
+            'paiements.anneeScolaire',
+            'bulletins.classe',
+            'bulletins.periodEvaluation',
+            'bulletins.detailBulletins',
+            'notes',
+        ])->findOrFail($id);
+
+        $totalAbsences  = $eleve->absences->count();
+        $totalRetards   = $eleve->retards->count();
+        $totalIncidents = $eleve->incidentsDisciplinaires->count();
+        $totalPaye      = $eleve->paiements->sum('montant');
+        $totalReste     = $eleve->paiements->sum('reste_a_payer');
+        $derniereInscription = $eleve->inscriptions->sortByDesc('created_at')->first();
+
+        return view('pages.dossiers_eleves.print', compact(
+            'eleve',
+            'totalAbsences',
+            'totalRetards',
+            'totalIncidents',
+            'totalPaye',
+            'totalReste',
+            'derniereInscription'
+        ));
+    }
+
+    /**
      * Affiche le dossier complet d'un élève.
      */
     public function show(string $id)

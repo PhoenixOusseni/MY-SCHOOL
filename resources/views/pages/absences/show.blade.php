@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="user-x"></i></div>
                             Détails de l'Absence
                         </h1>
+                        <p class="text-muted">Visualiser les informations complètes de l'absence sélectionnée</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -34,7 +35,7 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 mb-4">
+            <div class="col-lg-8">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">
@@ -117,8 +118,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">

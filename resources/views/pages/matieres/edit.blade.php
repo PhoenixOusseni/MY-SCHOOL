@@ -12,12 +12,15 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
-                            <div class="page-header-icon"><i data-feather="edit-2"></i></div>
+                            <div class="page-header-icon"><i data-feather="edit"></i></div>
                             Modifier la Matière
                         </h1>
+                        <p class="page-header-subtitle">
+                            Mettez à jour les informations de la matière en remplissant le formulaire ci-dessous.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_matieres.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_matieres.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -120,9 +123,6 @@
                                             <i data-feather="save" class="me-2"></i> &nbsp; Enregistrer les
                                             modifications
                                         </button>
-                                        <a href="{{ route('gestion_matieres.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

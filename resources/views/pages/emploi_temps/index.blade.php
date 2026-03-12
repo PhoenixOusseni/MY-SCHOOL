@@ -25,9 +25,12 @@
                             <i class="fas fa-plus me-1"></i> Ajouter un créneau
                         </a>
                     @endif
-                    <button onclick="window.print()" class="btn btn-light btn-sm">
-                        <i class="fas fa-print me-1"></i> Imprimer
-                    </button>
+                    @if($annee && $classeId)
+                        <a href="{{ route('gestion_emploi_temps.print', ['annee_id' => $annee->id, 'classe_id' => $classeId]) }}"
+                           target="_blank" class="btn btn-light btn-sm">
+                            <i class="fas fa-print me-1"></i> Imprimer
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

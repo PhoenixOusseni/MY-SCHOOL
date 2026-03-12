@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="book-open"></i></div>
                             Gestion des classes
                         </h1>
+                        <p class="text-muted">Gérez les classes de votre établissement scolaire. Ajoutez, modifiez ou consultez les classes existantes.</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-header bg-dark">
-                        <h5 class="mb-0 text-white">
+                        <h5 class="mb-0">
                             <i data-feather="plus-circle"
                                 style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
                             Ajouter une classe
@@ -158,7 +159,7 @@
             <div class="col-lg-8 mb-4">
                 <div class="card">
                     <div class="card-header bg-dark">
-                        <h5 class="mb-0 text-white">
+                        <h5 class="mb-0">
                             <i data-feather="list"
                                 style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
                             Liste des classes

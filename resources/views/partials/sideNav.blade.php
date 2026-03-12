@@ -149,7 +149,7 @@
                             <a class="nav-link" href="{{ route('gestion_periodes_evaluation.index') }}">Périodes d'évaluation</a>
                             <a class="nav-link" href="{{ route('gestion_evaluations.create') }}">Créer évaluation</a>
                             <a class="nav-link" href="{{ route('gestion_evaluations.index') }}">Liste des évaluations</a>
-                            <a class="nav-link" href="#">Calendrier examens</a>
+                            <a class="nav-link" href="{{ route('calendrier_examens.index') }}">Calendrier examens</a>
                         </nav>
                     </div>
 

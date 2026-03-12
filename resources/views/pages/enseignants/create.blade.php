@@ -15,9 +15,10 @@
                             <div class="page-header-icon"><i data-feather="user-plus"></i></div>
                             Ajouter un Enseignant
                         </h1>
+                        <p class="text-muted">Remplissez le formulaire ci-dessous pour ajouter un nouvel enseignant à l'établissement</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -212,9 +213,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

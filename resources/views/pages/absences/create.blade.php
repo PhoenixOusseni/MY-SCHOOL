@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter une Absence
                         </h1>
+                        <p class="text-white">Enregistrer une nouvelle absence pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -75,6 +76,7 @@
                                         <option value="" selected disabled>-- Sélectionner --</option>
                                         @foreach ($eleves as $eleve)
                                             <option value="{{ $eleve->id }}"
+                                                data-classe="{{ $eleveClasseMap[$eleve->id] ?? '' }}"
                                                 {{ old('eleve_id') == $eleve->id ? 'selected' : '' }}>
                                                 {{ $eleve->prenom }} {{ $eleve->nom }}
                                             </option>
@@ -157,9 +159,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +205,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             feather.replace();
+
+            document.getElementById('eleve_id').addEventListener('change', function() {
+                const selected = this.options[this.selectedIndex];
+                const classeId = selected.getAttribute('data-classe');
+                const classeSelect = document.getElementById('classe_id');
+                if (classeId) {
+                    classeSelect.value = classeId;
+                }
+            });
 
             document.getElementById('absenceForm').addEventListener('submit', function(e) {
                 const date = document.getElementById('date').value;

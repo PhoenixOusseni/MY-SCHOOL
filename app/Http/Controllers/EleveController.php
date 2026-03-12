@@ -13,6 +13,7 @@ use App\Models\Classe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class EleveController extends Controller
 {
@@ -55,6 +56,8 @@ class EleveController extends Controller
             'telephone' => 'nullable|string|max:20',
             'groupe_sanguin' => 'nullable|string|max:10',
             'notes_medicales' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'pieces_jointes' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
 
             // Compte utilisateur
             'email' => 'required|email|unique:users,email',
@@ -94,6 +97,18 @@ class EleveController extends Controller
                 'role_id' => $roleId,
             ]);
 
+            // Upload photo
+            $photoPath = null;
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('eleves/photos', 'public');
+            }
+
+            // Upload pièces jointes
+            $piecesJointesPath = null;
+            if ($request->hasFile('pieces_jointes')) {
+                $piecesJointesPath = $request->file('pieces_jointes')->store('eleves/pieces_jointes', 'public');
+            }
+
             // Créer l'élève
             $eleve = Eleve::create([
                 'registration_number' => $registrationNumber,
@@ -109,6 +124,8 @@ class EleveController extends Controller
                 'notes_medicales' => $validated['notes_medicales'] ?? null,
                 'date_inscription' => $validated['date_inscription'] ?? today(),
                 'statut' => $validated['statut'] ?? 'actif',
+                'photo' => $photoPath,
+                'pieces_jointes' => $piecesJointesPath,
                 'user_id' => $user->id,
                 'etablissement_id' => $validated['etablissement_id'] ?? null,
             ]);
@@ -134,6 +151,20 @@ class EleveController extends Controller
     {
         $eleve = Eleve::findOrFail($id);
         return view('pages.eleves.show', compact('eleve'));
+    }
+
+    public function carteScolaire(String $id)
+    {
+        $eleve = Eleve::with([
+            'etablissement',
+            'inscriptions.anneeScolaire',
+            'inscriptions.classe.niveau',
+            'eleveParents.tuteur',
+        ])->findOrFail($id);
+
+        $inscriptionActive = $eleve->inscriptions->sortByDesc('created_at')->first();
+
+        return view('pages.eleves.carte_scolaire', compact('eleve', 'inscriptionActive'));
     }
 
     /**
@@ -169,6 +200,8 @@ class EleveController extends Controller
             'telephone'        => 'nullable|string|max:20',
             'groupe_sanguin'   => 'nullable|string|max:10',
             'notes_medicales'  => 'nullable|string',
+            'photo'            => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'pieces_jointes'   => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
 
             // Informations scolaires
             'date_inscription' => 'nullable|date',
@@ -178,6 +211,22 @@ class EleveController extends Controller
 
         try {
             DB::beginTransaction();
+
+            // Upload photo (remplace l'ancienne si présente)
+            if ($request->hasFile('photo')) {
+                if ($eleve->photo) {
+                    Storage::disk('public')->delete($eleve->photo);
+                }
+                $validated['photo'] = $request->file('photo')->store('eleves/photos', 'public');
+            }
+
+            // Upload pièces jointes (remplace l'ancienne si présente)
+            if ($request->hasFile('pieces_jointes')) {
+                if ($eleve->pieces_jointes) {
+                    Storage::disk('public')->delete($eleve->pieces_jointes);
+                }
+                $validated['pieces_jointes'] = $request->file('pieces_jointes')->store('eleves/pieces_jointes', 'public');
+            }
 
             // Mise à jour de l'élève
             $eleve->update($validated);

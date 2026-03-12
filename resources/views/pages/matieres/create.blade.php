@@ -15,6 +15,9 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter une Matière
                         </h1>
+                        <p class="page-header-subtitle">
+                            Remplissez le formulaire ci-dessous pour ajouter une nouvelle matière à votre établissement.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_matieres.index') }}" class="btn btn-dark btn-sm">
@@ -114,9 +117,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_matieres.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

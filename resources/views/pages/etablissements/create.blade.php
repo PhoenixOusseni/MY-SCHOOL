@@ -14,6 +14,12 @@
                             <div class="page-header-icon"><i data-feather="user-plus"></i></div>
                             Ajouter un établissement
                         </h1>
+                        <p class="text-white">Remplissez le formulaire ci-dessous pour ajouter un nouvel établissement à l'organisation</p>
+                    </div>
+                    <div class="col-auto mt-4">
+                        <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-light btn-sm">
+                            <i data-feather="align-left"></i>&nbsp; Liste des établissements
+                        </a>
                     </div>
                 </div>
             </div>
@@ -26,22 +32,10 @@
             <div class="col-lg-12">
                 <!-- Tabbed dashboard card example-->
                 <div class="card mb-4">
+                    <div class="card-header">Formulaire d'ajout</div>
                     <div class="card-body">
-                        <div class="col-sm-12 mb-3">
-                            <a href="{{ route('gestion_etablissements.create') }}" class="btn btn-1"><i
-                                    data-feather="plus"></i>&thinsp;&thinsp;
-                                Ajouter un établissement</a>
-                            <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-dark"><i
-                                    data-feather="align-left"></i>&thinsp;&thinsp;
-                                Liste des établissements</a>
-                        </div>
                         <form action="{{ route('gestion_etablissements.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
-                            <hr>
-                            <h4 class="mb-3 mt-3 text-danger">Informations de l'établissement</h4>
-                            <hr>
-
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label class="small mb-1">Code <span class="text-muted">(optionnel)</span></label>
@@ -115,14 +109,9 @@
                                 </div>
                             </div>
 
-                            <hr class="my-4">
-
                             <div class="mt-3">
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&thinsp;&thinsp; Enregistrer
-                                </button>
-                                <button type="reset" class="btn btn-dark">
-                                    <i data-feather="x"></i>&thinsp;&thinsp; Réinitialiser
                                 </button>
                             </div>
                         </form>

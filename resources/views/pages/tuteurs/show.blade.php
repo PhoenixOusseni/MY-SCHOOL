@@ -19,7 +19,7 @@
                         </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-light btn-sm me-2">
+                        <a href="{{ route('gestion_tuteurs.index') }}" class="btn btn-1 btn-sm me-2">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>

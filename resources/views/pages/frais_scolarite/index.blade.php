@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i class="fas fa-dollar-sign"></i></div>
                             Frais de Scolarité
                         </h1>
+                        <p class="text-muted">Gérez les frais de scolarité de votre établissement scolaire</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_frais_scolarite.create') }}" class="btn btn-dark btn-sm">

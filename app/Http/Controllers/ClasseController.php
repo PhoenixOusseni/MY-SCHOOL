@@ -62,6 +62,7 @@ class ClasseController extends Controller
      */
     public function edit(String $id)
     {
+        $classe = Classe::findOrFail($id);
         $niveaux = Niveau::all();
         $etablissements = Etablissement::all();
         $anneesScolaires = AnneeScolaire::all();
@@ -71,8 +72,9 @@ class ClasseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request, String $id)
     {
+        $classe = Classe::findOrFail($id);
         $request->validate([
             'nom' => 'required|string|max:100',
             'capacite' => 'nullable|integer|min:1|max:500',
@@ -91,6 +93,36 @@ class ClasseController extends Controller
         $classe->save();
 
         return redirect()->route('gestion_classes.index')->with('success', 'Classe mise à jour avec succès.');
+    }
+
+    /**
+     * Print all student ID cards for a class.
+     */
+    public function printCartes(string $id)
+    {
+        $classe = Classe::with([
+            'etablissement',
+            'niveau',
+            'anneeScolaire',
+            'inscriptions.eleve.eleveParents.tuteur',
+        ])->findOrFail($id);
+
+        return view('pages.classes.print_carte', compact('classe'));
+    }
+
+    /**
+     * Print the effectif (student list) for a class.
+     */
+    public function printEffectif(string $id)
+    {
+        $classe = Classe::with([
+            'etablissement',
+            'niveau',
+            'anneeScolaire',
+            'inscriptions.eleve',
+        ])->findOrFail($id);
+
+        return view('pages.classes.print_effectif', compact('classe'));
     }
 
     /**

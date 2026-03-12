@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="edit"></i></div>
                             Modifier l'Enseignant
                         </h1>
+                        <p class="text-muted">Mettez à jour les informations de l'enseignant {{ $enseignant->prenom }} {{ $enseignant->nom }}</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-dark btn-sm">
@@ -272,9 +273,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer les modifications
                                         </button>
-                                        <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -290,6 +288,7 @@
                             <i data-feather="clock" class="me-2"></i>Historique
                         </h6>
                     </div>
+                    <hr>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -343,9 +342,10 @@
                         class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-1">Supprimer</button>
+                        <button type="submit" class="btn btn-1">
+                            <i data-feather="trash-2"></i>&nbsp; Oui, supprimer
+                        </button>
                     </form>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

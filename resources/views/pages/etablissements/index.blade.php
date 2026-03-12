@@ -14,6 +14,15 @@
                             <div class="page-header-icon"><i data-feather="list"></i></div>
                             Liste des établissements
                         </h1>
+                        <p class="text-white">Gérer les établissements de l'organisation </p>
+                    </div>
+                    <div class="col-auto mt-4">
+                        <a href="{{ route('gestion_etablissements.create') }}" class="btn btn-1 btn-sm"><i
+                                data-feather="plus"></i>&thinsp;&thinsp;
+                            Ajouter un établissement</a>
+                        <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-dark btn-sm"><i
+                                data-feather="align-left"></i>&thinsp;&thinsp;
+                            Liste des établissements</a>
                     </div>
                 </div>
             </div>
@@ -28,14 +37,6 @@
                 <!-- Tabbed dashboard card example-->
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="col-sm-12 mb-3">
-                            <a href="{{ route('gestion_etablissements.create') }}" class="btn btn-1 btn-sm"><i
-                                    data-feather="plus"></i>&thinsp;&thinsp;
-                                Ajouter un établissement</a>
-                            <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-dark btn-sm"><i
-                                    data-feather="align-left"></i>&thinsp;&thinsp;
-                                Liste des établissements</a>
-                        </div>
                         <table id="datatablesSimple">
                             <thead>
                                 <tr>

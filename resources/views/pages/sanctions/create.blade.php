@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter une Sanction
                         </h1>
+                        <p class="text-muted">Enregistrez une nouvelle sanction disciplinaire pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-dark">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -129,9 +130,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -66,8 +66,9 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-12">
-                <form action="{{ route('gestion_eleves.update', $eleve->id) }}" method="POST" enctype="multipart/form-data">
+            <div class="col-lg-8">
+                <form action="{{ route('gestion_eleves.update', $eleve->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -108,9 +109,12 @@
                                     <select class="form-select @error('genre') is-invalid @enderror" id="genre"
                                         name="genre">
                                         <option value="">Sélectionner...</option>
-                                        <option value="M" {{ old('genre', $eleve->genre) == 'M' ? 'selected' : '' }}>Masculin</option>
-                                        <option value="F" {{ old('genre', $eleve->genre) == 'F' ? 'selected' : '' }}>Féminin</option>
-                                        <option value="Autres" {{ old('genre', $eleve->genre) == 'Autres' ? 'selected' : '' }}>Autres</option>
+                                        <option value="M" {{ old('genre', $eleve->genre) == 'M' ? 'selected' : '' }}>
+                                            Masculin</option>
+                                        <option value="F" {{ old('genre', $eleve->genre) == 'F' ? 'selected' : '' }}>
+                                            Féminin</option>
+                                        <option value="Autres"
+                                            {{ old('genre', $eleve->genre) == 'Autres' ? 'selected' : '' }}>Autres</option>
                                     </select>
                                     @error('genre')
                                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -159,6 +163,44 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="photo" class="form-label">Photo de profil</label>
+                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"
+                                        id="photo" name="photo" accept="image/*">
+                                    @error('photo')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                    @if ($eleve->photo)
+                                        <small class="text-muted d-block mt-1">
+                                            <i data-feather="image" style="width: 14px; height: 14px;"></i> Photo actuelle
+                                            : {{ $eleve->photo }}
+                                        </small>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="pieces_jointes" class="form-label">Pièces jointes</label>
+                                    <input type="file"
+                                        class="form-control @error('pieces_jointes') is-invalid @enderror"
+                                        id="pieces_jointes" name="pieces_jointes[]" accept="pdf"
+                                        multiple>
+                                    @error('pieces_jointes')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                    @if ($eleve->pieces_jointes && count($eleve->pieces_jointes) > 0)
+                                        <small class="text-muted d-block mt-1">
+                                            <i data-feather="paperclip" style="width: 14px; height: 14px;"></i> Pièces
+                                            jointes actuelles :
+                                            <ul class="mb-0">
+                                                @foreach ($eleve->pieces_jointes as $piece)
+                                                    <li>{{ $piece }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </small>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -186,7 +228,8 @@
                                     <input type="email" class="form-control" id="email"
                                         value="{{ $eleve->user->email ?? 'N/A' }}" disabled>
                                     <small class="text-muted d-block mt-1">
-                                        <i data-feather="info" style="width: 14px; height: 14px;"></i> Géré via le compte utilisateur
+                                        <i data-feather="info" style="width: 14px; height: 14px;"></i> Géré via le compte
+                                        utilisateur
                                     </small>
                                 </div>
                             </div>
@@ -207,14 +250,30 @@
                                     <select class="form-select @error('groupe_sanguin') is-invalid @enderror"
                                         id="groupe_sanguin" name="groupe_sanguin">
                                         <option value="">Sélectionner...</option>
-                                        <option value="O+" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'O+' ? 'selected' : '' }}>O+</option>
-                                        <option value="O-" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'O-' ? 'selected' : '' }}>O-</option>
-                                        <option value="A+" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'A+' ? 'selected' : '' }}>A+</option>
-                                        <option value="A-" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'A-' ? 'selected' : '' }}>A-</option>
-                                        <option value="B+" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'B+' ? 'selected' : '' }}>B+</option>
-                                        <option value="B-" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'B-' ? 'selected' : '' }}>B-</option>
-                                        <option value="AB+" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'AB+' ? 'selected' : '' }}>AB+</option>
-                                        <option value="AB-" {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'AB-' ? 'selected' : '' }}>AB-</option>
+                                        <option value="O+"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'O+' ? 'selected' : '' }}>
+                                            O+</option>
+                                        <option value="O-"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'O-' ? 'selected' : '' }}>
+                                            O-</option>
+                                        <option value="A+"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'A+' ? 'selected' : '' }}>
+                                            A+</option>
+                                        <option value="A-"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'A-' ? 'selected' : '' }}>
+                                            A-</option>
+                                        <option value="B+"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'B+' ? 'selected' : '' }}>
+                                            B+</option>
+                                        <option value="B-"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'B-' ? 'selected' : '' }}>
+                                            B-</option>
+                                        <option value="AB+"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'AB+' ? 'selected' : '' }}>
+                                            AB+</option>
+                                        <option value="AB-"
+                                            {{ old('groupe_sanguin', $eleve->groupe_sanguin) == 'AB-' ? 'selected' : '' }}>
+                                            AB-</option>
                                     </select>
                                     @error('groupe_sanguin')
                                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -224,8 +283,8 @@
 
                             <div class="mb-0">
                                 <label for="notes_medicales" class="form-label">Notes médicales</label>
-                                <textarea class="form-control @error('notes_medicales') is-invalid @enderror"
-                                    id="notes_medicales" name="notes_medicales" rows="3"
+                                <textarea class="form-control @error('notes_medicales') is-invalid @enderror" id="notes_medicales"
+                                    name="notes_medicales" rows="3"
                                     placeholder="Ex: Allergies, problèmes de santé, médicaments spécialisés...">{{ old('notes_medicales', $eleve->notes_medicales) }}</textarea>
                                 @error('notes_medicales')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -265,16 +324,20 @@
                                     <select class="form-select @error('statut') is-invalid @enderror" id="statut"
                                         name="statut">
                                         <option value="">-- Sélectionner un statut --</option>
-                                        <option value="actif" {{ old('statut', $eleve->statut) == 'actif' ? 'selected' : '' }}>
+                                        <option value="actif"
+                                            {{ old('statut', $eleve->statut) == 'actif' ? 'selected' : '' }}>
                                             Actif
                                         </option>
-                                        <option value="suspendu" {{ old('statut', $eleve->statut) == 'suspendu' ? 'selected' : '' }}>
+                                        <option value="suspendu"
+                                            {{ old('statut', $eleve->statut) == 'suspendu' ? 'selected' : '' }}>
                                             Suspendu
                                         </option>
-                                        <option value="diplome" {{ old('statut', $eleve->statut) == 'diplome' ? 'selected' : '' }}>
+                                        <option value="diplome"
+                                            {{ old('statut', $eleve->statut) == 'diplome' ? 'selected' : '' }}>
                                             Diplômé
                                         </option>
-                                        <option value="abandonne" {{ old('statut', $eleve->statut) == 'abandonne' ? 'selected' : '' }}>
+                                        <option value="abandonne"
+                                            {{ old('statut', $eleve->statut) == 'abandonne' ? 'selected' : '' }}>
                                             Abandonné
                                         </option>
                                     </select>
@@ -287,7 +350,8 @@
                             <div class="row mb-0">
                                 <div class="col-md-6">
                                     <label for="date_inscription" class="form-label">Date d'inscription</label>
-                                    <input type="date" class="form-control @error('date_inscription') is-invalid @enderror"
+                                    <input type="date"
+                                        class="form-control @error('date_inscription') is-invalid @enderror"
                                         id="date_inscription" name="date_inscription"
                                         value="{{ old('date_inscription', $eleve->date_inscription ? $eleve->date_inscription : '') }}">
                                     @error('date_inscription')
@@ -300,7 +364,8 @@
                                     <input type="text" class="form-control" value="{{ $eleve->registration_number }}"
                                         disabled>
                                     <small class="text-muted d-block mt-1">
-                                        <i data-feather="lock" style="width: 14px; height: 14px;"></i> Ce numéro ne peut pas être modifié
+                                        <i data-feather="lock" style="width: 14px; height: 14px;"></i> Ce numéro ne peut
+                                        pas être modifié
                                     </small>
                                 </div>
                             </div>
@@ -341,11 +406,34 @@
                         <button type="submit" class="btn btn-1">
                             <i data-feather="save" class="me-2"></i> Enregistrer les modifications
                         </button>
-                        <a href="{{ route('gestion_eleves.show', $eleve->id) }}" class="btn btn-dark">
-                            <i data-feather="x" class="me-2"></i> Annuler
-                        </a>
                     </div>
                 </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow mb-4">
+                    <div class="card-body">
+                        <h6 class="mb-3">
+                            <i data-feather="info" class="me-2"></i> Conseils pour la modification
+                        </h6>
+                        <ul class="mb-0">
+                            <li>Assurez-vous que les informations personnelles sont à jour.</li>
+                            <li>Vérifiez les coordonnées de contact pour garantir une communication efficace.</li>
+                            <li>Utilisez les notes médicales pour informer le personnel en cas de besoins spécifiques.</li>
+                            <li>Gardez les informations scolaires à jour pour un suivi précis des inscriptions et du statut.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow mb-4">
+                    <div class="card-body">
+                        <h6 class="mb-3">
+                            <i data-feather="help-circle" class="me-2"></i> Besoin d'aide ?
+                        </h6>
+                        <p class="mb-0">Si vous avez des questions ou besoin d'assistance, n'hésitez pas à contacter
+                            l'administrateur du système ou à consulter la documentation.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

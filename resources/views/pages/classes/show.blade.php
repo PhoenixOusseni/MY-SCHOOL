@@ -15,20 +15,29 @@
                             <div class="page-header-icon"><i data-feather="book-open"></i></div>
                             {{ $classe->nom }}
                         </h1>
+                        <p class="text-muted">{{ $classe->description ?? 'Aucune description disponible.' }}</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_classes.index') }}" class="btn btn-light btn-sm">
-                            <i data-feather="arrow-left"></i>
+                            <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                         <a href="{{ route('gestion_classes.edit', $classe->id) }}" class="btn btn-dark btn-sm">
-                            <i data-feather="edit"></i>
+                            <i data-feather="edit"></i>&nbsp; Modifier
+                        </a>
+                        {{-- Impression de l'effectif de la classe --}}
+                        <a href="{{ route('gestion_classes.print_effectif', $classe->id) }}" class="btn btn-success btn-sm" target="_blank">
+                            <i data-feather="printer"></i>&nbsp; Effectif
+                        </a>
+                        {{-- Impression des cartes scolaires --}}
+                        <a href="{{ route('gestion_classes.print_cartes', $classe->id) }}" class="btn btn-info btn-sm" target="_blank">
+                            <i data-feather="credit-card"></i>&nbsp; Cartes
                         </a>
                         <form action="{{ route('gestion_classes.destroy', $classe->id) }}" method="POST"
                             style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
-                                <i data-feather="trash-2"></i>
+                                <i data-feather="trash-2"></i>&nbsp; Supprimer
                             </button>
                         </form>
                     </div>
@@ -303,8 +312,10 @@
                                     <tbody>
                                         @foreach ($classe->inscriptions as $index => $inscription)
                                             <tr>
-                                                <td><strong>{{ $inscription->eleve->registration_number ?? 'N/A' }}</strong></td>
-                                                <td>{{ $inscription->eleve->nom ?? 'N/A' }} {{ $inscription->eleve->prenom ?? 'N/A' }}</td>
+                                                <td><strong>{{ $inscription->eleve->registration_number ?? 'N/A' }}</strong>
+                                                </td>
+                                                <td>{{ $inscription->eleve->nom ?? 'N/A' }}
+                                                    {{ $inscription->eleve->prenom ?? 'N/A' }}</td>
                                                 <td>{{ $inscription->eleve->email ?? 'N/A' }}</td>
                                                 <td><small>{{ $inscription->eleve->telephone ?? 'N/A' }}</small></td>
                                                 <td>
@@ -317,7 +328,8 @@
                                                     </small>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('gestion_eleves.show', $inscription->eleve->id) }}" class="btn btn-sm btn-1" title="Voir">
+                                                    <a href="{{ route('gestion_eleves.show', $inscription->eleve->id) }}"
+                                                        class="btn btn-sm btn-1" title="Voir">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
@@ -354,14 +366,16 @@
                                         @foreach ($classe->professeurPrincipals as $index => $professeur)
                                             <tr>
                                                 <td><strong>{{ $index + 1 }}</strong></td>
-                                                <td>{{ $professeur->enseignant->nom ?? 'N/A' }} {{ $professeur->enseignant->prenom ?? 'N/A' }}</td>
+                                                <td>{{ $professeur->enseignant->nom ?? 'N/A' }}
+                                                    {{ $professeur->enseignant->prenom ?? 'N/A' }}</td>
                                                 <td><small>{{ $professeur->enseignant->email ?? 'N/A' }}</small></td>
                                                 <td><small>{{ $professeur->enseignant->telephone ?? 'N/A' }}</small>
                                                 </td>
                                                 <td><small>{{ $professeur->enseignant->etablissement->nom ?? 'N/A' }}</small>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('gestion_enseignants.show', $professeur->id) }}" class="btn btn-sm btn-1" title="Voir">
+                                                    <a href="{{ route('gestion_enseignants.show', $professeur->id) }}"
+                                                        class="btn btn-sm btn-1" title="Voir">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
@@ -408,7 +422,8 @@
                                                         class="badge bg-success">{{ $enseignement->credits ?? 0 }}</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('gestion_enseignants.show', $enseignement->enseignant->id) }}" class="btn btn-sm btn-1" title="Voir">
+                                                    <a href="{{ route('gestion_enseignants.show', $enseignement->enseignant->id) }}"
+                                                        class="btn btn-sm btn-1" title="Voir">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                 </td>
@@ -447,7 +462,8 @@
                                             <tr>
                                                 <td><strong>{{ $index + 1 }}</strong></td>
                                                 <td>{{ $absence->eleve->prenom ?? 'N/A' }}
-                                                    {{ $absence->eleve->nom ?? '' }} - {{ $absence->eleve->registration_number ?? 'N/A' }}</td>
+                                                    {{ $absence->eleve->nom ?? '' }} -
+                                                    {{ $absence->eleve->registration_number ?? 'N/A' }}</td>
                                                 <td>{{ $absence->date ? $absence->date->format('d/m/Y') : 'N/A' }}</td>
                                                 <td>
                                                     <span class="badge bg-warning">{{ $absence->duree ?? 0 }}h</span>

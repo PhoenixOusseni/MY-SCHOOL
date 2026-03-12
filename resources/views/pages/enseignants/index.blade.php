@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="briefcase"></i></div>
                             Gestion des Enseignants
                         </h1>
+                        <p class="text-muted">Liste de tous les enseignants de l'établissement</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_enseignants.create') }}" class="btn btn-dark btn-sm">

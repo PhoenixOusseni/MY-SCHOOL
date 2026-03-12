@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier le Retard
                         </h1>
+                        <p class="text-muted">Mettez à jour les informations du retard enregistré pour l'élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -144,16 +145,26 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer les modifications
                                         </button>
-                                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="m-2">
+                        <h6 class="mb-0">
+                            <i data-feather="help-circle" class="me-2"></i>Aide
+                        </h6>
+                    </div>
+                    <hr>
+                    <div class="card-body p-4">
+                        <p class="mb-2">Mettez à jour les informations du retard et enregistrez vos modifications.</p>
+                        <p class="mb-0">La suppression est définitive, utilisez-la avec précaution.</p>
+                    </div>
+                </div>
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">
@@ -189,22 +200,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm mb-4">
-                    <div class="m-2">
-                        <h6 class="mb-0">
-                            <i data-feather="help-circle" class="me-2"></i>Aide
-                        </h6>
-                    </div>
-                    <hr>
-                    <div class="card-body p-4">
-                        <p class="mb-2">Mettez à jour les informations du retard et enregistrez vos modifications.</p>
-                        <p class="mb-0">La suppression est définitive, utilisez-la avec précaution.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
 
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">

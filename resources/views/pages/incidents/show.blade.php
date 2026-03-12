@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="alert-triangle"></i></div>
                             Détails de l'Incident Disciplinaire
                         </h1>
+                        <p class="text-muted">Consultez les détails complets de cet incident disciplinaire</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_incidents.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_incidents.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>

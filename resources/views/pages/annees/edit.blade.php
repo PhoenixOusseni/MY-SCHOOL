@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier l'année scolaire
                         </h1>
+                        <p class="text-muted">Modifiez les informations de l'année scolaire</p>
                     </div>
                 </div>
             </div>
@@ -117,17 +118,11 @@
                             </div>
 
                             <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-1">
+                                <button type="submit" class="btn btn-1 btn-sm">
                                     <i data-feather="save"
                                         style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
                                     Mettre à jour
                                 </button>
-                                <a href="{{ route('gestion_annees_scolaires.show', $anneeScolaire->id) }}"
-                                    class="btn btn-dark">
-                                    <i data-feather="x"
-                                        style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
-                                    Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

@@ -34,6 +34,7 @@ use App\Http\Controllers\ParametreController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\EmploiTempController;
 use App\Http\Controllers\DossierEleveController;
+use App\Http\Controllers\CalendrierExamensController;
 
 
 // Routes publiques (non authentifiées)
@@ -64,12 +65,16 @@ Route::middleware('auth')->group(function () {
 
     // Gestion des classes
     Route::resource('gestion_classes', ClasseController::class);
+    Route::get('gestion_classes/{id}/print-effectif', [ClasseController::class, 'printEffectif'])->name('gestion_classes.print_effectif');
+    Route::get('gestion_classes/{id}/print-cartes', [ClasseController::class, 'printCartes'])->name('gestion_classes.print_cartes');
 
     // Gestion des eleves
     Route::resource('gestion_eleves', EleveController::class);
+    Route::get('gestion_eleves/{id}/carte', [EleveController::class, 'carteScolaire'])->name('gestion_eleves.carte');
 
     // Dossiers des élèves
     Route::get('dossiers_eleves', [DossierEleveController::class, 'index'])->name('dossiers_eleves.index');
+    Route::get('dossiers_eleves/{id}/print', [DossierEleveController::class, 'print'])->name('dossiers_eleves.print');
     Route::get('dossiers_eleves/{id}', [DossierEleveController::class, 'show'])->name('dossiers_eleves.show');
 
     // Gestion des inscriptions
@@ -111,6 +116,9 @@ Route::middleware('auth')->group(function () {
 
     // Gestion des évaluations
     Route::resource('gestion_evaluations', EvaluationController::class);
+
+    // Calendrier des examens
+    Route::get('calendrier_examens', [CalendrierExamensController::class, 'index'])->name('calendrier_examens.index');
 
     // Gestion des notes
     Route::resource('gestion_notes', NoteController::class);
@@ -159,6 +167,7 @@ Route::middleware('auth')->group(function () {
     Route::post('parametres/restaurer', [ParametreController::class, 'restaurer'])->name('parametres.restaurer');
 
     // Emploi du temps
+    Route::get('gestion_emploi_temps/print', [EmploiTempController::class, 'print'])->name('gestion_emploi_temps.print');
     Route::resource('gestion_emploi_temps', EmploiTempController::class);
 
     // Statistiques & Rapports

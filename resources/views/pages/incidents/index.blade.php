@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i data-feather="alert-triangle"></i></div>
                             Gestion des Incidents Disciplinaires
                         </h1>
+                        <p class="text-muted">Consultez, ajoutez et gérez les incidents disciplinaires des élèves</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_incidents.create') }}" class="btn btn-dark btn-sm">

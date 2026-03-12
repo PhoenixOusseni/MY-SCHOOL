@@ -15,7 +15,7 @@
                             {{ $enseignement->matiere->intitule }}</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_enseignement_matieres.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_enseignement_matieres.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -118,9 +118,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&nbsp; Enregistrer les modifications
                                 </button>
-                                <a href="{{ route('gestion_enseignement_matieres.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -198,7 +195,7 @@
                         </p>
                         <button type="button" class="btn btn-danger btn-sm w-100" data-bs-toggle="modal"
                             data-bs-target="#deleteModal">
-                            <i data-feather="trash-2"></i> Supprimer l'enseignement
+                            <i data-feather="trash-2"></i>&nbsp; Supprimer l'enseignement
                         </button>
                     </div>
                 </div>
@@ -226,13 +223,14 @@
                         <strong>irréversible</strong>.
                     </p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <div class="m-3">
                     <form action="{{ route('gestion_enseignement_matieres.destroy', $enseignement->id) }}" method="POST"
                         class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i data-feather="trash-2"></i>&nbsp; Supprimer définitivement
+                        </button>
                     </form>
                 </div>
             </div>

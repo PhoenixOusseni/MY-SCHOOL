@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier la Sanction
                         </h1>
+                        <p class="text-muted">Mettez à jour les informations de cette sanction disciplinaire</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-dark">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -130,9 +131,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer les modifications
                                         </button>
-                                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +211,10 @@
                     <form action="{{ route('gestion_sanctions.destroy', $sanction->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-1">Supprimer</button>
+                        <button type="submit" class="btn btn-1">
+                            <i data-feather="trash" class="me-2"></i>&nbsp; Oui, Supprimer
+                        </button>
                     </form>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

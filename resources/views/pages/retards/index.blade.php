@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i data-feather="clock"></i></div>
                             Gestion des Retards
                         </h1>
+                        <p class="text-white">Gérer les retards des élèves</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_retards.create') }}" class="btn btn-dark btn-sm">

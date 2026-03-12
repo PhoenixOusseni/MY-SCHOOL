@@ -178,6 +178,46 @@ class EmploiTempController extends Controller
     }
 
     /* ═══════════════════════════════════════════════════════════
+     |  IMPRESSION
+     ═══════════════════════════════════════════════════════════ */
+
+    public function print(Request $request)
+    {
+        $annees  = AnneeScolaire::orderByDesc('id')->get();
+        $annee   = $request->integer('annee_id')
+            ? AnneeScolaire::find($request->integer('annee_id'))
+            : (AnneeScolaire::where('is_current', true)->first() ?? AnneeScolaire::latest('id')->first());
+
+        $classes  = $annee ? Classe::where('annee_scolaire_id', $annee->id)->with('etablissement')->get() : collect();
+        $classeId = $request->integer('classe_id') ?: ($classes->first()?->id);
+        $classe   = $classeId ? Classe::with('etablissement', 'anneeScolaire', 'niveau')->find($classeId) : null;
+
+        $grille = [];
+        foreach (EmploiTemp::JOURS as $jour) {
+            $grille[$jour] = [];
+        }
+
+        $creneaux = collect();
+        if ($annee && $classeId) {
+            $creneaux = EmploiTemp::where('annee_scolaire_id', $annee->id)
+                ->whereHas('enseignementMatiereClasse', fn($q) => $q->where('classe_id', $classeId))
+                ->with(['enseignementMatiereClasse.matiere', 'enseignementMatiereClasse.enseignant'])
+                ->orderBy('heure_debut')
+                ->get();
+
+            foreach ($creneaux as $c) {
+                if (isset($grille[$c->jour_semaine])) {
+                    $grille[$c->jour_semaine][] = $c;
+                }
+            }
+        }
+
+        return view('pages.emploi_temps.print', compact(
+            'annee', 'classes', 'classeId', 'classe', 'grille', 'creneaux'
+        ));
+    }
+
+    /* ═══════════════════════════════════════════════════════════
      |  SUPPRESSION
      ═══════════════════════════════════════════════════════════ */
 

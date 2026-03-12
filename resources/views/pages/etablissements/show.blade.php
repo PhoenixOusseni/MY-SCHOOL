@@ -153,10 +153,10 @@
                     <div class="col-auto mt-4">
                         <div class="action-buttons">
                             <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-light btn-sm">
-                                <i data-feather="arrow-left"></i>
+                                <i data-feather="arrow-left"></i>&nbsp; Retour
                             </a>
                             <a href="{{ route('gestion_etablissements.edit', $etablissement->id) }}" class="btn btn-dark btn-sm">
-                                <i data-feather="edit"></i>
+                                <i data-feather="edit"></i>&nbsp; Modifier
                             </a>
                         </div>
                     </div>

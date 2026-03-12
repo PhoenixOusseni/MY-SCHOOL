@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_annees_scolaires.index') }}" class="btn btn-light ms-2">
-                            <i data-feather="arrow-left"></i>
+                            <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                         <a href="{{ route('gestion_annees_scolaires.edit', $annee->id) }}" class="btn btn-dark ms-2">
-                            <i data-feather="edit-2"></i>
+                            <i data-feather="edit"></i>&nbsp; Modifier
                         </a>
                     </div>
                 </div>

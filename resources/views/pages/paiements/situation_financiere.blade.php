@@ -76,7 +76,7 @@
                                 <small class="text-muted">Paiements terminés</small>
                             </div>
                             <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                                <i class="fas fa-check-circle text-success fa-lg"></i>
+                                <i class="fas fa-check-circle fa-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                 <small class="text-muted">Paiements non finalisés</small>
                             </div>
                             <div class="bg-warning bg-opacity-10 rounded-circle p-3">
-                                <i class="fas fa-clock text-warning fa-lg"></i>
+                                <i class="fas fa-clock fa-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                 <small class="text-muted">Soldes impayés</small>
                             </div>
                             <div class="bg-danger bg-opacity-10 rounded-circle p-3">
-                                <i class="fas fa-exclamation-circle text-danger fa-lg"></i>
+                                <i class="fas fa-exclamation-circle fa-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                                 <small class="text-muted">{{ $nbEleves }} élève(s) concerné(s)</small>
                             </div>
                             <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                                <i class="fas fa-receipt text-primary fa-lg"></i>
+                                <i class="fas fa-receipt fa-lg"></i>
                             </div>
                         </div>
                     </div>

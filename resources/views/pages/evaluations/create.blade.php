@@ -28,6 +28,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="card-title">Ajouter une évaluation</h5>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_evaluations.store') }}" method="POST" id="evaluationForm">
                             @csrf
@@ -198,10 +201,10 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <h5 class="card-title"><i data-feather="info"></i> Information</h5>
+                        <hr>
                         <p class="card-text small">
                             Cette page permet de créer une nouvelle évaluation pour une classe.
                         </p>
-                        <hr>
                         <p class="card-text small"><strong>Types d'évaluation:</strong></p>
                         <ul class="small">
                             <li><strong>Examen:</strong> Examen semestriel ou annuel</li>

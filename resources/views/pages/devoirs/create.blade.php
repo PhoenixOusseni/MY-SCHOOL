@@ -29,6 +29,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-file-alt me-2"></i>Informations du devoir
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_devoirs.store') }}" method="POST" enctype="multipart/form-data"
                             id="devoirForm">
@@ -178,9 +181,10 @@
             <!-- Info Box -->
             <div class="col-lg-4">
                 <div class="card bg-light">
+                    <div class="card-header">
+                        <i class="fas fa-info-circle me-2"></i>À propos de cette page
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Information</h5>
-                        <hr>
                         <p class="card-text small">
                             Cette page permet de créer un nouveau devoir pour une classe spécifique et une matière.
                         </p>

@@ -29,6 +29,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="mb-0"><i data-feather="file-text"></i>&nbsp; Détails du devoir</h5>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_devoirs.update', $devoir->id) }}" method="POST"
                             enctype="multipart/form-data" id="devoirForm">
@@ -163,9 +166,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&nbsp; Enregistrer les modifications
                                 </button>
-                                <a href="{{ route('gestion_devoirs.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -277,9 +277,8 @@
                     <form action="{{ route('gestion_devoirs.destroy', $devoir->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-1">Supprimer définitivement</button>
+                        <button type="submit" class="btn btn-1"><i data-feather="trash-2"></i>&nbsp; Supprimer définitivement</button>
                     </form>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

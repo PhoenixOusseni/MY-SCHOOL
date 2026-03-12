@@ -86,7 +86,7 @@
                                 <label for="date_debut" class="form-label">Date de début <span
                                         class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('date_debut') is-invalid @enderror"
-                                    id="date_debut" name="date_debut" value="{{ old('date_debut', $periode->date_debut) }}"
+                                    id="date_debut" name="date_debut" value="{{ old('date_debut', $periode->date_debut ? \Carbon\Carbon::parse($periode->date_debut)->format('Y-m-d') : '') }}"
                                     required>
                                 @error('date_debut')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -98,7 +98,7 @@
                                 <label for="date_fin" class="form-label">Date de fin <span
                                         class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('date_fin') is-invalid @enderror"
-                                    id="date_fin" name="date_fin" value="{{ old('date_fin', $periode->date_fin) }}"
+                                    id="date_fin" name="date_fin" value="{{ old('date_fin', $periode->date_fin ? \Carbon\Carbon::parse($periode->date_fin)->format('Y-m-d') : '') }}"
                                     required>
                                 @error('date_fin')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -199,8 +199,8 @@
 
                 <!-- Danger Zone -->
                 <div class="card border-danger">
-                    <div class="card-header bg-danger text-white">
-                        <h5 class="mb-0 text-light">Zone de danger</h5>
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="mb-0">Zone de danger</h5>
                     </div>
                     <div class="card-body">
                         <p class="text-muted small mb-3">
@@ -220,9 +220,9 @@
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
+                <div class="modal-header bg-light text-dark">
                     <h5 class="modal-title">Confirmation de suppression</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Êtes-vous sûr de vouloir supprimer cette période d'évaluation?</p>
@@ -233,13 +233,14 @@
                     <p class="text-muted small"><i data-feather="alert-triangle"></i> Cette action est
                         <strong>irréversible</strong>.</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <div class="m-3">
                     <form action="{{ route('gestion_periodes_evaluation.destroy', $periode->id) }}" method="POST"
                         class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i data-feather="trash-2"></i>&nbsp; Oui, supprimer
+                        </button>
                     </form>
                 </div>
             </div>

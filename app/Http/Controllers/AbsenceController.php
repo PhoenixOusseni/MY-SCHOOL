@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absence;
 use App\Models\Classe;
 use App\Models\Eleve;
+use App\Models\Inscription;
 use App\Models\Matiere;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,7 +35,13 @@ class AbsenceController extends Controller
         $matieres = Matiere::orderBy('intitule')->get();
         $users = User::orderBy('nom')->orderBy('prenom')->get();
 
-        return view('pages.absences.create', compact('eleves', 'classes', 'matieres', 'users'));
+        // Map eleve_id => classe_id (dernière inscription)
+        $eleveClasseMap = Inscription::orderBy('created_at', 'desc')
+            ->get()
+            ->unique('eleve_id')
+            ->pluck('classe_id', 'eleve_id');
+
+        return view('pages.absences.create', compact('eleves', 'classes', 'matieres', 'users', 'eleveClasseMap'));
     }
 
     /**

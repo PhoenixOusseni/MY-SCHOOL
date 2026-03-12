@@ -14,9 +14,12 @@
                             <div class="page-header-icon"><i class="fas fa-user-plus"></i></div>
                             Nouvel Utilisateur
                         </h1>
+                        <p class="mt-2 mb-0 text-white-75">
+                            Gérez les utilisateurs du système
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_utilisateurs.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_utilisateurs.index') }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-arrow-left me-1"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -124,11 +127,8 @@
 
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-1">
-                                    <i class="fas fa-save me-1"></i> Créer l'utilisateur
+                                    <i class="fas fa-save me-2"></i> Créer l'utilisateur
                                 </button>
-                                <a href="{{ route('gestion_utilisateurs.index') }}" class="btn btn-outline-secondary">
-                                    Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

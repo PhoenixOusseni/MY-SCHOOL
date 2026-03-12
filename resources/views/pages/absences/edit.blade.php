@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier l'Absence
                         </h1>
+                        <p class="text-muted">Mettre à jour les informations de l'absence sélectionnée</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -34,7 +35,7 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
+            <div class="col-lg-8">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">
@@ -153,16 +154,14 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer les modifications
                                         </button>
-                                        <a href="{{ route('gestion_absences.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-lg-4">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-2">
                         <h6 class="mb-0">
@@ -183,7 +182,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="alert alert-danger" role="alert">
                     <div class="d-flex">
                         <i data-feather="alert-triangle" class="me-3 mt-1"></i>
@@ -208,7 +206,7 @@
                     <h5 class="modal-title">
                         <i data-feather="alert-triangle" class="me-2"></i>Confirmation de suppression
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Êtes-vous sûr de vouloir supprimer cette absence ?</p>
@@ -222,9 +220,10 @@
                     <form action="{{ route('gestion_absences.destroy', $absence->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-1">Supprimer</button>
+                        <button type="submit" class="btn btn-1">
+                            <i data-feather="trash-2" class="me-2"></i>Oui, Supprimer
+                        </button>
                     </form>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

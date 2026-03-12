@@ -15,6 +15,10 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier l'Association
                         </h1>
+                        <p class="page-header-subtitle">
+                            Modifiez les détails de l'association entre l'élève et son tuteur, y compris les rôles et les
+                            permissions.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_associations.show', $eleveParent->id) }}" class="btn btn-light btn-sm">
@@ -36,7 +40,7 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
+            <div class="col-lg-8">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="m-3">
                         <h6 class="mb-0">
@@ -209,23 +213,21 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>Enregistrer les Modifications
                                         </button>
-                                        <a href="{{ route('gestion_associations.show', $eleveParent->id) }}"
-                                            class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-lg-4">
                 <!-- Info Card -->
                 <div class="alert alert-warning" role="alert">
                     <div class="d-flex">
                         <i data-feather="alert-circle" class="me-3 mt-1"></i>
                         <div>
                             <h6 class="alert-heading">À propos des modifications</h6>
+                            <hr>
                             <ul class="mb-0">
                                 <li>Vous pouvez modifier les paramètres de l'association</li>
                                 <li>Vous ne pouvez pas créer un doublon (même élève + même tuteur)</li>

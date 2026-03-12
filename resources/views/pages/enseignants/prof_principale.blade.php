@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="users"></i></div>
                             Gestion des Professeurs Principaux
                         </h1>
+                        <p class="text-muted">Gérez les professeurs principaux de votre établissement</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_enseignants.index') }}" class="btn btn-dark btn-sm">
@@ -241,10 +242,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                            <div class="btn-group btn-group-sm gap-2" role="group">
+                                                <button type="button" class="btn btn-1" data-bs-toggle="modal"
                                                     data-bs-target="#editModal{{ $prof->id }}">
-                                                    <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                                    <i data-feather="edit" style="width: 14px; height: 14px;"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal{{ $prof->id }}">

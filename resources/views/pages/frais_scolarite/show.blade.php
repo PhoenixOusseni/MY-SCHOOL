@@ -17,11 +17,8 @@
                         <div class="page-header-subtitle">Détails du frais de scolarité</div>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_frais_scolarite.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_frais_scolarite.index') }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-arrow-left me-1"></i>&nbsp; Retour
-                        </a>
-                        <a href="{{ route('gestion_frais_scolarite.edit', $frai->id) }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-edit me-1"></i>&nbsp; Modifier
                         </a>
                     </div>
                 </div>

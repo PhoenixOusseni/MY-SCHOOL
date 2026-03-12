@@ -6,6 +6,8 @@ use App\Models\Bulletin;
 use App\Models\Classe;
 use App\Models\DetailBulletin;
 use App\Models\Eleve;
+use App\Models\Enseignant;
+use App\Models\Matiere;
 use App\Models\MatiereNiveau;
 use App\Models\MoyenneMatiere;
 use App\Models\PeriodEvaluation;
@@ -98,8 +100,10 @@ class BulletinController extends Controller
     {
         try {
             $bulletin = Bulletin::with('eleve', 'classe', 'periodEvaluation', 'detailBulletins.matiere', 'detailBulletins.enseignant')->findOrFail($id);
+            $matieres = Matiere::orderBy('intitule')->get();
+            $enseignants = Enseignant::orderBy('nom')->orderBy('prenom')->get();
 
-            return view('pages.bulletins.show', compact('bulletin'));
+            return view('pages.bulletins.show', compact('bulletin', 'matieres', 'enseignants'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Bulletin non trouvé');
         }

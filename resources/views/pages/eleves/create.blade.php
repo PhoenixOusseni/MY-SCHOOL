@@ -43,16 +43,15 @@
         @endif
 
         <div class="row">
-            <div class="col-lg-12 mx-auto">
+            <div class="col-lg-8">
                 <div class="card mb-4">
+                    <div class="card-header">
+                        <i data-feather="plus" style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
+                        Formulaire d'ajout d'un nouvel élève
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_eleves.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <h5 class="mb-0">
-                                <i data-feather="user"></i>
-                                Informations Personnelles
-                            </h5>
-                            <hr>
                             <!-- Section: Identité -->
                             <div class="row mb-4">
                                 <div class="col-md-6">
@@ -173,6 +172,32 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="photo" class="form-label">Photo de l'élève</label>
+                                    <input type="file" class="form-control @error('photo') is-invalid @enderror"
+                                        id="photo" name="photo" accept="image/*">
+                                    @error('photo')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div>
+                                        <small class="text-muted">Formats acceptés: JPG, PNG. Taille maximale: 2MB.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="pieces_jointes" class="form-label">Pièces jointes</label>
+                                    <input type="file"
+                                        class="form-control @error('pieces_jointes') is-invalid @enderror"
+                                        id="pieces_jointes" name="pieces_jointes" accept="pdf">
+                                    @error('pieces_jointes')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div>
+                                        <small class="text-muted">Ex: Certificat de naissance, carte d'identité...</small>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-4">
                                 <label for="notes_medicales" class="form-label">Notes médicales</label>
                                 <textarea class="form-control @error('notes_medicales') is-invalid @enderror" id="notes_medicales"
@@ -263,8 +288,10 @@
                                 <div class="col-md-6">
                                     <div class="alert alert-info mb-0" role="alert">
                                         <small>
-                                            <i data-feather="info" style="width: 14px; height: 14px; display: inline; margin-right: 4px;"></i>
-                                            <strong>Numéro d'immatriculation:</strong> Généré automatiquement au format EL2026/00001
+                                            <i data-feather="info"
+                                                style="width: 14px; height: 14px; display: inline; margin-right: 4px;"></i>
+                                            <strong>Numéro d'immatriculation:</strong> Généré automatiquement au format
+                                            EL2026/00001
                                         </small>
                                     </div>
                                 </div>
@@ -323,17 +350,49 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i data-feather="info" style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
+                        Conseils pour remplir le formulaire
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i data-feather="check"
+                                    style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
+                                Assurez-vous que les champs marqués d'une astérisque (<span class="text-danger">*</span>)
+                                sont remplis.
+                            </li>
+                            <li class="mb-2">
+                                <i data-feather="check"
+                                    style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
+                                Utilisez un format d'email valide pour le champ "Email".
+                            </li>
+                            <li class="mb-2">
+                                <i data-feather="check"
+                                    style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
+                                Le mot de passe doit comporter au moins 8 caractères.
+                            </li>
+                            <li class="mb-2">
+                                <i data-feather="check"
+                                    style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
+                                Sélectionnez l'établissement auquel l'élève est affilié, si applicable.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('script')
-    <script>
-        $(document).ready(function() {
-            // Réinitialiser les icônes Feather
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        });
-    </script>
-@endsection
+    @section('script')
+        <script>
+            $(document).ready(function() {
+                // Réinitialiser les icônes Feather
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            });
+        </script>
+    @endsection

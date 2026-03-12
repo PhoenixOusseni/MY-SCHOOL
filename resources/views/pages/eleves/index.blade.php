@@ -22,8 +22,7 @@
                                 data-feather="plus"></i>&thinsp;&thinsp;
                             Ajouter un élève</a>
                         <a href="{{ route('gestion_eleves.index') }}" class="btn btn-dark btn-sm"><i
-                                data-feather="align-left"></i>&thinsp;&thinsp;
-                            Liste des élèves
+                                data-feather="align-left"></i>&thinsp;&thinsp; Liste des élèves
                         </a>
                     </div>
                 </div>
@@ -39,83 +38,6 @@
                 <!-- Tabbed dashboard card example-->
                 <div class="card mb-4">
                     <div class="card-body">
-
-                        <!-- Statistiques -->
-                        <div class="row mb-4">
-                            <div class="col-lg-3 mb-4">
-                                <div class="card bg-primary text-dark">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <p class="card-text mb-0">Total Élèves</p>
-                                                <h4 class="mb-0">{{ $eleves->count() }}</h4>
-                                            </div>
-                                            <div>
-                                                <i data-feather="users"
-                                                    style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 mb-4">
-                                <div class="card bg-info text-dark">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <p class="card-text mb-0">Établissements</p>
-                                                <h4 class="mb-0">
-                                                    {{ $eleves->pluck('etablissement_id')->unique()->count() }}</h4>
-                                            </div>
-                                            <div>
-                                                <i data-feather="building"
-                                                    style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 mb-4">
-                                <div class="card bg-success text-dark">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <p class="card-text mb-0">Élèves Inscrits</p>
-                                                <h4 class="mb-0">
-                                                    {{ $eleves->filter(function ($eleve) {return $eleve->inscriptions->count() > 0;})->count() }}
-                                                </h4>
-                                            </div>
-                                            <div>
-                                                <i data-feather="user-check"
-                                                    style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 mb-4">
-                                <div class="card bg-warning text-dark">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <p class="card-text mb-0">En Attente</p>
-                                                <h4 class="mb-0">
-                                                    {{ $eleves->filter(function ($eleve) {return $eleve->inscriptions->count() == 0;})->count() }}
-                                                </h4>
-                                            </div>
-                                            <div>
-                                                <i data-feather="clock"
-                                                    style="width: 48px; height: 48px; opacity: 0.5;"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="table-responsive">
                             <table id="datatablesSimple">
                                 <thead class="table-light">

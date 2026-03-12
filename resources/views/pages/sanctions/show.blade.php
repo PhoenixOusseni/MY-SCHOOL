@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="shield"></i></div>
                             Détails de la Sanction
                         </h1>
+                        <p class="text-muted">Consultez les informations détaillées de cette sanction disciplinaire</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_sanctions.index') }}" class="btn btn-dark">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>

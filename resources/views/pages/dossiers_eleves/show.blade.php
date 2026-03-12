@@ -4,46 +4,157 @@
     @include('partials.style')
     <style>
         .avatar-xl {
-            width: 90px; height: 90px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px; font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
             flex-shrink: 0;
         }
+
         .stat-badge {
             border-radius: 12px;
             padding: 14px 18px;
         }
+
         .nav-tabs .nav-link {
             color: #64748b;
             font-size: 13px;
             font-weight: 600;
         }
+
         .nav-tabs .nav-link.active {
             color: var(--primary, #c41e3a);
             border-bottom: 2px solid var(--primary, #c41e3a);
         }
+
         .timeline-item {
             position: relative;
             padding-left: 28px;
             margin-bottom: 18px;
         }
+
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: 8px; top: 6px;
-            width: 10px; height: 10px;
+            left: 8px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--primary, #c41e3a);
         }
+
         .timeline-item::after {
             content: '';
             position: absolute;
-            left: 12px; top: 18px;
-            width: 2px; height: calc(100% + 4px);
+            left: 12px;
+            top: 18px;
+            width: 2px;
+            height: calc(100% + 4px);
             background: #e2e8f0;
         }
-        .timeline-item:last-child::after { display: none; }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        @media print {
+
+            /* Masquer les éléments non imprimables */
+            .page-header,
+            .sidenav,
+            #layoutSidenav_nav,
+            .topnav,
+            nav,
+            .btn,
+            .nav-tabs,
+            .card-header,
+            footer,
+            #print-btn-area {
+                display: none !important;
+            }
+
+            /* Afficher tous les onglets */
+            .tab-pane {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                page-break-inside: avoid;
+            }
+
+            /* En-tête d'impression */
+            .print-header {
+                display: block !important;
+                border-bottom: 2px solid #c41e3a;
+                padding-bottom: 12px;
+                margin-bottom: 20px;
+            }
+
+            /* Séparateurs de section */
+            .print-section-title {
+                display: block !important;
+                background: #f1f5f9;
+                padding: 6px 12px;
+                font-weight: 700;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                margin: 16px 0 8px;
+                border-left: 4px solid #c41e3a;
+            }
+
+            body {
+                font-size: 12px;
+                color: #000;
+            }
+
+            .container-xl {
+                max-width: 100% !important;
+                margin-top: 0 !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #dee2e6 !important;
+            }
+
+            .card-body {
+                padding: 12px !important;
+            }
+
+            .table {
+                font-size: 11px;
+            }
+
+            a {
+                color: #000 !important;
+                text-decoration: none !important;
+            }
+
+            .badge {
+                border: 1px solid #999;
+            }
+
+            .alert {
+                border: 1px solid #f97316;
+                background: #fff7ed !important;
+                color: #000 !important;
+            }
+
+            .mt-n10 {
+                margin-top: 0 !important;
+            }
+        }
+
+        /* Éléments cachés hors impression */
+        .print-header,
+        .print-section-title {
+            display: none;
+        }
     </style>
 @endsection
 
@@ -65,39 +176,64 @@
                                 <i class="fas fa-id-badge me-1"></i>{{ $eleve->registration_number }}
                                 &nbsp;|&nbsp;
                                 @php
-                                    $badgeClass = match($eleve->statut) {
-                                        'actif'     => 'success',
-                                        'suspendu'  => 'warning',
-                                        'diplome'   => 'primary',
+                                    $badgeClass = match ($eleve->statut) {
+                                        'actif' => 'success',
+                                        'suspendu' => 'warning',
+                                        'diplome' => 'primary',
                                         'abandonne' => 'danger',
-                                        default     => 'secondary',
+                                        default => 'secondary',
                                     };
                                 @endphp
                                 <span class="badge bg-{{ $badgeClass }}">{{ ucfirst($eleve->statut ?? 'N/A') }}</span>
                             </p>
                             @if ($derniereInscription)
                                 <small class="text-white-50">
-                                    Classe : <strong class="text-white">{{ $derniereInscription->classe->nom ?? '—' }}</strong>
-                                    &nbsp;|&nbsp; Année : <strong class="text-white">{{ $derniereInscription->anneeScolaire->libelle ?? '—' }}</strong>
+                                    Classe : <strong
+                                        class="text-white">{{ $derniereInscription->classe->nom ?? '—' }}</strong>
+                                    &nbsp;|&nbsp; Année : <strong
+                                        class="text-white">{{ $derniereInscription->anneeScolaire->libelle ?? '—' }}</strong>
                                 </small>
                             @endif
                         </div>
                     </div>
-                    <div class="col-auto mt-4 d-flex gap-2">
-                        <a href="{{ route('gestion_eleves.edit', $eleve->id) }}" class="btn btn-light btn-sm">
+                    <div class="col-auto mt-4 d-flex gap-2" id="print-btn-area">
+                        <a href="{{ route('dossiers_eleves.index') }}" class="btn btn-dark btn-sm">
+                            <i class="fas fa-arrow-left"></i>&nbsp; Retour
+                        </a>
+                        <a href="{{ route('gestion_eleves.edit', $eleve->id) }}" class="btn btn-dark btn-sm">
                             <i class="fas fa-edit"></i>&nbsp; Modifier
                         </a>
                         <a href="{{ route('gestion_inscriptions.create') }}" class="btn btn-warning btn-sm text-dark">
                             <i class="fas fa-user-plus"></i>&nbsp; Inscrire
                         </a>
-                        <a href="{{ route('dossiers_eleves.index') }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-arrow-left"></i>&nbsp; Retour
+                        <a href="{{ route('dossiers_eleves.print', $eleve->id) }}" target="_blank"
+                            class="btn btn-success btn-sm">
+                            <i class="fas fa-print"></i>&nbsp; Imprimer
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- En-tête visible uniquement à l'impression -->
+    <div class="container-xl px-4 print-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-0">Dossier Élève — {{ $eleve->prenom }} {{ $eleve->nom }}</h4>
+                <small>Matricule : {{ $eleve->registration_number }}
+                    @if ($derniereInscription)
+                        &nbsp;|&nbsp; Classe : {{ $derniereInscription->classe->nom ?? '—' }}
+                        &nbsp;|&nbsp; Année : {{ $derniereInscription->anneeScolaire->libelle ?? '—' }}
+                    @endif
+                </small>
+            </div>
+            <div class="text-end">
+                <div class="fw-bold">{{ $eleve->etablissement->nom ?? '' }}</div>
+                <small>Imprimé le {{ \Carbon\Carbon::now()->format('d/m/Y à H:i') }}</small>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="container-xl px-4 mt-n10 mb-5">
@@ -213,10 +349,12 @@
 
                 {{-- ===== ONGLET INFORMATIONS ===== --}}
                 <div class="tab-pane fade show active" id="info" role="tabpanel">
+                    <span class="print-section-title">Informations personnelles & scolaires</span>
                     <div class="row g-4">
                         <!-- Informations personnelles -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Informations personnelles
                             </h6>
                             <table class="table table-sm table-borderless">
@@ -227,11 +365,13 @@
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Genre</td>
-                                        <td>{{ $eleve->genre == 'M' ? 'Masculin' : ($eleve->genre == 'F' ? 'Féminin' : ($eleve->genre ?? '—')) }}</td>
+                                        <td>{{ $eleve->genre == 'M' ? 'Masculin' : ($eleve->genre == 'F' ? 'Féminin' : $eleve->genre ?? '—') }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Date de naissance</td>
-                                        <td>{{ $eleve->date_naissance ? \Carbon\Carbon::parse($eleve->date_naissance)->format('d/m/Y') : '—' }}</td>
+                                        <td>{{ $eleve->date_naissance ? \Carbon\Carbon::parse($eleve->date_naissance)->format('d/m/Y') : '—' }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Lieu de naissance</td>
@@ -258,7 +398,8 @@
                         </div>
                         <!-- Informations médicales & scolaires -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Informations médicales
                             </h6>
                             <table class="table table-sm table-borderless mb-4">
@@ -280,7 +421,8 @@
                                 </tbody>
                             </table>
 
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Informations scolaires
                             </h6>
                             <table class="table table-sm table-borderless">
@@ -295,11 +437,14 @@
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Date d'inscription</td>
-                                        <td>{{ $eleve->date_inscription ? \Carbon\Carbon::parse($eleve->date_inscription)->format('d/m/Y') : '—' }}</td>
+                                        <td>{{ $eleve->date_inscription ? \Carbon\Carbon::parse($eleve->date_inscription)->format('d/m/Y') : '—' }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Statut</td>
-                                        <td><span class="badge bg-{{ $badgeClass }}">{{ ucfirst($eleve->statut ?? 'N/A') }}</span></td>
+                                        <td><span
+                                                class="badge bg-{{ $badgeClass }}">{{ ucfirst($eleve->statut ?? 'N/A') }}</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Login système</td>
@@ -313,6 +458,7 @@
 
                 {{-- ===== ONGLET SCOLARITÉ ===== --}}
                 <div class="tab-pane fade" id="scolarite" role="tabpanel">
+                    <span class="print-section-title">Historique de scolarité</span>
                     <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
                         Historique des inscriptions
                     </h6>
@@ -332,16 +478,19 @@
                                         <div>
                                             <span class="fw-semibold">{{ $inscription->classe->nom ?? '—' }}</span>
                                             @if ($inscription->classe->niveau ?? null)
-                                                <span class="badge bg-secondary ms-2">{{ $inscription->classe->niveau->libelle }}</span>
+                                                <span
+                                                    class="badge bg-secondary ms-2">{{ $inscription->classe->niveau->libelle }}</span>
                                             @endif
                                             <br>
                                             <small class="text-muted">
                                                 Année : {{ $inscription->anneeScolaire->libelle ?? '—' }}
                                                 &nbsp;&bull;&nbsp;
-                                                Inscrit le : {{ $inscription->date_inscription ? \Carbon\Carbon::parse($inscription->date_inscription)->format('d/m/Y') : '—' }}
+                                                Inscrit le :
+                                                {{ $inscription->date_inscription ? \Carbon\Carbon::parse($inscription->date_inscription)->format('d/m/Y') : '—' }}
                                             </small>
                                         </div>
-                                        <a href="{{ route('gestion_inscriptions.show', $inscription->id) }}" class="btn btn-xs btn-outline-secondary btn-sm">
+                                        <a href="{{ route('gestion_inscriptions.show', $inscription->id) }}"
+                                            class="btn btn-xs btn-outline-secondary btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </div>
@@ -353,6 +502,7 @@
 
                 {{-- ===== ONGLET BULLETINS ===== --}}
                 <div class="tab-pane fade" id="bulletins" role="tabpanel">
+                    <span class="print-section-title">Bulletins scolaires</span>
                     @if ($eleve->bulletins->isEmpty())
                         <div class="text-center py-4 text-muted">
                             <i data-feather="file-minus" style="width:36px;height:36px;opacity:.3;"></i>
@@ -384,19 +534,24 @@
                                                     {{ number_format($moy, 2) }}
                                                 </span>
                                             </td>
-                                            <td class="text-center">{{ $bulletin->rang ?? '—' }}/{{ $bulletin->total_eleves ?? '?' }}</td>
+                                            <td class="text-center">
+                                                {{ $bulletin->rang ?? '—' }}/{{ $bulletin->total_eleves ?? '?' }}</td>
                                             <td class="text-center">{{ $bulletin->absences ?? 0 }}</td>
                                             <td class="text-center">
                                                 @if ($bulletin->mention_conduite)
-                                                    <span class="badge bg-info text-dark">{{ $bulletin->mention_conduite }}</span>
+                                                    <span
+                                                        class="badge bg-info text-dark">{{ $bulletin->mention_conduite }}</span>
                                                 @else
                                                     —
                                                 @endif
                                             </td>
-                                            <td><small class="text-muted">{{ Str::limit($bulletin->commentaire_principal, 60) ?? '—' }}</small></td>
+                                            <td><small
+                                                    class="text-muted">{{ Str::limit($bulletin->commentaire_principal, 60) ?? '—' }}</small>
+                                            </td>
                                             <td class="text-center">
                                                 <a href="{{ route('gestion_bulletins.print', $bulletin->id) }}"
-                                                   class="btn btn-xs btn-sm btn-outline-danger" target="_blank" title="Imprimer">
+                                                    class="btn btn-xs btn-sm btn-outline-danger" target="_blank"
+                                                    title="Imprimer">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                             </td>
@@ -410,10 +565,12 @@
 
                 {{-- ===== ONGLET ASSIDUITÉ ===== --}}
                 <div class="tab-pane fade" id="assiduite" role="tabpanel">
+                    <span class="print-section-title">Assiduité — Absences & Retards</span>
                     <div class="row g-4">
                         <!-- Absences -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Absences ({{ $totalAbsences }})
                             </h6>
                             @if ($eleve->absences->isEmpty())
@@ -431,7 +588,8 @@
                                         <tbody>
                                             @foreach ($eleve->absences->sortByDesc('created_at') as $absence)
                                                 <tr>
-                                                    <td>{{ $absence->date_absence ? \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') : '—' }}</td>
+                                                    <td>{{ $absence->date_absence ? \Carbon\Carbon::parse($absence->date_absence)->format('d/m/Y') : '—' }}
+                                                    </td>
                                                     <td><small>{{ $absence->motif ?? '—' }}</small></td>
                                                     <td class="text-center">
                                                         @if ($absence->justifiee ?? false)
@@ -449,7 +607,8 @@
                         </div>
                         <!-- Retards -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Retards ({{ $totalRetards }})
                             </h6>
                             @if ($eleve->retards->isEmpty())
@@ -467,7 +626,8 @@
                                         <tbody>
                                             @foreach ($eleve->retards->sortByDesc('created_at') as $retard)
                                                 <tr>
-                                                    <td>{{ $retard->date_retard ? \Carbon\Carbon::parse($retard->date_retard)->format('d/m/Y') : '—' }}</td>
+                                                    <td>{{ $retard->date_retard ? \Carbon\Carbon::parse($retard->date_retard)->format('d/m/Y') : '—' }}
+                                                    </td>
                                                     <td>{{ $retard->duree ?? '—' }}</td>
                                                     <td><small>{{ $retard->motif ?? '—' }}</small></td>
                                                 </tr>
@@ -482,10 +642,12 @@
 
                 {{-- ===== ONGLET DISCIPLINE ===== --}}
                 <div class="tab-pane fade" id="discipline" role="tabpanel">
+                    <span class="print-section-title">Discipline — Incidents & Sanctions</span>
                     <div class="row g-4">
                         <!-- Incidents -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Incidents ({{ $totalIncidents }})
                             </h6>
                             @if ($eleve->incidentsDisciplinaires->isEmpty())
@@ -495,7 +657,8 @@
                                     <div class="alert alert-danger py-2 mb-2">
                                         <div class="d-flex justify-content-between">
                                             <strong>{{ $incident->type ?? 'Incident' }}</strong>
-                                            <small class="text-muted">{{ $incident->date_incident ? \Carbon\Carbon::parse($incident->date_incident)->format('d/m/Y') : '' }}</small>
+                                            <small
+                                                class="text-muted">{{ $incident->date_incident ? \Carbon\Carbon::parse($incident->date_incident)->format('d/m/Y') : '' }}</small>
                                         </div>
                                         <small>{{ $incident->description ?? '—' }}</small>
                                     </div>
@@ -504,7 +667,8 @@
                         </div>
                         <!-- Sanctions -->
                         <div class="col-lg-6">
-                            <h6 class="text-muted fw-semibold text-uppercase mb-3" style="font-size:11px;letter-spacing:.08em;">
+                            <h6 class="text-muted fw-semibold text-uppercase mb-3"
+                                style="font-size:11px;letter-spacing:.08em;">
                                 Sanctions ({{ $eleve->sanctions->count() }})
                             </h6>
                             @if ($eleve->sanctions->isEmpty())
@@ -514,7 +678,8 @@
                                     <div class="alert alert-warning py-2 mb-2">
                                         <div class="d-flex justify-content-between">
                                             <strong>{{ $sanction->type ?? 'Sanction' }}</strong>
-                                            <small class="text-muted">{{ $sanction->date_sanction ? \Carbon\Carbon::parse($sanction->date_sanction)->format('d/m/Y') : '' }}</small>
+                                            <small
+                                                class="text-muted">{{ $sanction->date_sanction ? \Carbon\Carbon::parse($sanction->date_sanction)->format('d/m/Y') : '' }}</small>
                                         </div>
                                         <small>{{ $sanction->description ?? '—' }}</small>
                                     </div>
@@ -526,17 +691,20 @@
 
                 {{-- ===== ONGLET PAIEMENTS ===== --}}
                 <div class="tab-pane fade" id="paiements" role="tabpanel">
+                    <span class="print-section-title">Paiements & Situation financière</span>
                     <!-- Résumé financier -->
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <div class="card border-0 bg-success bg-opacity-10 p-3 text-center">
-                                <div class="fw-bold fs-5 text-success">{{ number_format($totalPaye, 0, ',', ' ') }} FCFA</div>
+                                <div class="fw-bold fs-5 text-success">{{ number_format($totalPaye, 0, ',', ' ') }} FCFA
+                                </div>
                                 <div class="text-muted small">Total payé</div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="card border-0 bg-danger bg-opacity-10 p-3 text-center">
-                                <div class="fw-bold fs-5 text-danger">{{ number_format($totalReste, 0, ',', ' ') }} FCFA</div>
+                                <div class="fw-bold fs-5 text-danger">{{ number_format($totalReste, 0, ',', ' ') }} FCFA
+                                </div>
                                 <div class="text-muted small">Reste à payer</div>
                             </div>
                         </div>
@@ -578,28 +746,33 @@
                                             <td><code>{{ $paiement->reference ?? '—' }}</code></td>
                                             <td>{{ $paiement->fraiScolarite->libelle ?? '—' }}</td>
                                             <td>{{ $paiement->anneeScolaire->libelle ?? '—' }}</td>
-                                            <td>{{ $paiement->date_paiement ? \Carbon\Carbon::parse($paiement->date_paiement)->format('d/m/Y') : '—' }}</td>
-                                            <td class="text-end fw-semibold text-success">{{ number_format($paiement->montant, 0, ',', ' ') }}</td>
-                                            <td class="text-end {{ ($paiement->reste_a_payer ?? 0) > 0 ? 'text-danger' : 'text-success' }}">
+                                            <td>{{ $paiement->date_paiement ? \Carbon\Carbon::parse($paiement->date_paiement)->format('d/m/Y') : '—' }}
+                                            </td>
+                                            <td class="text-end fw-semibold text-success">
+                                                {{ number_format($paiement->montant, 0, ',', ' ') }}</td>
+                                            <td
+                                                class="text-end {{ ($paiement->reste_a_payer ?? 0) > 0 ? 'text-danger' : 'text-success' }}">
                                                 {{ number_format($paiement->reste_a_payer ?? 0, 0, ',', ' ') }}
                                             </td>
                                             <td class="text-center">
-                                                <span class="badge bg-secondary">{{ $paiement->methode_paiement ?? '—' }}</span>
+                                                <span
+                                                    class="badge bg-secondary">{{ $paiement->methode_paiement ?? '—' }}</span>
                                             </td>
                                             <td class="text-center">
                                                 @php
-                                                    $sc = match($paiement->status ?? '') {
-                                                        'complet'    => 'success',
-                                                        'partiel'    => 'warning',
+                                                    $sc = match ($paiement->status ?? '') {
+                                                        'complet' => 'success',
+                                                        'partiel' => 'warning',
                                                         'en_attente' => 'secondary',
-                                                        default      => 'light',
+                                                        default => 'light',
                                                     };
                                                 @endphp
-                                                <span class="badge bg-{{ $sc }}">{{ ucfirst($paiement->status ?? '—') }}</span>
+                                                <span
+                                                    class="badge bg-{{ $sc }}">{{ ucfirst($paiement->status ?? '—') }}</span>
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('gestion_paiements.print', $paiement->id) }}"
-                                                   class="btn btn-xs btn-sm btn-outline-secondary" target="_blank">
+                                                    class="btn btn-xs btn-sm btn-outline-secondary" target="_blank">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                             </td>
@@ -613,6 +786,7 @@
 
                 {{-- ===== ONGLET PARENTS / TUTEURS ===== --}}
                 <div class="tab-pane fade" id="parents" role="tabpanel">
+                    <span class="print-section-title">Parents & Tuteurs</span>
                     @if ($eleve->eleveParents->isEmpty())
                         <div class="text-center py-4 text-muted">
                             <i data-feather="users" style="width:36px;height:36px;opacity:.3;"></i>
@@ -631,27 +805,32 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-start gap-3">
                                                     <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center flex-shrink-0"
-                                                         style="width:48px;height:48px;font-size:18px;font-weight:700;">
+                                                        style="width:48px;height:48px;font-size:18px;font-weight:700;">
                                                         {{ strtoupper(substr($tuteur->prenom, 0, 1)) }}{{ strtoupper(substr($tuteur->nom, 0, 1)) }}
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <div class="fw-semibold">{{ $tuteur->prenom }} {{ $tuteur->nom }}</div>
-                                                        <div class="text-muted small mb-1">{{ $tuteur->relationship ?? '—' }}</div>
+                                                        <div class="fw-semibold">{{ $tuteur->prenom }}
+                                                            {{ $tuteur->nom }}</div>
+                                                        <div class="text-muted small mb-1">
+                                                            {{ $tuteur->relationship ?? '—' }}</div>
                                                         <div class="d-flex flex-wrap gap-2 mt-2">
                                                             @if ($tuteur->telephone)
                                                                 <span class="badge bg-light text-dark border">
-                                                                    <i class="fas fa-phone me-1"></i>{{ $tuteur->telephone }}
+                                                                    <i
+                                                                        class="fas fa-phone me-1"></i>{{ $tuteur->telephone }}
                                                                 </span>
                                                             @endif
                                                             @if ($tuteur->email)
                                                                 <span class="badge bg-light text-dark border">
-                                                                    <i class="fas fa-envelope me-1"></i>{{ $tuteur->email }}
+                                                                    <i
+                                                                        class="fas fa-envelope me-1"></i>{{ $tuteur->email }}
                                                                 </span>
                                                             @endif
                                                         </div>
                                                         <div class="mt-2">
                                                             @if ($ep->is_primary)
-                                                                <span class="badge bg-primary me-1">Contact principal</span>
+                                                                <span class="badge bg-primary me-1">Contact
+                                                                    principal</span>
                                                             @endif
                                                             @if ($ep->can_pickup)
                                                                 <span class="badge bg-success me-1">Peut récupérer</span>
@@ -678,9 +857,9 @@
 @endsection
 
 @section('script')
-<script>
-    $(document).ready(function () {
-        if (typeof feather !== 'undefined') feather.replace();
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            if (typeof feather !== 'undefined') feather.replace();
+        });
+    </script>
 @endsection

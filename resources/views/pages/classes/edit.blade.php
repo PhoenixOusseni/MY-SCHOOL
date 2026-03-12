@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier la classe
                         </h1>
+                        <p class="text-muted">Modifiez les informations de la classe ci-dessous.</p>
                     </div>
                 </div>
             </div>
@@ -54,11 +55,11 @@
 
                             <div class="mb-3">
                                 <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
-                                <input type="text" 
-                                       class="form-control @error('nom') is-invalid @enderror" 
-                                       id="nom" 
-                                       name="nom" 
-                                       placeholder="Ex: 6ème A" 
+                                <input type="text"
+                                       class="form-control @error('nom') is-invalid @enderror"
+                                       id="nom"
+                                       name="nom"
+                                       placeholder="Ex: 6ème A"
                                        value="{{ old('nom', $classe->nom) }}"
                                        required>
                                 @error('nom')
@@ -69,11 +70,11 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="capacite" class="form-label">Capacité</label>
-                                    <input type="number" 
-                                           class="form-control @error('capacite') is-invalid @enderror" 
-                                           id="capacite" 
-                                           name="capacite" 
-                                           placeholder="Ex: 50" 
+                                    <input type="number"
+                                           class="form-control @error('capacite') is-invalid @enderror"
+                                           id="capacite"
+                                           name="capacite"
+                                           placeholder="Ex: 50"
                                            value="{{ old('capacite', $classe->capacite) }}"
                                            min="1"
                                            max="500">
@@ -84,11 +85,11 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="salle" class="form-label">Salle</label>
-                                    <input type="text" 
-                                           class="form-control @error('salle') is-invalid @enderror" 
-                                           id="salle" 
-                                           name="salle" 
-                                           placeholder="Ex: A101" 
+                                    <input type="text"
+                                           class="form-control @error('salle') is-invalid @enderror"
+                                           id="salle"
+                                           name="salle"
+                                           placeholder="Ex: A101"
                                            value="{{ old('salle', $classe->salle) }}">
                                     @error('salle')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -99,12 +100,12 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="niveau_id" class="form-label">Niveau</label>
-                                    <select class="form-select @error('niveau_id') is-invalid @enderror" 
-                                            id="niveau_id" 
+                                    <select class="form-select @error('niveau_id') is-invalid @enderror"
+                                            id="niveau_id"
                                             name="niveau_id">
                                         <option value="">Tous les niveaux</option>
                                         @foreach($niveaux as $niveau)
-                                            <option value="{{ $niveau->id }}" 
+                                            <option value="{{ $niveau->id }}"
                                                     {{ old('niveau_id', $classe->niveau_id) == $niveau->id ? 'selected' : '' }}>
                                                 {{ $niveau->nom }}
                                             </option>
@@ -117,12 +118,12 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="etablissement_id" class="form-label">Établissement</label>
-                                    <select class="form-select @error('etablissement_id') is-invalid @enderror" 
-                                            id="etablissement_id" 
+                                    <select class="form-select @error('etablissement_id') is-invalid @enderror"
+                                            id="etablissement_id"
                                             name="etablissement_id">
                                         <option value="">Tous les établissements</option>
                                         @foreach($etablissements as $etablissement)
-                                            <option value="{{ $etablissement->id }}" 
+                                            <option value="{{ $etablissement->id }}"
                                                     {{ old('etablissement_id', $classe->etablissement_id) == $etablissement->id ? 'selected' : '' }}>
                                                 {{ $etablissement->nom }}
                                             </option>
@@ -136,12 +137,12 @@
 
                             <div class="mb-3">
                                 <label for="annee_scolaire_id" class="form-label">Année scolaire</label>
-                                <select class="form-select @error('annee_scolaire_id') is-invalid @enderror" 
-                                        id="annee_scolaire_id" 
+                                <select class="form-select @error('annee_scolaire_id') is-invalid @enderror"
+                                        id="annee_scolaire_id"
                                         name="annee_scolaire_id">
                                     <option value="">Toutes les années</option>
                                     @foreach($anneesScolaires as $annee)
-                                        <option value="{{ $annee->id }}" 
+                                        <option value="{{ $annee->id }}"
                                                 {{ old('annee_scolaire_id', $classe->annee_scolaire_id) == $annee->id ? 'selected' : '' }}>
                                             {{ $annee->libelle }}
                                         </option>
@@ -157,10 +158,6 @@
                                     <i data-feather="save" style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
                                     Mettre à jour
                                 </button>
-                                <a href="{{ route('gestion_classes.index') }}" class="btn btn-secondary">
-                                    <i data-feather="x" style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
-                                    Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

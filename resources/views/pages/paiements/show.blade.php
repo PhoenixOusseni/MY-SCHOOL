@@ -481,14 +481,15 @@
             })();
         </script>
     @endif
+
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
+                <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="fas fa-exclamation-triangle me-2"></i>Confirmation de suppression
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Êtes-vous sûr de vouloir supprimer ce paiement ?</p>
@@ -501,13 +502,14 @@
                     </div>
                     <p class="text-danger small">Cette action est irréversible.</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <div class="m-3">
                     <form action="{{ route('gestion_paiements.destroy', $paiement->id) }}" method="POST"
                         class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt me-1"></i> Oui, supprimer
+                        </button>
                     </form>
                 </div>
             </div>

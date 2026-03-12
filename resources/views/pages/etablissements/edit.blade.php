@@ -14,6 +14,15 @@
                             <div class="page-header-icon"><i data-feather="edit"></i></div>
                             Modifier l'établissement
                         </h1>
+                        <p class="text-white">Mettre à jour les informations de l'établissement</p>
+                    </div>
+                    <div class="col-auto mt-4">
+                        <a href="{{ route('gestion_etablissements.show', $etablissement->id) }}" class="btn btn-light btn-sm">
+                            <i data-feather="arrow-left"></i>&nbsp; Retour
+                        </a>
+                        <a href="{{ route('gestion_etablissements.index') }}" class="btn btn-dark btn-sm">
+                            <i data-feather="align-left"></i>&nbsp; Liste des établissements
+                        </a>
                     </div>
                 </div>
             </div>
@@ -25,21 +34,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card mb-4">
+                    <div class="card-header">Formulaire de modification</div>
                     <div class="card-body">
-                        <div class="col-sm-12 mb-3">
-                            <a href="{{ route('gestion_etablissements.show', $etablissement->id) }}" class="btn btn-dark">
-                                <i data-feather="arrow-left"></i>&nbsp; Retour
-                            </a>
-                        </div>
-
                         <form action="{{ route('gestion_etablissements.update', $etablissement->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-
-                            <hr>
-                            <h4 class="mb-3 mt-3 text-danger">Informations de l'établissement</h4>
-                            <hr>
-
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label class="small mb-1">Code <span class="text-muted">(optionnel)</span></label>
@@ -127,9 +126,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&thinsp;&thinsp; Mettre à jour
                                 </button>
-                                <a href="{{ route('gestion_etablissements.show', $etablissement->id) }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&thinsp;&thinsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

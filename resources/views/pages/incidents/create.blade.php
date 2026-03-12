@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="plus-circle"></i></div>
                             Ajouter un Incident Disciplinaire
                         </h1>
+                        <p class="text-muted">Enregistrez un nouvel incident disciplinaire pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_incidents.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_incidents.index') }}" class="btn btn-dark btn-sm">
                              <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -152,9 +153,6 @@
                                         <button type="submit" class="btn btn-1">
                                             <i data-feather="save" class="me-2"></i>&nbsp; Enregistrer
                                         </button>
-                                        <a href="{{ route('gestion_incidents.index') }}" class="btn btn-dark">
-                                            <i data-feather="x" class="me-2"></i>&nbsp; Annuler
-                                        </a>
                                     </div>
                                 </div>
                             </div>

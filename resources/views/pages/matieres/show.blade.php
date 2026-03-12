@@ -15,6 +15,9 @@
                             <div class="page-header-icon"><i data-feather="book"></i></div>
                             Détails de la Matière
                         </h1>
+                        <p class="page-header-subtitle">
+                            Consultez les informations détaillées de la matière, les enseignements associés, et gérez les actions liées à cette matière.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_matieres.index') }}" class="btn btn-dark btn-sm">

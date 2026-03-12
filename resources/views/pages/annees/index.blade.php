@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="calendar"></i></div>
                             Années scolaires
                         </h1>
+                        <p class="text-white">Gestion des années scolaires de l'organisation</p>
                     </div>
                 </div>
             </div>
@@ -184,22 +185,10 @@
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" role="group">
                                                         <a href="{{ route('gestion_annees_scolaires.show', $annee->id) }}"
-                                                            class="btn btn-success" title="Voir">
+                                                            class="btn btn-1 btn-sm" title="Voir">
                                                             <i data-feather="eye" style="width: 14px; height: 14px;"></i>
                                                         </a>
-                                                        <a href="#" class="btn btn-danger"
-                                                            onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer cette année ?')) document.getElementById('delete-form-{{ $annee->id }}').submit();"
-                                                            title="Supprimer">
-                                                            <i data-feather="trash-2"
-                                                                style="width: 14px; height: 14px;"></i>
-                                                        </a>
                                                     </div>
-                                                    <form id="delete-form-{{ $annee->id }}"
-                                                        action="{{ route('gestion_annees_scolaires.destroy', $annee->id) }}"
-                                                        method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

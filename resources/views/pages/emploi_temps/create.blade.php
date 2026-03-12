@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-auto mt-4">
                     <a href="{{ route('gestion_emploi_temps.index', ['annee_id' => $anneeId, 'classe_id' => $classeId]) }}"
-                       class="btn btn-white btn-sm">
+                       class="btn btn-dark btn-sm">
                         <i class="fas fa-arrow-left me-1"></i> Retour à la grille
                     </a>
                 </div>
@@ -142,14 +142,9 @@
                             </div>
                         </div>
 
-                        <hr class="my-4">
-                        <div class="d-flex justify-content-end gap-2">
-                            <a href="{{ route('gestion_emploi_temps.index', ['annee_id' => $anneeId, 'classe_id' => $classeId]) }}"
-                               class="btn btn-secondary">
-                                <i class="fas fa-times me-1"></i> Annuler
-                            </a>
+                        <div class="d-flex justify-content-start gap-2v mt-5">
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-1"></i> Enregistrer
+                                <i class="fas fa-save me-1"></i>&nbsp; Enregistrer
                             </button>
                         </div>
                     </form>

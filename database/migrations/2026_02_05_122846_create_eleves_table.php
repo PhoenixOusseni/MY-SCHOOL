@@ -22,10 +22,11 @@ return new class extends Migration {
             $table->text('adresse')->nullable();
             $table->string('telephone')->nullable();
             $table->string('email')->nullable();
-            $table->string('photo')->nullable();
             $table->string('groupe_sanguin')->nullable();
             $table->text('notes_medicales')->nullable();
             $table->date('date_inscription')->nullable();
+            $table->string('pieces_jointes')->nullable();
+            $table->string('photo')->nullable();
             $table->enum('statut', ['actif', 'suspendu', 'diplome', 'abandonne'])->default('actif');
 
             $table->foreignId('user_id')->nullable()->unique()->constrained('users')->onDelete('cascade')->onUpdate('cascade');

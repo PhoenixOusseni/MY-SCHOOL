@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i class="fas fa-money-bill-wave"></i></div>
                             Gestion des Paiements
                         </h1>
+                        <p class="text-muted">Gérez les paiements de vos élèves</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_paiements.create') }}" class="btn btn-dark btn-sm">

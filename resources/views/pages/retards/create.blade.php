@@ -17,7 +17,7 @@
                         <p class="text-muted">Enregistrez un nouveau retard pour un élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -146,20 +146,6 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="alert alert-info" role="alert">
-                    <div class="d-flex">
-                        <i data-feather="alert-circle" class="me-3 mt-1"></i>
-                        <div>
-                            <h6 class="alert-heading">Informations</h6>
-                            <ul class="mb-0 ps-3">
-                                <li>La date, l'élève et la classe sont obligatoires</li>
-                                <li>La durée est exprimée en minutes</li>
-                                <li>Vous pouvez associer une matière si nécessaire</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm mb-4">
@@ -173,6 +159,19 @@
                         <p class="mb-2">Saisissez les informations du retard pour l'élève concerné.</p>
                         <p class="mb-2">Si vous connaissez l'heure d'arrivée et la durée, renseignez-les pour faciliter les rapports.</p>
                         <p class="mb-0">Le statut justifié peut être coché si une justification est fournie.</p>
+                    </div>
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <div class="d-flex">
+                        <i data-feather="alert-circle" class="me-3 mt-1"></i>
+                        <div>
+                            <h6 class="alert-heading">Informations</h6>
+                            <ul class="mb-0 ps-3">
+                                <li>La date, l'élève et la classe sont obligatoires</li>
+                                <li>La durée est exprimée en minutes</li>
+                                <li>Vous pouvez associer une matière si nécessaire</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

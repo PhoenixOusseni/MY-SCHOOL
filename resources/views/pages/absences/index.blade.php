@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i data-feather="user-x"></i></div>
                             Gestion des Absences
                         </h1>
+                        <p class="text-muted">Gérer et suivre les absences des élèves</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_absences.create') }}" class="btn btn-dark btn-sm">

@@ -15,6 +15,7 @@
                             <div class="page-header-icon"><i data-feather="layers"></i></div>
                             Niveaux scolaires
                         </h1>
+                        <p class="text-white">Gérez les différents niveaux scolaires de votre établissement</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-header bg-dark">
-                        <h5 class="mb-0 text-white">
+                        <h5 class="mb-0">
                             <i data-feather="plus-circle"
                                 style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
                             Ajouter un niveau
@@ -121,8 +122,8 @@
             <!-- Bloc de liste -->
             <div class="col-lg-8 mb-4">
                 <div class="card">
-                    <div class="card-header bg-dark text-white">
-                        <h5 class="mb-0 text-white">
+                    <div class="card-header bg-dark">
+                        <h5 class="mb-0">
                             <i data-feather="list"
                                 style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
                             Liste des niveaux
@@ -168,19 +169,7 @@
                                                             <i data-feather="eye"
                                                                 style="width: 14px; height: 14px;"></i>
                                                         </a>
-                                                        <a href="#" class="btn btn-danger"
-                                                            onclick="event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce niveau ?')) document.getElementById('delete-form-{{ $niveau->id }}').submit();"
-                                                            title="Supprimer">
-                                                            <i data-feather="trash-2"
-                                                                style="width: 14px; height: 14px;"></i>
-                                                        </a>
                                                     </div>
-                                                    <form id="delete-form-{{ $niveau->id }}"
-                                                        action="{{ route('gestion_niveaux.destroy', $niveau->id) }}"
-                                                        method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

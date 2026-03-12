@@ -15,6 +15,9 @@
                             <div class="page-header-icon"><i data-feather="link-2"></i></div>
                             Associations Élèves - Tuteurs
                         </h1>
+                        <p class="page-header-subtitle">
+                            Gérer les associations entre les élèves et leurs tuteurs, y compris les rôles et les permissions.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_associations.create') }}" class="btn btn-dark btn-sm me-2">
@@ -231,11 +234,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-4">
-            {{ $eleveParents->links() }}
         </div>
     </div>
 

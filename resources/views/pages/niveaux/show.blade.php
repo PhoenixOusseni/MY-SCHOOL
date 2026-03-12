@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_niveaux.index') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-arrow-left"></i>
+                            <i class="fas fa-arrow-left"></i>&nbsp; Retour
                         </a>
                         <a href="{{ route('gestion_niveaux.edit', $niveau->id) }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-edit"></i>&nbsp; Modifier
                         </a>
                     </div>
                 </div>
@@ -301,7 +301,7 @@
                                     <tbody>
                                         @foreach ($niveau->matiereNiveaux as $matiereNiveau)
                                             <tr>
-                                                <td><strong>{{ $matiereNiveau->matiere->libelle ?? 'N/A' }}</strong></td>
+                                                <td><strong>{{ $matiereNiveau->matiere->intitule ?? 'N/A' }}</strong></td>
                                                 <td>
                                                     <small
                                                         class="text-muted">{{ $matiereNiveau->matiere->code ?? 'N/A' }}</small>

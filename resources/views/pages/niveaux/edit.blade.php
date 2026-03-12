@@ -15,6 +15,13 @@
                             <div class="page-header-icon"><i data-feather="edit-2"></i></div>
                             Modifier le niveau
                         </h1>
+                        <p class="text-muted">Modifiez les informations du niveau ci-dessous.</p>
+                    </div>
+                    <div class="col-auto mt-4">
+                        <a href="{{ route('gestion_niveaux.index') }}" class="btn btn-light">
+                            <i data-feather="arrow-left" style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
+                            Retour à la liste
+                        </a>
                     </div>
                 </div>
             </div>
@@ -110,11 +117,6 @@
                                         style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
                                     Mettre à jour
                                 </button>
-                                <a href="{{ route('gestion_niveaux.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"
-                                        style="width: 16px; height: 16px; display: inline; margin-right: 8px;"></i>
-                                    Annuler
-                                </a>
                             </div>
                         </form>
                     </div>

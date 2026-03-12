@@ -14,9 +14,10 @@
                             <div class="page-header-icon"><i data-feather="clock"></i></div>
                             Détails du Retard
                         </h1>
+                        <p class="text-muted">Affichez les détails complets du retard enregistré pour l'élève</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-light">
+                        <a href="{{ route('gestion_retards.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -179,7 +180,7 @@
                     <form action="{{ route('gestion_retards.destroy', $retard->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger btn-sm">
                             <i data-feather="trash-2" class="me-2"></i>Supprimer
                         </button>
                     </form>

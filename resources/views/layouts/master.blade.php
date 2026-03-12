@@ -466,41 +466,285 @@
         }
 
         /* =============================================
-           PAGE HEADER
+           PAGE HEADER — PROFESSIONAL DESIGN
         ============================================= */
         .page-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
-            padding: 28px 0 60px !important;
+            background:
+                linear-gradient(135deg, #9b1530 0%, var(--primary) 40%, #b8263d 70%, var(--primary-dark) 100%) !important;
+            padding: 20px 0 104px !important;
             position: relative;
             overflow: hidden;
+            border-bottom: none !important;
         }
 
+        /* Noise texture overlay */
         .page-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image:
+                radial-gradient(ellipse at 15% 60%, rgba(255,255,255,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 15%, rgba(255,180,180,0.08) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
+            z-index: 0;
         }
 
+        /* Decorative large circle - top right */
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Inner elements above pseudo-elements */
+        .page-header .container-xl,
+        .page-header .container-fluid {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Content vertical spacing */
+        .page-header .page-header-content {
+            padding-top: 0.75rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Left separator line accent */
+        .page-header .page-header-content .row {
+            position: relative;
+        }
+
+        /* Title */
         .page-header-title {
-            font-size: 1.25rem !important;
+            font-size: 1.35rem !important;
             font-weight: 700 !important;
             color: #fff !important;
             display: flex !important;
             align-items: center !important;
-            gap: 10px !important;
+            gap: 12px !important;
+            letter-spacing: -0.02em !important;
+            line-height: 1.25 !important;
+            margin-bottom: 0 !important;
         }
 
+        /* Icon container */
         .page-header-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .page-header-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .page-header-icon svg,
+        .page-header-icon .feather,
+        .page-header-icon i {
+            width: 20px !important;
+            height: 20px !important;
+            color: #fff !important;
+            font-size: 18px;
+        }
+
+        /* Subtitle / description */
+        .page-header .page-header-subtitle,
+        .page-header p.text-muted,
+        .page-header p.mb-0,
+        .page-header p.mt-2 {
+            color: rgba(255,255,255,0.72) !important;
+            font-size: 13px !important;
+            font-weight: 400 !important;
+            margin-top: 5px !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Action buttons in header */
+        .page-header .btn {
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            padding: 0.45rem 1rem !important;
+            border-radius: 9px !important;
+            transition: all 0.18s ease !important;
+            letter-spacing: 0 !important;
+        }
+
+        .page-header .btn-light {
+            background: rgba(255,255,255,0.95) !important;
+            color: var(--primary-dark) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+        }
+
+        .page-header .btn-light:hover {
+            background: #fff !important;
+            color: var(--primary) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18) !important;
+        }
+
+        .page-header .btn-dark {
+            background: rgba(0,0,0,0.28) !important;
+            color: rgba(255,255,255,0.92) !important;
+            border: 1px solid rgba(255,255,255,0.18) !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+        }
+
+        .page-header .btn-dark:hover {
+            background: rgba(0,0,0,0.45) !important;
+            color: #fff !important;
+            transform: translateY(-2px) !important;
+            border-color: rgba(255,255,255,0.3) !important;
+        }
+
+        .page-header .btn-outline-light,
+        .page-header .btn-outline-white {
+            color: rgba(255,255,255,0.9) !important;
+            border-color: rgba(255,255,255,0.4) !important;
+        }
+
+        .page-header .btn-outline-light:hover,
+        .page-header .btn-outline-white:hover {
+            background: rgba(255,255,255,0.15) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.6) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Badges / tags in header (like annee-badge) */
+        .page-header .annee-badge,
+        .page-header .badge {
+            background: rgba(255,255,255,0.15) !important;
+            color: rgba(255,255,255,0.9) !important;
+            border: 1px solid rgba(255,255,255,0.22) !important;
+            border-radius: 20px !important;
+            padding: 4px 10px !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
             backdrop-filter: blur(4px);
+        }
+
+        /* Breadcrumb inside header */
+        .page-header .breadcrumb {
+            background: rgba(0,0,0,0.12) !important;
+            border-radius: 8px !important;
+            padding: 6px 14px !important;
+            margin-bottom: 0 !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+
+        .page-header .breadcrumb-item,
+        .page-header .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255,255,255,0.55) !important;
+            font-size: 12px !important;
+        }
+
+        .page-header .breadcrumb-item a {
+            color: rgba(255,255,255,0.8) !important;
+            text-decoration: none !important;
+        }
+
+        .page-header .breadcrumb-item a:hover {
+            color: #fff !important;
+        }
+
+        .page-header .breadcrumb-item.active {
+            color: rgba(255,255,255,0.55) !important;
+        }
+
+        /* Decorative bottom shimmer line */
+        .page-header-dark {
+            border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+        }
+
+        /* Left vertical accent bar on title group */
+        .page-header .page-header-title::before {
+            content: none;
+        }
+
+        /* Decorative dot grid — top left quadrant */
+        .page-header .container-xl::before,
+        .page-header .container-fluid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 160px;
+            height: 80px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px);
+            background-size: 16px 16px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        /* Small decorative circle — bottom right */
+        .page-header .page-header-content::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            right: 60px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 40px solid rgba(255,255,255,0.04);
+            pointer-events: none;
+        }
+
+        /* Subtle inner glow on the left */
+        .page-header .col-auto:first-child {
+            position: relative;
+        }
+
+        /* Form controls inside header (stats pages filters) */
+        .page-header .form-select,
+        .page-header .form-control {
+            background: rgba(255,255,255,0.15) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255,255,255,0.28) !important;
+            border-radius: 9px !important;
+            font-size: 13px !important;
+            padding: 0.4rem 2rem 0.4rem 0.85rem !important;
+            backdrop-filter: blur(4px);
+        }
+
+        .page-header .form-select:focus,
+        .page-header .form-control:focus {
+            background: rgba(255,255,255,0.22) !important;
+            border-color: rgba(255,255,255,0.5) !important;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.12) !important;
+            color: #fff !important;
+        }
+
+        .page-header .form-select option {
+            color: var(--text-primary) !important;
+            background: #fff !important;
+        }
+
+        /* Input group inside header */
+        .page-header .input-group-text {
+            background: rgba(255,255,255,0.12) !important;
+            border-color: rgba(255,255,255,0.25) !important;
+            color: rgba(255,255,255,0.8) !important;
         }
 
         /* =============================================

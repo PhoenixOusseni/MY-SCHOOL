@@ -12,6 +12,9 @@
                             <div class="page-header-icon"><i data-feather="book"></i></div>
                             Gestion des Enseignements
                         </h1>
+                        <p class="page-header-subtitle">
+                            Consultez, ajoutez, modifiez ou supprimez les enseignements associés aux matières, classes et années scolaires.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_enseignement_matieres.create') }}" class="btn btn-dark btn-sm">
@@ -27,7 +30,7 @@
         <!-- Statistics Cards -->
         <div class="row mb-4">
             <div class="col-md-3 mb-3">
-                <div class="card bg-primary text-white">
+                <div class="card bg-primary">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Enseignements total</p>
@@ -38,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-success text-white">
+                <div class="card bg-success">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Années actives</p>
@@ -49,7 +52,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-info text-white">
+                <div class="card bg-info">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Classes</p>
@@ -60,7 +63,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-3">
-                <div class="card bg-warning text-white">
+                <div class="card bg-warning">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <p class="card-text mb-0">Enseignements page</p>
@@ -162,11 +165,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-center">
-                        {{ $enseignementMatiereClasses->links() }}
                     </div>
                 @else
                     <div class="alert alert-info text-center py-5">

@@ -15,7 +15,7 @@
                         <p class="text-muted">{{ $evaluation->titre }}</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_evaluations.index') }}" class="btn btn-light btn-sm">
+                        <a href="{{ route('gestion_evaluations.index') }}" class="btn btn-dark btn-sm">
                             <i data-feather="arrow-left"></i>&nbsp; Retour
                         </a>
                     </div>
@@ -28,6 +28,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card">
+                    <div class="card-header bg-light text-dark">
+                        <h5 class="card-title mb-0">Détails de l'évaluation</h5>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_evaluations.update', $evaluation->id) }}" method="POST"
                             id="evaluationForm">
@@ -200,9 +203,6 @@
                                 <button type="submit" class="btn btn-1">
                                     <i data-feather="save"></i>&nbsp; Enregistrer les modifications
                                 </button>
-                                <a href="{{ route('gestion_evaluations.index') }}" class="btn btn-dark">
-                                    <i data-feather="x"></i>&nbsp; Annuler
-                                </a>
                             </div>
                         </form>
                     </div>
@@ -293,7 +293,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-light text-dark">
                     <h5 class="modal-title">Confirmation de suppression</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Êtes-vous sûr de vouloir supprimer cette évaluation?</p>
@@ -303,16 +303,18 @@
                             {{ $evaluation->enseignementMatiereClasse->matiere->intitule ?? 'N/A' }}</small>
                     </div>
                     <p class="text-muted small"><i data-feather="alert-triangle"></i> Cette action est
-                        <strong>irréversible</strong>.</p>
+                        <strong>irréversible</strong>.
+                    </p>
                 </div>
                 <div class="m-3">
                     <form action="{{ route('gestion_evaluations.destroy', $evaluation->id) }}" method="POST"
                         class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i data-feather="trash-2"></i>&nbsp; Oui, supprimer
+                        </button>
                     </form>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>

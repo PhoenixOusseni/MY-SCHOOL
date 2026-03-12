@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Eleve extends Model
 {
+    protected $casts = [];
+
     protected $fillable = [
         'registration_number',
         'nom',
@@ -17,6 +19,7 @@ class Eleve extends Model
         'adresse',
         'telephone',
         'email',
+        'pieces_jointes',
         'photo',
         'groupe_sanguin',
         'notes_medicales',

@@ -145,7 +145,7 @@
                                            accept=".sql,.txt">
                                     @error('fichier_sql')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
-                                <button type="submit" class="btn btn-dark w-100">
+                                <button type="submit" class="btn btn-dark btn-sm w-100">
                                     <i class="fas fa-redo me-2"></i>Restaurer
                                 </button>
                             </form>

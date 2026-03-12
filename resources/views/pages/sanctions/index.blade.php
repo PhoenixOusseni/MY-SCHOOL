@@ -14,6 +14,7 @@
                             <div class="page-header-icon"><i data-feather="shield"></i></div>
                             Gestion des Sanctions
                         </h1>
+                        <p class="text-muted">Consultez, ajoutez et gérez les sanctions disciplinaires des élèves</p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_sanctions.create') }}" class="btn btn-dark">

@@ -15,6 +15,9 @@
                             <div class="page-header-icon"><i data-feather="book"></i></div>
                             Gestion des Matières
                         </h1>
+                        <p class="page-header-subtitle">
+                            Gérer les matières de votre établissement, ajouter de nouvelles matières, et consulter les détails de chaque matière.
+                        </p>
                     </div>
                     <div class="col-auto mt-4">
                         <a href="{{ route('gestion_matieres.create') }}" class="btn btn-dark btn-sm">
