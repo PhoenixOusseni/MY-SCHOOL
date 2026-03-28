@@ -210,57 +210,63 @@
                             <hr>
 
                             <!-- Section: Compte utilisateur -->
-                            <h6 class="mb-3">
-                                <i data-feather="lock"
-                                    style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
-                                Compte Utilisateur
-                            </h6>
-
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label">Email <span
-                                            class="text-danger">*</span></label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        id="email" name="email" placeholder="exemple@domaine.com"
-                                        value="{{ old('email') }}" required>
-                                    @error('email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="login" class="form-label">Identifiant de connexion <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control @error('login') is-invalid @enderror"
-                                        id="login" name="login" placeholder="Ex: jean.dupont"
-                                        value="{{ old('login') }}" required>
-                                    @error('login')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h6 class="mb-0">
+                                    <i data-feather="lock"
+                                        style="width: 18px; height: 18px; display: inline; margin-right: 8px;"></i>
+                                    Compte Utilisateur
+                                </h6>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox" id="create_account"
+                                        name="create_account" value="1"
+                                        {{ old('create_account') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="create_account">Créer un compte</label>
                                 </div>
                             </div>
 
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="password" class="form-label">Mot de passe <span
-                                            class="text-danger">*</span></label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        id="password" name="password" placeholder="Minimum 8 caractères" required>
-                                    @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <div id="compte_utilisateur_fields" style="{{ old('create_account') ? '' : 'display:none;' }}">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            id="email" name="email" placeholder="exemple@domaine.com"
+                                            value="{{ old('email') }}">
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="login" class="form-label">Identifiant de connexion <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control @error('login') is-invalid @enderror"
+                                            id="login" name="login" placeholder="Ex: jean.dupont"
+                                            value="{{ old('login') }}">
+                                        @error('login')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label for="password_confirmation" class="form-label">Confirmer le mot de passe <span
-                                            class="text-danger">*</span></label>
-                                    <input type="password"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        id="password_confirmation" name="password_confirmation"
-                                        placeholder="Confirmez le mot de passe" required>
-                                    @error('password_confirmation')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Mot de passe <span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                            id="password" name="password" placeholder="Minimum 8 caractères">
+                                        @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="password_confirmation" class="form-label">Confirmer le mot de passe <span class="text-danger">*</span></label>
+                                        <input type="password"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror"
+                                            id="password_confirmation" name="password_confirmation"
+                                            placeholder="Confirmez le mot de passe">
+                                        @error('password_confirmation')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
@@ -365,14 +371,14 @@
                                 sont remplis.
                             </li>
                             <li class="mb-2">
-                                <i data-feather="check"
+                                <i data-feather="user-check"
                                     style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
-                                Utilisez un format d'email valide pour le champ "Email".
+                                Activez le toggle <strong>Créer un compte</strong> uniquement si l'élève doit avoir accès à la plateforme.
                             </li>
                             <li class="mb-2">
                                 <i data-feather="check"
                                     style="width: 14px; height: 14px; display: inline; margin-right: 6px;"></i>
-                                Le mot de passe doit comporter au moins 8 caractères.
+                                Si un compte est créé, le mot de passe doit comporter au moins 8 caractères.
                             </li>
                             <li class="mb-2">
                                 <i data-feather="check"
@@ -389,10 +395,24 @@
     @section('script')
         <script>
             $(document).ready(function() {
-                // Réinitialiser les icônes Feather
                 if (typeof feather !== 'undefined') {
                     feather.replace();
                 }
+
+                const toggle = document.getElementById('create_account');
+                const fields = document.getElementById('compte_utilisateur_fields');
+
+                toggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        fields.style.display = '';
+                    } else {
+                        fields.style.display = 'none';
+                        // Vider les champs quand on désactive
+                        fields.querySelectorAll('input').forEach(function(input) {
+                            input.value = '';
+                        });
+                    }
+                });
             });
         </script>
     @endsection

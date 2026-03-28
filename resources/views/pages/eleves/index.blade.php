@@ -58,10 +58,10 @@
                                         <tr>
                                             <td><strong>{{ $index + 1 }}</strong></td>
                                             <td><span class="badge bg-dark">{{ $eleve->registration_number }}</span></td>
-                                            <td>{{ $eleve->user->prenom ?? 'N/A' }}</td>
-                                            <td>{{ $eleve->user->nom ?? 'N/A' }}</td>
+                                            <td>{{ $eleve->prenom }}</td>
+                                            <td>{{ $eleve->nom }}</td>
                                             <td><small>{{ $eleve->user->email ?? 'N/A' }}</small></td>
-                                            <td><small>{{ $eleve->user->telephone ?? 'N/A' }}</small></td>
+                                            <td><small>{{ $eleve->telephone ?? 'N/A' }}</small></td>
                                             <td>
                                                 @if ($eleve->etablissement)
                                                     <span class="badge bg-dark">{{ $eleve->etablissement->nom }}</span>

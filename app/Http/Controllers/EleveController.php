@@ -43,6 +43,8 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
+        $createAccount = $request->boolean('create_account');
+
         // Validation des données
         $validated = $request->validate([
             // Informations personnelles
@@ -59,10 +61,10 @@ class EleveController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'pieces_jointes' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120',
 
-            // Compte utilisateur
-            'email' => 'required|email|unique:users,email',
-            'login' => 'required|string|unique:users,login',
-            'password' => 'required|string|min:8|confirmed',
+            // Compte utilisateur (optionnel)
+            'email' => $createAccount ? 'required|email|unique:users,email' : 'nullable|email',
+            'login' => $createAccount ? 'required|string|unique:users,login' : 'nullable|string',
+            'password' => $createAccount ? 'required|string|min:8|confirmed' : 'nullable|string',
 
             // Informations scolaires
             'date_inscription' => 'nullable|date',
@@ -82,20 +84,22 @@ class EleveController extends Controller
             $number = $lastEleve ? (int)substr($lastEleve->registration_number, -5) + 1 : 1;
             $registrationNumber = $prefix . $year . '/' . str_pad($number, 5, '0', STR_PAD_LEFT);
 
-            // Récupérer le rôle étudiant
-            $roleEleve = Role::where('libelle', 'eleve')->orWhere('libelle', 'Élève')->first();
-            $roleId = $roleEleve?->id ?? 3; // Fallback à 3 si le rôle n'existe pas
+            // Créer le compte utilisateur si demandé
+            $user = null;
+            if ($createAccount) {
+                $roleEleve = Role::where('libelle', 'eleve')->orWhere('libelle', 'Élève')->first();
+                $roleId = $roleEleve?->id ?? 3;
 
-            // Créer le compte utilisateur
-            $user = User::create([
-                'nom' => $validated['nom'],
-                'prenom' => $validated['prenom'],
-                'email' => $validated['email'],
-                'login' => $validated['login'],
-                'telephone' => $validated['telephone'] ?? null,
-                'password' => Hash::make($validated['password']),
-                'role_id' => $roleId,
-            ]);
+                $user = User::create([
+                    'nom' => $validated['nom'],
+                    'prenom' => $validated['prenom'],
+                    'email' => $validated['email'],
+                    'login' => $validated['login'],
+                    'telephone' => $validated['telephone'] ?? null,
+                    'password' => Hash::make($validated['password']),
+                    'role_id' => $roleId,
+                ]);
+            }
 
             // Upload photo
             $photoPath = null;
@@ -126,7 +130,7 @@ class EleveController extends Controller
                 'statut' => $validated['statut'] ?? 'actif',
                 'photo' => $photoPath,
                 'pieces_jointes' => $piecesJointesPath,
-                'user_id' => $user->id,
+                'user_id' => $user?->id,
                 'etablissement_id' => $validated['etablissement_id'] ?? null,
             ]);
 
