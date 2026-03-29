@@ -52,16 +52,20 @@
                                 <label for="eleve_id" class="form-label fw-semibold">
                                     Élève <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select @error('eleve_id') is-invalid @enderror" id="eleve_id" name="eleve_id" required>
+                                <select class="form-select @error('eleve_id') is-invalid @enderror" id="eleve_id"
+                                    name="eleve_id" required>
                                     <option value="" disabled selected>-- Sélectionner un élève --</option>
                                     @foreach ($eleves as $eleve)
-                                        <option value="{{ $eleve->id }}" {{ old('eleve_id') == $eleve->id ? 'selected' : '' }}>
+                                        <option value="{{ $eleve->id }}"
+                                            {{ old('eleve_id') == $eleve->id ? 'selected' : '' }}>
                                             {{ $eleve->prenom }} {{ strtoupper($eleve->nom) }}
                                             ({{ $eleve->registration_number }})
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('eleve_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                @error('eleve_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="row">
@@ -70,15 +74,20 @@
                                     <label for="frai_scolarite_id" class="form-label fw-semibold">
                                         Type de frais <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select @error('frai_scolarite_id') is-invalid @enderror" id="frai_scolarite_id" name="frai_scolarite_id" required>
+                                    <select class="form-select @error('frai_scolarite_id') is-invalid @enderror"
+                                        id="frai_scolarite_id" name="frai_scolarite_id" required>
                                         <option value="" disabled selected>-- Sélectionner --</option>
                                         @foreach ($frais as $frai)
-                                            <option value="{{ $frai->id }}" {{ old('frai_scolarite_id') == $frai->id ? 'selected' : '' }}>
-                                                {{ $frai->libelle }} — {{ number_format($frai->montant, 0, ',', ' ') }} {{ $frai->devise }}
+                                            <option value="{{ $frai->id }}"
+                                                {{ old('frai_scolarite_id') == $frai->id ? 'selected' : '' }}>
+                                                {{ $frai->libelle }} — {{ number_format($frai->montant, 0, ',', ' ') }}
+                                                {{ $frai->devise }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('frai_scolarite_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('frai_scolarite_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <!-- Année scolaire -->
@@ -86,15 +95,19 @@
                                     <label for="annee_scolaire_id" class="form-label fw-semibold">
                                         Année scolaire <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select @error('annee_scolaire_id') is-invalid @enderror" id="annee_scolaire_id" name="annee_scolaire_id" required>
+                                    <select class="form-select @error('annee_scolaire_id') is-invalid @enderror"
+                                        id="annee_scolaire_id" name="annee_scolaire_id" required>
                                         <option value="" disabled selected>-- Sélectionner --</option>
                                         @foreach ($annees as $annee)
-                                            <option value="{{ $annee->id }}" {{ old('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
+                                            <option value="{{ $annee->id }}"
+                                                {{ old('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
                                                 {{ $annee->libelle }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('annee_scolaire_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('annee_scolaire_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -105,10 +118,11 @@
                                         Montant <span class="text-danger">*</span>
                                     </label>
                                     <input type="number" step="0.01" min="0"
-                                        class="form-control @error('montant') is-invalid @enderror"
-                                        id="montant" name="montant"
-                                        value="{{ old('montant') }}" placeholder="Ex: 50000" required>
-                                    @error('montant')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                        class="form-control @error('montant') is-invalid @enderror" id="montant"
+                                        name="montant" value="{{ old('montant') }}" placeholder="Ex: 50000" required>
+                                    @error('montant')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <!-- Date de paiement -->
@@ -116,11 +130,12 @@
                                     <label for="date_paiement" class="form-label fw-semibold">
                                         Date de paiement <span class="text-danger">*</span>
                                     </label>
-                                    <input type="date"
-                                        class="form-control @error('date_paiement') is-invalid @enderror"
+                                    <input type="date" class="form-control @error('date_paiement') is-invalid @enderror"
                                         id="date_paiement" name="date_paiement"
                                         value="{{ old('date_paiement', date('Y-m-d')) }}" required>
-                                    @error('date_paiement')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('date_paiement')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -130,13 +145,18 @@
                                     <label for="methode_paiement" class="form-label fw-semibold">
                                         Mode paiement <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select @error('methode_paiement') is-invalid @enderror" id="methode_paiement" name="methode_paiement" required>
+                                    <select class="form-select @error('methode_paiement') is-invalid @enderror"
+                                        id="methode_paiement" name="methode_paiement" required>
                                         <option value="" disabled selected>-- Sélectionner --</option>
                                         @foreach ($methodes as $key => $label)
-                                            <option value="{{ $key }}" {{ old('methode_paiement') == $key ? 'selected' : '' }}>{{ $label }}</option>
+                                            <option value="{{ $key }}"
+                                                {{ old('methode_paiement') == $key ? 'selected' : '' }}>
+                                                {{ $label }}</option>
                                         @endforeach
                                     </select>
-                                    @error('methode_paiement')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('methode_paiement')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <!-- Statut -->
@@ -144,12 +164,34 @@
                                     <label for="status" class="form-label fw-semibold">
                                         Statut <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
+                                    <select class="form-select @error('status') is-invalid @enderror" id="status"
+                                        name="status" required>
                                         @foreach ($statuses as $key => $label)
-                                            <option value="{{ $key }}" {{ old('status', 'Terminé') == $key ? 'selected' : '' }}>{{ $label }}</option>
+                                            <option value="{{ $key }}"
+                                                {{ old('status', 'Terminé') == $key ? 'selected' : '' }}>
+                                                {{ $label }}</option>
                                         @endforeach
                                     </select>
-                                    @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- Prochaine échéance -->
+                                <div class="mb-4">
+                                    <label for="prochaine_paie" class="form-label fw-semibold">
+                                        <i class="fas fa-calendar-alt me-1 text-warning"></i>
+                                        Date du prochain paiement
+                                        <small class="text-muted fw-normal">(si montant non soldé)</small>
+                                    </label>
+                                    <input type="date"
+                                        class="form-control @error('prochaine_paie') is-invalid @enderror"
+                                        id="prochaine_paie" name="prochaine_paie" value="{{ old('prochaine_paie') }}">
+                                    @error('prochaine_paie')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -157,35 +199,41 @@
                                 <!-- Référence -->
                                 <div class="col-md-6 mb-3">
                                     <label for="reference" class="form-label fw-semibold">Référence / N° reçu</label>
-                                    <input type="text"
-                                        class="form-control @error('reference') is-invalid @enderror"
-                                        id="reference" name="reference"
-                                        value="{{ old('reference') }}" placeholder="Ex: REC-2026-001">
-                                    @error('reference')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    <input type="text" class="form-control @error('reference') is-invalid @enderror"
+                                        id="reference" name="reference" value="{{ old('reference') }}"
+                                        placeholder="Ex: REC-2026-001">
+                                    @error('reference')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <!-- Reçu par -->
                                 <div class="col-md-6 mb-3">
                                     <label for="received_by" class="form-label fw-semibold">Reçu par</label>
-                                    <select class="form-select @error('received_by') is-invalid @enderror" id="received_by" name="received_by">
+                                    <select class="form-select @error('received_by') is-invalid @enderror"
+                                        id="received_by" name="received_by">
                                         <option value="">-- Utilisateur connecté --</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" {{ old('received_by') == $user->id ? 'selected' : '' }}>
+                                            <option value="{{ $user->id }}"
+                                                {{ old('received_by') == $user->id ? 'selected' : '' }}>
                                                 {{ $user->prenom }} {{ $user->nom }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('received_by')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                    @error('received_by')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
                             <!-- Notes -->
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label for="notes" class="form-label fw-semibold">Notes / Observations</label>
-                                <textarea class="form-control @error('notes') is-invalid @enderror"
-                                    id="notes" name="notes" rows="3"
+                                <textarea class="form-control @error('notes') is-invalid @enderror" id="notes" name="notes" rows="3"
                                     placeholder="Informations complémentaires...">{{ old('notes') }}</textarea>
-                                @error('notes')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                @error('notes')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Boutons -->

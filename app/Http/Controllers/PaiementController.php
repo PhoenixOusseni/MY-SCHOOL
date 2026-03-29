@@ -48,6 +48,7 @@ class PaiementController extends Controller
                 'frai_scolarite_id' => 'required|exists:frai_scolarites,id',
                 'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
                 'received_by' => 'nullable|exists:users,id',
+                'prochaine_paie' => 'nullable|date',
             ]);
 
             $data = $request->all();
@@ -97,6 +98,7 @@ class PaiementController extends Controller
                 'date_paiement'    => 'required|date',
                 'reference'        => 'nullable|string|max:255',
                 'notes'            => 'nullable|string',
+                'prochaine_paie'   => 'nullable|date',
             ]);
 
             $nouveauReste  = $paiement->reste_a_payer - $request->montant;
@@ -115,6 +117,7 @@ class PaiementController extends Controller
                 'notes'             => $request->notes ?? 'Versement complémentaire — paiement N°' . $paiement->id,
                 'status'            => $nouveauStatut,
                 'received_by'       => Auth::id(),
+                'prochaine_paie'    => $nouveauReste > 0 ? $request->prochaine_paie : null,
             ]);
 
             // Marquer l'original comme soldé (reste = 0)
@@ -160,6 +163,7 @@ class PaiementController extends Controller
                 'frai_scolarite_id' => 'required|exists:frai_scolarites,id',
                 'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
                 'received_by' => 'nullable|exists:users,id',
+                'prochaine_paie' => 'nullable|date',
             ]);
 
             $data = $request->all();
@@ -180,6 +184,23 @@ class PaiementController extends Controller
         $paiement = Paiement::with('eleve', 'fraiScolarite', 'anneeScolaire', 'receivedBy')->findOrFail($id);
 
         return view('pages.paiements.print', compact('paiement'));
+    }
+
+    public function impayes()
+    {
+        $today = now()->toDateString();
+
+        // Derniers paiements avec un reste > 0 par élève / frais / année
+        $impayes = Paiement::with('eleve', 'fraiScolarite', 'anneeScolaire')
+            ->where('reste_a_payer', '>', 0)
+            ->whereNotIn('status', ['Annulé', 'Remboursé'])
+            ->orderByRaw('prochaine_paie IS NULL ASC, prochaine_paie ASC')
+            ->get()
+            ->unique(fn($p) => $p->eleve_id . '-' . $p->frai_scolarite_id . '-' . $p->annee_scolaire_id);
+
+        $methodes = ['Especes' => 'Espèces', 'cheque' => 'Chèque', 'virement' => 'Virement', 'mobile_money' => 'Mobile Money', 'carte' => 'Carte'];
+
+        return view('pages.paiements.impaye', compact('impayes', 'today', 'methodes'));
     }
 
     public function situationFinanciere()

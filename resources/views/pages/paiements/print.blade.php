@@ -329,6 +329,14 @@
                     <td>{{ $paiement->notes }}</td>
                 </tr>
             @endif
+            @if ($paiement->prochaine_paie)
+                <tr>
+                    <td>Prochain paiement</td>
+                    <td style="color:#856404; font-weight:700;">
+                        📅 {{ $paiement->prochaine_paie->format('d/m/Y') }}
+                    </td>
+                </tr>
+            @endif
         </table>
 
         <!-- Signatures -->

@@ -18,10 +18,12 @@ class Paiement extends Model
         'frai_scolarite_id',
         'annee_scolaire_id',
         'received_by',
+        'prochaine_paie',
     ];
 
     protected $casts = [
         'date_paiement' => 'date',
+        'prochaine_paie' => 'date',
         'montant' => 'decimal:2',
     ];
 

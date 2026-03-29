@@ -183,11 +183,25 @@
                             </div>
 
                             <!-- Notes -->
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label for="notes" class="form-label fw-semibold">Notes / Observations</label>
                                 <textarea class="form-control @error('notes') is-invalid @enderror"
                                     id="notes" name="notes" rows="3">{{ old('notes', $paiement->notes) }}</textarea>
                                 @error('notes')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+
+                            <!-- Prochaine échéance -->
+                            <div class="mb-4">
+                                <label for="prochaine_paie" class="form-label fw-semibold">
+                                    <i class="fas fa-calendar-alt me-1 text-warning"></i>
+                                    Date du prochain paiement
+                                    <small class="text-muted fw-normal">(si montant non soldé)</small>
+                                </label>
+                                <input type="date"
+                                    class="form-control @error('prochaine_paie') is-invalid @enderror"
+                                    id="prochaine_paie" name="prochaine_paie"
+                                    value="{{ old('prochaine_paie', $paiement->prochaine_paie?->format('Y-m-d')) }}">
+                                @error('prochaine_paie')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
 
                             <!-- Boutons -->

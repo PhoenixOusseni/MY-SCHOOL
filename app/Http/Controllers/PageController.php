@@ -112,6 +112,16 @@ class PageController extends Controller
                 ->get()
             : collect();
 
+        // ── Impayés dont prochaine_paie dans les 8 prochains jours ──
+        $impayes8Jours = Paiement::with('eleve', 'fraiScolarite', 'anneeScolaire')
+            ->where('reste_a_payer', '>', 0)
+            ->whereNotIn('status', ['Annulé', 'Remboursé'])
+            ->whereNotNull('prochaine_paie')
+            ->whereDate('prochaine_paie', '<=', Carbon::now()->addDays(8))
+            ->orderBy('prochaine_paie')
+            ->get()
+            ->unique(fn($p) => $p->eleve_id . '-' . $p->frai_scolarite_id . '-' . $p->annee_scolaire_id);
+
         // ── Paiements mensuels (6 derniers mois) ─────────────────────
         $paiementsMensuels = Paiement::select(
                 DB::raw("DATE_FORMAT(date_paiement, '%Y-%m') as mois"),
@@ -132,7 +142,8 @@ class PageController extends Controller
             'absencesMois', 'retardsMois', 'incidentsMois',
             'parGenre', 'evolutionEffectifs',
             'tauxReussite', 'dernierePeriode',
-            'topClasses', 'paiementsMensuels'
+            'topClasses', 'paiementsMensuels',
+            'impayes8Jours'
         ));
     }
 

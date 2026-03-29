@@ -17,9 +17,14 @@
                         <p class="text-muted">Gérez les paiements de vos élèves</p>
                     </div>
                     <div class="col-auto mt-4">
-                        <a href="{{ route('gestion_paiements.create') }}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-plus me-1"></i>&nbsp; Enregistrer un paiement
-                        </a>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('gestion_paiements.create') }}" class="btn btn-dark btn-sm">
+                                <i class="fas fa-plus me-1"></i>&nbsp; Enregistrer un paiement
+                            </a>
+                            <a href="{{ route('gestion_paiements.impayes') }}" class="btn btn-dark btn-sm">
+                                <i class="fas fa-list me-1"></i>&nbsp; Liste des impayés
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,24 +119,24 @@
                             @forelse ($paiements as $index => $paiement)
                                 @php
                                     $statusColors = [
-                                        'Terminé'   => 'success',
+                                        'Terminé' => 'success',
                                         'En attente' => 'warning',
-                                        'Annulé'    => 'danger',
+                                        'Annulé' => 'danger',
                                         'Remboursé' => 'secondary',
                                     ];
                                     $methodeIcons = [
-                                        'Especes'      => 'fa-money-bill',
-                                        'cheque'       => 'fa-file-alt',
-                                        'virement'     => 'fa-exchange-alt',
+                                        'Especes' => 'fa-money-bill',
+                                        'cheque' => 'fa-file-alt',
+                                        'virement' => 'fa-exchange-alt',
                                         'mobile_money' => 'fa-mobile-alt',
-                                        'carte'        => 'fa-credit-card',
+                                        'carte' => 'fa-credit-card',
                                     ];
                                     $methodeLabels = [
-                                        'Especes'      => 'Espèces',
-                                        'cheque'       => 'Chèque',
-                                        'virement'     => 'Virement',
+                                        'Especes' => 'Espèces',
+                                        'cheque' => 'Chèque',
+                                        'virement' => 'Virement',
                                         'mobile_money' => 'Mobile Money',
-                                        'carte'        => 'Carte',
+                                        'carte' => 'Carte',
                                     ];
                                 @endphp
                                 <tr>
@@ -139,7 +144,8 @@
                                     <td>
                                         {{ $paiement->eleve->prenom ?? '' }}
                                         {{ $paiement->eleve->nom ?? 'N/A' }} <br>
-                                        <small class="text-muted">{{ $paiement->eleve->registration_number ?? 'N/A' }}</small>
+                                        <small
+                                            class="text-muted">{{ $paiement->eleve->registration_number ?? 'N/A' }}</small>
                                     </td>
                                     <td>
                                         <small class="text-muted">{{ $paiement->fraiScolarite->libelle ?? 'N/A' }}</small>
@@ -155,7 +161,8 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <i class="fas {{ $methodeIcons[$paiement->methode_paiement] ?? 'fa-question' }} me-1 text-muted"></i>
+                                        <i
+                                            class="fas {{ $methodeIcons[$paiement->methode_paiement] ?? 'fa-question' }} me-1 text-muted"></i>
                                         {{ $methodeLabels[$paiement->methode_paiement] ?? $paiement->methode_paiement }}
                                     </td>
                                     <td>
@@ -184,20 +191,24 @@
                                                 <h5 class="modal-title">
                                                     <i class="fas fa-exclamation-triangle me-2"></i>Confirmation
                                                 </h5>
-                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                <button type="button" class="btn-close btn-close-white"
+                                                    data-bs-dismiss="modal"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <p>Supprimer ce paiement ?</p>
                                                 <div class="alert alert-warning">
-                                                    <strong>{{ $paiement->eleve->prenom ?? '' }} {{ $paiement->eleve->nom ?? '' }}</strong> —
+                                                    <strong>{{ $paiement->eleve->prenom ?? '' }}
+                                                        {{ $paiement->eleve->nom ?? '' }}</strong> —
                                                     {{ number_format($paiement->montant, 0, ',', ' ') }} —
                                                     {{ $paiement->date_paiement->format('d/m/Y') }}
                                                 </div>
                                                 <p class="text-danger small">Cette action est irréversible.</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                                <form action="{{ route('gestion_paiements.destroy', $paiement->id) }}" method="POST" class="d-inline">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Annuler</button>
+                                                <form action="{{ route('gestion_paiements.destroy', $paiement->id) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>

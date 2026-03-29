@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('gestion_frais_scolarite', FraiScolariteController::class);
 
     // Gestion des paiements
+    Route::get('gestion_paiements/impayes', [PaiementController::class, 'impayes'])->name('gestion_paiements.impayes');
     Route::resource('gestion_paiements', PaiementController::class);
     Route::get('gestion_paiements/{id}/print', [PaiementController::class, 'printReceipt'])->name('gestion_paiements.print');
     Route::post('gestion_paiements/{id}/solder', [PaiementController::class, 'solder'])->name('gestion_paiements.solder');

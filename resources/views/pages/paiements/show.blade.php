@@ -179,6 +179,15 @@
                                 <p class="mb-0">{{ $paiement->reference ?? '—' }}</p>
                             </div>
                         </div>
+                        @if ($paiement->prochaine_paie)
+                            <div class="alert alert-warning py-2 px-3 mb-3 d-flex align-items-center gap-2">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>
+                                    <strong>Prochain paiement prévu :</strong>
+                                    {{ $paiement->prochaine_paie->format('d/m/Y') }}
+                                </span>
+                            </div>
+                        @endif
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
@@ -429,6 +438,17 @@
                                     value="{{ date('Y-m-d') }}" required>
                             </div>
 
+                            <!-- Prochain paiement (visible uniquement si reste > 0) -->
+                            <div class="mb-3" id="prochainePaieWrapper" style="display:none;">
+                                <label class="form-label fw-semibold">
+                                    <i class="fas fa-calendar-alt me-1 text-warning"></i>
+                                    Date du prochain paiement
+                                    <small class="text-muted fw-normal">(montant non soldé)</small>
+                                </label>
+                                <input type="date" class="form-control" name="prochaine_paie"
+                                    id="solderProchainePaie">
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label fw-semibold">Référence / N° reçu</label>
@@ -436,11 +456,9 @@
                                         placeholder="Ex: REC-2026-002">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label fw-semibold">Notes</label>
-                                    <textarea class="form-control w-100" name="notes" rows="3" placeholder="Observations..."></textarea>
-                                </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Notes</label>
+                                <textarea class="form-control" name="notes" rows="3" placeholder="Observations..."></textarea>
                             </div>
                         </div>
                         <div class="m-3">
@@ -460,20 +478,28 @@
                 var apercu = document.getElementById('resteApercu');
                 var apercuVal = document.getElementById('resteApercuVal');
 
+                var prochainePaieWrapper = document.getElementById('prochainePaieWrapper');
+                var prochainePaieInput = document.getElementById('solderProchainePaie');
+
                 function updateApercu() {
                     var val = parseFloat(input.value) || 0;
                     var reste = resteMax - val;
                     if (val <= 0 || val > resteMax) {
                         apercu.style.display = 'none';
+                        prochainePaieWrapper.style.display = 'none';
+                        prochainePaieInput.removeAttribute('required');
                         return;
                     }
                     apercu.style.display = 'block';
                     if (reste <= 0) {
                         apercu.className = 'alert alert-success mb-3';
                         apercuVal.textContent = '0 {{ $devise }} — Paiement entièrement soldé ✓';
+                        prochainePaieWrapper.style.display = 'none';
+                        prochainePaieInput.removeAttribute('required');
                     } else {
                         apercu.className = 'alert alert-warning mb-3';
                         apercuVal.textContent = reste.toLocaleString('fr-FR') + ' {{ $devise }}';
+                        prochainePaieWrapper.style.display = 'block';
                     }
                 }
                 input.addEventListener('input', updateApercu);

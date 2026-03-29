@@ -577,6 +577,80 @@
             </div>
         </div>
 
+        {{-- ── ROW 5 : Impayés échéance ≤ 8 jours ──────────────────── --}}
+        @if($impayes8Jours->count() > 0)
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <div class="card border-0" style="border-left: 4px solid #ef4444 !important;">
+                    <div class="card-header d-flex align-items-center justify-content-between" style="background:rgba(239,68,68,0.05);">
+                        <span style="color:#ef4444;font-weight:700;">
+                            <i data-feather="alert-circle" style="width:15px;height:15px;margin-right:6px;"></i>
+                            Impayés — échéance dans moins de 8 jours
+                            <span class="badge ms-2" style="background:#ef4444;color:#fff;font-size:11px;border-radius:20px;padding:3px 9px;">{{ $impayes8Jours->count() }}</span>
+                        </span>
+                        <a href="{{ route('gestion_paiements.impayes') }}" style="font-size:12px;color:#ef4444;text-decoration:none;">Voir tous les impayés →</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0" style="font-size:13px;">
+                                <thead style="background:#f8fafc;">
+                                    <tr>
+                                        <th class="ps-3 py-2" style="font-weight:600;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.05em;">Élève</th>
+                                        <th class="py-2" style="font-weight:600;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.05em;">Frais</th>
+                                        <th class="py-2" style="font-weight:600;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.05em;">Reste à payer</th>
+                                        <th class="py-2" style="font-weight:600;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.05em;">Prochaine échéance</th>
+                                        <th class="py-2 pe-3" style="font-weight:600;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:.05em;">Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($impayes8Jours as $p)
+                                    @php
+                                        $today = \Carbon\Carbon::today();
+                                        $echeance = \Carbon\Carbon::parse($p->prochaine_paie);
+                                        $jours = $today->diffInDays($echeance, false);
+                                        $isOverdue = $jours < 0;
+                                        $isToday   = $jours === 0;
+                                    @endphp
+                                    <tr style="border-bottom:1px solid var(--border-color);">
+                                        <td class="ps-3 py-2">
+                                            <div style="font-weight:600;color:var(--text-primary);">
+                                                {{ $p->eleve?->nom ?? '—' }} {{ $p->eleve?->prenom ?? '' }}
+                                            </div>
+                                        </td>
+                                        <td class="py-2" style="color:var(--text-secondary);">{{ $p->fraiScolarite?->libelle ?? '—' }}</td>
+                                        <td class="py-2">
+                                            <span style="font-weight:700;color:#ef4444;">{{ number_format($p->reste_a_payer, 0, ',', ' ') }} FCFA</span>
+                                        </td>
+                                        <td class="py-2">
+                                            @if($isOverdue)
+                                                <span class="badge" style="background:rgba(239,68,68,0.12);color:#dc2626;font-size:11px;border-radius:20px;padding:3px 9px;">
+                                                    <i data-feather="alert-triangle" style="width:11px;height:11px;margin-right:3px;"></i>
+                                                    En retard ({{ abs($jours) }}j)
+                                                </span>
+                                            @elseif($isToday)
+                                                <span class="badge" style="background:rgba(245,158,11,0.12);color:#d97706;font-size:11px;border-radius:20px;padding:3px 9px;">
+                                                    Aujourd'hui
+                                                </span>
+                                            @else
+                                                <span class="badge" style="background:rgba(245,158,11,0.08);color:#92400e;font-size:11px;border-radius:20px;padding:3px 9px;">
+                                                    {{ $echeance->format('d/m/Y') }} (dans {{ $jours }}j)
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td class="py-2 pe-3">
+                                            <a href="{{ route('gestion_paiements.show', $p->id) }}" style="font-size:12px;color:var(--primary);text-decoration:none;">Voir →</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
     </div><!-- /.container-xl -->
 </main>
 @endsection
