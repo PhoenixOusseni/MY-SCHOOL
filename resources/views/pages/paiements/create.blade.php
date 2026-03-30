@@ -92,21 +92,17 @@
 
                                 <!-- Année scolaire -->
                                 <div class="col-md-6 mb-3">
-                                    <label for="annee_scolaire_id" class="form-label fw-semibold">
+                                    <label class="form-label fw-semibold">
                                         Année scolaire <span class="text-danger">*</span>
                                     </label>
-                                    <select class="form-select @error('annee_scolaire_id') is-invalid @enderror"
-                                        id="annee_scolaire_id" name="annee_scolaire_id" required>
-                                        <option value="" disabled selected>-- Sélectionner --</option>
-                                        @foreach ($annees as $annee)
-                                            <option value="{{ $annee->id }}"
-                                                {{ old('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
-                                                {{ $annee->libelle }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    @if($annees->isNotEmpty())
+                                        <input type="hidden" name="annee_scolaire_id" value="{{ $annees->first()->id }}">
+                                        <input type="text" class="form-control bg-light" value="{{ $annees->first()->libelle }}" readonly>
+                                    @else
+                                        <div class="alert alert-warning py-2 mb-0">Aucune année scolaire en cours n'est définie.</div>
+                                    @endif
                                     @error('annee_scolaire_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

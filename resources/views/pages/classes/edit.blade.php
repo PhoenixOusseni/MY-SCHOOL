@@ -121,7 +121,6 @@
                                     <select class="form-select @error('etablissement_id') is-invalid @enderror"
                                             id="etablissement_id"
                                             name="etablissement_id">
-                                        <option value="">Tous les établissements</option>
                                         @foreach($etablissements as $etablissement)
                                             <option value="{{ $etablissement->id }}"
                                                     {{ old('etablissement_id', $classe->etablissement_id) == $etablissement->id ? 'selected' : '' }}>
@@ -136,20 +135,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="annee_scolaire_id" class="form-label">Année scolaire</label>
-                                <select class="form-select @error('annee_scolaire_id') is-invalid @enderror"
-                                        id="annee_scolaire_id"
-                                        name="annee_scolaire_id">
-                                    <option value="">Toutes les années</option>
-                                    @foreach($anneesScolaires as $annee)
-                                        <option value="{{ $annee->id }}"
-                                                {{ old('annee_scolaire_id', $classe->annee_scolaire_id) == $annee->id ? 'selected' : '' }}>
-                                            {{ $annee->libelle }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">Année scolaire</label>
+                                @if($anneesScolaires->isNotEmpty())
+                                    <input type="hidden" name="annee_scolaire_id" value="{{ $anneesScolaires->first()->id }}">
+                                    <input type="text" class="form-control bg-light" value="{{ $anneesScolaires->first()->libelle }}" readonly>
+                                @else
+                                    <div class="alert alert-warning py-2 mb-0">Aucune année scolaire en cours n'est définie.</div>
+                                @endif
                                 @error('annee_scolaire_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 

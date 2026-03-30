@@ -57,13 +57,13 @@
                             <!-- Année scolaire -->
                             <div class="col-md-6">
                                 <label class="form-label fw-500">Année scolaire <span class="text-danger">*</span></label>
-                                <select name="annee_scolaire_id" id="annee_scolaire_id" class="form-select @error('annee_scolaire_id') is-invalid @enderror"
-                                        onchange="reloadPage(this.value, null)">
-                                    @foreach($annees as $a)
-                                        <option value="{{ $a->id }}" @selected($a->id == $anneeId)>{{ $a->libelle }}</option>
-                                    @endforeach
-                                </select>
-                                @error('annee_scolaire_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                @if($annees->isNotEmpty())
+                                    <input type="hidden" name="annee_scolaire_id" id="annee_scolaire_id" value="{{ $annees->first()->id }}">
+                                    <input type="text" class="form-control bg-light" value="{{ $annees->first()->libelle }}" readonly>
+                                @else
+                                    <div class="alert alert-warning py-2 mb-0">Aucune année scolaire en cours n'est définie.</div>
+                                @endif
+                                @error('annee_scolaire_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                             </div>
 
                             <!-- Classe -->

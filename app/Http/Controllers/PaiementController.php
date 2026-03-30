@@ -26,7 +26,7 @@ class PaiementController extends Controller
     {
         $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
         $frais = FraiScolarite::orderBy('libelle')->get();
-        $annees = AnneeScolaire::orderBy('libelle', 'desc')->get();
+        $annees = AnneeScolaire::where('is_current', true)->orderBy('libelle', 'desc')->get();
         $users = User::orderBy('nom')->get();
         $methodes = ['Especes' => 'Espèces', 'cheque' => 'Chèque', 'virement' => 'Virement', 'mobile_money' => 'Mobile Money', 'carte' => 'Carte'];
         $statuses = ['En attente' => 'En attente', 'Terminé' => 'Terminé', 'Annulé' => 'Annulé', 'Remboursé' => 'Remboursé'];
@@ -139,7 +139,7 @@ class PaiementController extends Controller
         $paiement = Paiement::findOrFail($id);
         $eleves = Eleve::orderBy('nom')->orderBy('prenom')->get();
         $frais = FraiScolarite::orderBy('libelle')->get();
-        $annees = AnneeScolaire::orderBy('libelle', 'desc')->get();
+        $annees = AnneeScolaire::where('is_current', true)->orderBy('libelle', 'desc')->get();
         $users = User::orderBy('nom')->get();
         $methodes = ['Especes' => 'Espèces', 'cheque' => 'Chèque', 'virement' => 'Virement', 'mobile_money' => 'Mobile Money', 'carte' => 'Carte'];
         $statuses = ['En attente' => 'En attente', 'Terminé' => 'Terminé', 'Annulé' => 'Annulé', 'Remboursé' => 'Remboursé'];

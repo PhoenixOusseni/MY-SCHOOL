@@ -18,7 +18,7 @@ class EnseignementMatiereClasseController extends Controller
     {
         $enseignementMatiereClasses = EnseignementMatiereClasse::with('enseignant', 'matiere', 'classe', 'anneeScolaire')
             ->paginate(15);
-        $anneesScolaires = AnneeScolaire::orderBy('libelle')->get();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->orderBy('libelle')->get();
         $classes = Classe::orderBy('nom')->get();
         return view('pages.enseignement_matiere_classes.index', compact('enseignementMatiereClasses', 'anneesScolaires', 'classes'));
     }
@@ -31,7 +31,7 @@ class EnseignementMatiereClasseController extends Controller
         $enseignants = Enseignant::where('statut', 'actif')->orderBy('nom')->orderBy('prenom')->get();
         $matieres = Matiere::where('is_active', true)->orderBy('intitule')->get();
         $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('libelle')->get();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->orderBy('libelle')->get();
         return view('pages.enseignement_matiere_classes.create', compact('enseignants', 'matieres', 'classes', 'anneesScolaires'));
     }
 
@@ -75,7 +75,7 @@ class EnseignementMatiereClasseController extends Controller
         $enseignants = Enseignant::orderBy('nom')->orderBy('prenom')->get();
         $matieres = Matiere::orderBy('intitule')->get();
         $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('libelle')->get();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->orderBy('libelle')->get();
         return view('pages.enseignement_matiere_classes.edit', compact('enseignement', 'enseignants', 'matieres', 'classes', 'anneesScolaires'));
     }
 

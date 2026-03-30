@@ -64,7 +64,7 @@ class EmploiTempController extends Controller
 
     public function create(Request $request)
     {
-        $annees  = AnneeScolaire::orderByDesc('id')->get();
+        $annees  = AnneeScolaire::where('is_current', true)->orderByDesc('id')->get();
         $anneeId = $request->integer('annee_id')
             ?: (AnneeScolaire::where('is_current', true)->first()?->id ?? $annees->first()?->id);
 

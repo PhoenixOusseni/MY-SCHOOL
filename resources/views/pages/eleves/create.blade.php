@@ -296,8 +296,7 @@
                                         <small>
                                             <i data-feather="info"
                                                 style="width: 14px; height: 14px; display: inline; margin-right: 4px;"></i>
-                                            <strong>Numéro d'immatriculation:</strong> Généré automatiquement au format
-                                            EL2026/00001
+                                            <strong>Numéro d'immatriculation:</strong> Généré automatiquement au format EL2026/00001
                                         </small>
                                     </div>
                                 </div>
@@ -326,7 +325,6 @@
                                     <label for="etablissement_id" class="form-label">Établissement</label>
                                     <select class="form-select @error('etablissement_id') is-invalid @enderror"
                                         id="etablissement_id" name="etablissement_id">
-                                        <option value="">Sélectionner un établissement</option>
                                         @if (isset($etablissements))
                                             @foreach ($etablissements as $etablissement)
                                                 <option value="{{ $etablissement->id }}"

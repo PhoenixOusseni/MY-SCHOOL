@@ -169,18 +169,13 @@
 
                             <!-- Sélection de l'année scolaire -->
                             <div class="mb-4">
-                                <label for="annee_scolaire_id" class="form-label">Année Scolaire <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select @error('annee_scolaire_id') is-invalid @enderror"
-                                    id="annee_scolaire_id" name="annee_scolaire_id" required>
-                                    <option value="">-- Sélectionner une année scolaire --</option>
-                                    @foreach ($anneesScolaires as $annee)
-                                        <option value="{{ $annee->id }}"
-                                            {{ old('annee_scolaire_id', $inscription->annee_scolaire_id) == $annee->id ? 'selected' : '' }}>
-                                            {{ $annee->libelle }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">Année Scolaire <span class="text-danger">*</span></label>
+                                @if($anneesScolaires->isNotEmpty())
+                                    <input type="hidden" id="annee_scolaire_id" name="annee_scolaire_id" value="{{ $anneesScolaires->first()->id }}">
+                                    <input type="text" class="form-control bg-light" value="{{ $anneesScolaires->first()->libelle }}" readonly>
+                                @else
+                                    <div class="alert alert-warning py-2 mb-0">Aucune année scolaire en cours n'est définie.</div>
+                                @endif
                                 @error('annee_scolaire_id')
                                     <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror

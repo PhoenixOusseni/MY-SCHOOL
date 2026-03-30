@@ -26,7 +26,7 @@ class InscriptionController extends Controller
     {
         $eleves = Eleve::all();
         $classes = Classe::all();
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
         return view('pages.inscriptions.create', compact('eleves', 'classes', 'anneesScolaires'));
     }
 
@@ -108,7 +108,7 @@ class InscriptionController extends Controller
             $inscription = Inscription::findOrFail($id);
             $eleves = Eleve::all();
             $classes = Classe::all();
-            $anneesScolaires = AnneeScolaire::all();
+            $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
             return view('pages.inscriptions.edit', compact('inscription', 'eleves', 'classes', 'anneesScolaires'));
         } catch (\Exception $e) {
             return redirect()->route('gestion_inscriptions.index')

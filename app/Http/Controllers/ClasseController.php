@@ -18,7 +18,7 @@ class ClasseController extends Controller
         $classes = Classe::all();
         $niveaux = Niveau::all();
         $etablissements = Etablissement::all();
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
         return view('pages.classes.index', compact('classes', 'niveaux', 'etablissements', 'anneesScolaires'));
     }
 
@@ -65,7 +65,7 @@ class ClasseController extends Controller
         $classe = Classe::findOrFail($id);
         $niveaux = Niveau::all();
         $etablissements = Etablissement::all();
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
         return view('pages.classes.edit', compact('classe', 'niveaux', 'etablissements', 'anneesScolaires'));
     }
 

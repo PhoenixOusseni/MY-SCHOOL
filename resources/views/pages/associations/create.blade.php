@@ -10,6 +10,7 @@
             border-radius: .375rem;
             background: #fff;
         }
+
         .eleve-item {
             display: flex;
             align-items: center;
@@ -19,31 +20,100 @@
             border-bottom: 1px solid #f1f3f5;
             transition: background .1s;
         }
-        .eleve-item:last-child { border-bottom: none; }
-        .eleve-item:hover { background: #f8f9fa; }
-        .eleve-item.selected { background: #e8f4fd; }
-        .eleve-item input[type="checkbox"] { flex-shrink: 0; width: 1rem; height: 1rem; cursor: pointer; }
-        .eleve-item label { cursor: pointer; margin: 0; flex: 1; font-size: .875rem; }
-        .eleve-item .badge-classe { font-size: .7rem; white-space: nowrap; }
-        .selected-tags { display: flex; flex-wrap: wrap; gap: .35rem; min-height: 32px; }
+
+        .eleve-item:last-child {
+            border-bottom: none;
+        }
+
+        .eleve-item:hover {
+            background: #f8f9fa;
+        }
+
+        .eleve-item.selected {
+            background: #e8f4fd;
+        }
+
+        .eleve-item input[type="checkbox"] {
+            flex-shrink: 0;
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+
+        .eleve-item label {
+            cursor: pointer;
+            margin: 0;
+            flex: 1;
+            font-size: .875rem;
+        }
+
+        .eleve-item .badge-classe {
+            font-size: .7rem;
+            white-space: nowrap;
+        }
+
+        .selected-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .35rem;
+            min-height: 32px;
+        }
+
         .selected-tag {
-            display: inline-flex; align-items: center; gap: .3rem;
-            background: #0d6efd; color: #fff;
-            border-radius: 20px; padding: .2rem .65rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            background: #0d6efd;
+            color: #fff;
+            border-radius: 20px;
+            padding: .2rem .65rem;
             font-size: .78rem;
         }
-        .selected-tag .remove-tag { cursor: pointer; opacity: .8; font-size: .85rem; }
-        .selected-tag .remove-tag:hover { opacity: 1; }
-        #eleveSearch { border-radius: .375rem .375rem 0 0; border-bottom: none; }
-        .eleve-list { border-radius: 0 0 .375rem .375rem; }
-        #selectAllRow {
-            display: flex; align-items: center; gap: .6rem;
-            padding: .4rem .75rem; background: #f8f9fa;
-            border: 1px solid #dee2e6; border-bottom: 2px solid #dee2e6;
-            font-size: .8rem; font-weight: 600; color: #495057;
+
+        .selected-tag .remove-tag {
+            cursor: pointer;
+            opacity: .8;
+            font-size: .85rem;
         }
-        #selectAllRow input { width: 1rem; height: 1rem; cursor: pointer; }
-        .empty-message { text-align: center; color: #adb5bd; padding: 1.5rem; font-size: .85rem; }
+
+        .selected-tag .remove-tag:hover {
+            opacity: 1;
+        }
+
+        #eleveSearch {
+            border-radius: .375rem .375rem 0 0;
+            border-bottom: none;
+        }
+
+        .eleve-list {
+            border-radius: 0 0 .375rem .375rem;
+        }
+
+        #selectAllRow {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .4rem .75rem;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-bottom: 2px solid #dee2e6;
+            font-size: .8rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        #selectAllRow input {
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #adb5bd;
+            padding: 1.5rem;
+            font-size: .85rem;
+        }
     </style>
 @endsection
 
@@ -103,8 +173,10 @@
                                     <small class="text-muted">Élèves sélectionnés</small>
                                     <span class="badge bg-primary" id="selectedCount">0</span>
                                 </div>
-                                <div id="selectedTags" class="selected-tags p-2 border rounded bg-light" style="min-height: 40px;">
-                                    <span class="text-muted" id="noSelectionText" style="font-size:.8rem;">Aucun élève sélectionné</span>
+                                <div id="selectedTags" class="selected-tags p-2 border rounded bg-light"
+                                    style="min-height: 40px;">
+                                    <span class="text-muted" id="noSelectionText" style="font-size:.8rem;">Aucun élève
+                                        sélectionné</span>
                                 </div>
                             </div>
 
@@ -115,7 +187,8 @@
                             {{-- Ligne Tout sélectionner --}}
                             <div id="selectAllRow">
                                 <input type="checkbox" id="selectAll">
-                                <label for="selectAll" style="cursor:pointer; margin:0;">Tout sélectionner / désélectionner</label>
+                                <label for="selectAll" style="cursor:pointer; margin:0;">Tout sélectionner /
+                                    désélectionner</label>
                                 <span id="visibleCount" class="ms-auto text-muted fw-normal"></span>
                             </div>
 
@@ -127,17 +200,14 @@
                                         $classeNom = $classe?->libelle ?? ($classe?->nom ?? 'Sans classe');
                                     @endphp
                                     <div class="eleve-item"
-                                         data-search="{{ strtolower($eleve->prenom . ' ' . $eleve->nom . ' ' . $classeNom) }}"
-                                         data-id="{{ $eleve->id }}"
-                                         onclick="toggleItem(this)">
-                                        <input type="checkbox" name="eleve_ids[]"
-                                               value="{{ $eleve->id }}"
-                                               id="eleve_{{ $eleve->id }}"
-                                               {{ in_array($eleve->id, (array) old('eleve_ids', [])) ? 'checked' : '' }}
-                                               onclick="event.stopPropagation();"
-                                               onchange="onCheckChange(this)">
+                                        data-search="{{ strtolower($eleve->prenom . ' ' . $eleve->nom . ' ' . $classeNom) }}"
+                                        data-id="{{ $eleve->id }}" onclick="toggleItem(this)">
+                                        <input type="checkbox" name="eleve_ids[]" value="{{ $eleve->id }}"
+                                            id="eleve_{{ $eleve->id }}"
+                                            {{ in_array($eleve->id, (array) old('eleve_ids', [])) ? 'checked' : '' }}
+                                            onclick="event.stopPropagation();" onchange="onCheckChange(this)">
                                         <label for="eleve_{{ $eleve->id }}">
-                                            <strong>{{ $eleve->prenom . ' ' . strtoupper($eleve->nom) }}</strong>
+                                            <strong>{{ $eleve->registration_number . ' -->' . $eleve->prenom . ' ' . strtoupper($eleve->nom) }}</strong>
                                         </label>
                                         <span class="badge bg-secondary badge-classe">{{ $classeNom }}</span>
                                     </div>
@@ -163,20 +233,22 @@
                                         value="{{ $tuteur->prenom . ' ' . strtoupper($tuteur->nom) }}" disabled>
                                     <span class="input-group-text">
                                         @php
-                                            $labels = ['pere'=>'Père','mere'=>'Mère','tuteur'=>'Tuteur','autre'=>'Autre'];
+                                            $labels = [
+                                                'pere' => 'Père',
+                                                'mere' => 'Mère',
+                                                'tuteur' => 'Tuteur',
+                                                'autre' => 'Autre',
+                                            ];
                                         @endphp
                                         <span class="badge bg-primary">{{ $labels[$tuteur->relationship] ?? 'N/A' }}</span>
                                     </span>
                                 </div>
                             @else
-                                <select class="form-select" id="tuteur_id" name="tuteur_id" required
-                                    onchange="updateTuteurInfo()">
+                                <select class="form-select" id="tuteur_id" name="tuteur_id" required>
                                     <option value="" selected disabled>-- Sélectionner un tuteur --</option>
                                     @foreach ($tuteurs as $t)
-                                        <option value="{{ $t->id }}"
-                                            data-relationship="{{ $t->relationship }}"
-                                            data-telephone="{{ $t->telephone }}"
-                                            data-email="{{ $t->email }}"
+                                        <option value="{{ $t->id }}" data-relationship="{{ $t->relationship }}"
+                                            data-telephone="{{ $t->telephone }}" data-email="{{ $t->email }}"
                                             {{ old('tuteur_id') == $t->id ? 'selected' : '' }}>
                                             {{ $t->prenom . ' ' . strtoupper($t->nom) }}
                                         </option>
@@ -213,8 +285,8 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="emergency_contact" name="emergency_contact"
-                                    {{ old('emergency_contact') ? 'checked' : '' }}>
+                                <input class="form-check-input" type="checkbox" id="emergency_contact"
+                                    name="emergency_contact" {{ old('emergency_contact') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="emergency_contact">
                                     <strong>Contact d'urgence</strong>
                                     <small class="d-block text-muted">Contacter en cas d'urgence</small>
@@ -238,7 +310,7 @@
 
     <script>
         @php
-            $relationshipLabel = ['pere'=>'Père','mere'=>'Mère','tuteur'=>'Tuteur','autre'=>'Autre'];
+            $relationshipLabel = ['pere' => 'Père', 'mere' => 'Mère', 'tuteur' => 'Tuteur', 'autre' => 'Autre'];
         @endphp
 
         // ── Tuteur info ──────────────────────────────────────────────
@@ -279,7 +351,8 @@
 
                     const tag = document.createElement('span');
                     tag.className = 'selected-tag';
-                    tag.innerHTML = `${label} <small>(${classe})</small> <span class="remove-tag" onclick="removeEleve(${cb.value})">&times;</span>`;
+                    tag.innerHTML =
+                        `${label} <small>(${classe})</small> <span class="remove-tag" onclick="removeEleve(${cb.value})">&times;</span>`;
                     tagsContainer.appendChild(tag);
                 });
             }
@@ -311,7 +384,10 @@
 
         function removeEleve(id) {
             const cb = document.getElementById('eleve_' + id);
-            if (cb) { cb.checked = false; updateUI(); }
+            if (cb) {
+                cb.checked = false;
+                updateUI();
+            }
         }
 
         // ── Recherche ─────────────────────────────────────────────────
@@ -357,7 +433,28 @@
             feather.replace();
             updateUI();
             updateSelectAll();
-            if (document.getElementById('tuteur_id')?.value) updateTuteurInfo();
+        });
+
+        $(document).ready(function() {
+            $('#tuteur_id').select2({
+                placeholder: '-- Sélectionner un tuteur --',
+                allowClear: true,
+                width: '100%',
+                language: {
+                    noResults: function() { return 'Aucun résultat trouvé'; },
+                    searching: function() { return 'Recherche en cours…'; }
+                }
+            });
+
+            // Restaurer la sélection old() si présente
+            const oldTuteur = '{{ old('tuteur_id') }}';
+            if (oldTuteur) {
+                $('#tuteur_id').val(oldTuteur).trigger('change');
+            }
+
+            $('#tuteur_id').on('change', function() {
+                updateTuteurInfo();
+            });
         });
     </script>
 @endsection

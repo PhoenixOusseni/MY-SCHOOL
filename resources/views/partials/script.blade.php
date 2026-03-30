@@ -41,5 +41,16 @@
                 searching:  function () { return 'Recherche en cours…'; }
             }
         });
+
+        // ── Select2 : Classe - Matière ────────────────────────────
+        $('select[name="enseignement_matiere_classe_id"]').select2({
+            placeholder: '-- Sélectionner une classe-matière --',
+            allowClear: true,
+            width: '100%',
+            language: {
+                noResults: function () { return 'Aucun résultat trouvé'; },
+                searching:  function () { return 'Recherche en cours…'; }
+            }
+        });
     });
 </script>

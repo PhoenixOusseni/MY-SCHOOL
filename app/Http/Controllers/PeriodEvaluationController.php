@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PeriodEvaluation;
+use App\Models\AnneeScolaire;
 use Illuminate\Http\Request;
 
 class PeriodEvaluationController extends Controller
@@ -30,7 +31,7 @@ class PeriodEvaluationController extends Controller
             'quart' => 'Quart',
         ];
 
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
 
         return view('pages.periodes_evaluation.create', compact('types', 'anneesScolaires'));
     }
@@ -86,7 +87,7 @@ class PeriodEvaluationController extends Controller
                 'quart' => 'Quart',
             ];
 
-            $anneesScolaires = AnneeScolaire::all();
+            $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
 
             $periodeEvaluation = PeriodEvaluation::findOrFail($id);
 

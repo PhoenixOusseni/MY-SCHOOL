@@ -21,9 +21,6 @@
                         <a href="{{ route('gestion_eleves.create') }}" class="btn btn-light btn-sm"><i
                                 data-feather="plus"></i>&thinsp;&thinsp;
                             Ajouter un élève</a>
-                        <a href="{{ route('gestion_eleves.index') }}" class="btn btn-dark btn-sm"><i
-                                data-feather="align-left"></i>&thinsp;&thinsp; Liste des élèves
-                        </a>
                     </div>
                 </div>
             </div>

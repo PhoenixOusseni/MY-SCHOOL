@@ -56,8 +56,8 @@
                             <!-- Classe - Matière -->
                             <div class="mb-3">
                                 <label for="enseignement_matiere_classe_id" class="form-label">Classe - Matière <span class="text-danger">*</span></label>
-                                <select class="form-select @error('enseignement_matiere_classe_id') is-invalid @enderror" id="enseignement_matiere_classe_id" name="enseignement_matiere_classe_id" required>
-                                    <option value="" disabled>Sélectionner une classe-matière</option>
+                                <select class="form-select @error('enseignement_matiere_classe_id') is-invalid @enderror" id="enseignement_matiere_classe_id" name="enseignement_matiere_classe_id">
+                                    <option value=""></option>
                                     @foreach($enseignementMatiereClasses as $emc)
                                         <option value="{{ $emc->id }}" @selected(old('enseignement_matiere_classe_id') == $emc->id)>
                                             {{ $emc->classe->nom }} - {{ $emc->matiere->intitule }}

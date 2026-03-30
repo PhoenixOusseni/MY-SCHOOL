@@ -154,17 +154,13 @@
                         <div class="row">
                             <!-- Année Scolaire -->
                             <div class="col-md-6 mb-3">
-                                <label for="annee_scolaire_id" class="form-label">Année Scolaire <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" id="annee_scolaire_id" name="annee_scolaire_id" required>
-                                    <option value="" selected disabled>-- Sélectionner une année --</option>
-                                    @foreach ($anneesScolaires as $annee)
-                                        <option value="{{ $annee->id }}"
-                                            {{ old('annee_scolaire_id') == $annee->id ? 'selected' : '' }}>
-                                            {{ $annee->libelle }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label">Année Scolaire <span class="text-danger">*</span></label>
+                                @if($anneesScolaires->isNotEmpty())
+                                    <input type="hidden" id="annee_scolaire_id" name="annee_scolaire_id" value="{{ $anneesScolaires->first()->id }}">
+                                    <input type="text" class="form-control bg-light" value="{{ $anneesScolaires->first()->libelle }}" readonly>
+                                @else
+                                    <div class="alert alert-warning py-2 mb-0">Aucune année scolaire en cours n'est définie.</div>
+                                @endif
                             </div>
 
                             <!-- Principal -->

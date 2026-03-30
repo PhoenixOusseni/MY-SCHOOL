@@ -170,7 +170,7 @@ class EnseignantController extends Controller
     {
         $enseignants = Enseignant::orderBy('nom')->orderBy('prenom')->get();
         $classes = Classe::orderBy('nom')->get();
-        $anneesScolaires = AnneeScolaire::orderBy('libelle')->get();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->orderBy('libelle')->get();
         $professeursRetour = ProfesseurPrincipal::with('enseignant', 'classe', 'anneeScolaire')->get();
         return view('pages.enseignants.prof_principale', compact('enseignants', 'classes', 'anneesScolaires', 'professeursRetour'));
     }

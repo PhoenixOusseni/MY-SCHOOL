@@ -32,7 +32,7 @@ class EleveController extends Controller
     public function create()
     {
         $etablissements = Etablissement::all();
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
         $niveaux = Niveau::all();
         $classes = Classe::all();
         return view('pages.eleves.create', compact('etablissements', 'anneesScolaires', 'niveaux', 'classes'));
@@ -178,7 +178,7 @@ class EleveController extends Controller
     {
         $eleve = Eleve::findOrFail($id);
         $etablissements = Etablissement::all();
-        $anneesScolaires = AnneeScolaire::all();
+        $anneesScolaires = AnneeScolaire::where('is_current', true)->get();
         $niveaux = Niveau::all();
         $classes = Classe::all();
         return view('pages.eleves.edit', compact('eleve', 'etablissements', 'anneesScolaires', 'niveaux', 'classes'));
