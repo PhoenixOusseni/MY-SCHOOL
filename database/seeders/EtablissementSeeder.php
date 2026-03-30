@@ -13,13 +13,13 @@ class EtablissementSeeder extends Seeder
         $directeur = User::where('email', 'directeur@school.com')->first();
 
         Etablissement::firstOrCreate(
-            ['nom' => 'Lycée Almamya'],
+            ['nom' => 'Ecole Municipal de dagnoen'],
             [
-                'code'          => 'LYC-ALM-001',
-                'adresse'       => 'Quartier Almamya, Commune de Kaloum, Conakry, Guinée',
-                'telephone'     => '+224 622 00 11 22',
-                'email'         => 'contact@lycee-almamya.gn',
-                'nom_directeur' => 'M. Amadou Diallo',
+                'code'          => 'LYC-EMD-001',
+                'adresse'       => 'Quartier dagnoen, Commune de kadiogo, Ouagadougou, Burkina Faso',
+                'telephone'     => '+226 62 00 11 22',
+                'email'         => 'contact@ecole-dagnoen.gn',
+                'nom_directeur' => 'M. OUEDRAOGO Ousseni',
                 'user_id'       => $directeur?->id,
             ]
         );
